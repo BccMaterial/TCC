@@ -1,238 +1,31 @@
-% ===============================================================
-% BIBLIOGRAFIA - TEMPLATE TCC1 SENAC SANTO AMARO
-% ===============================================================
-% Este arquivo contém exemplos de referências no padrão ABNT
-% (NBR 6023:2018) para diferentes tipos de fontes.
-%
-% O pacote abntex2cite formata automaticamente as referências.
-% Basta adicionar suas entradas aqui e usar \cite ou
-% \citeonline no texto.
-%
-% TIPOS DE ENTRADA E FORMATO ABNT:
-% -----------------------------------------------------------------
-% book          -> SOBRENOME, Nome. Titulo. Edicao. Local: Editora, Ano.
-% article       -> SOBRENOME, Nome. Titulo do artigo. Periodico, v. X, n. Y, p. XX-YY, Ano.
-% inproceedings -> SOBRENOME, Nome. Titulo. In: EVENTO, Local. Anais. Editora, Ano. p. XX-YY.
-% mastersthesis -> SOBRENOME, Nome. Titulo. Ano. Dissertacao (Mestrado) - Instituicao, Local, Ano.
-% phdthesis     -> SOBRENOME, Nome. Titulo. Ano. Tese (Doutorado) - Instituicao, Local, Ano.
-% misc          -> SOBRENOME, Nome. Titulo. Ano. Disponivel em: URL. Acesso em: data.
-% manual        -> ORGANIZACAO. Titulo. Local, Ano.
-% ===============================================================
-
-
-% ---------------------------------------------------------------
-% EXEMPLOS DE LIVROS
-% Formato ABNT: SOBRENOME, Nome. Titulo: subtitulo. Edicao. Local: Editora, Ano.
-% ---------------------------------------------------------------
-
-% Livro com um autor
-@book{Wazlawick2020,
-  author    = {Raul Sidnei Wazlawick},
-  title     = {Metodologia de Pesquisa para Ciência da Computação},
-  publisher = {Elsevier},
-  year      = {2020},
-  edition   = {3},
-  address   = {Rio de Janeiro}
+@article{Almaktoom2023,
+   author = {Abdulaziz T Almaktoom},
+   doi = {10.1016/J.HELIYON.2023.E18753},
+   journal = {Heliyon},
+   title = {Health care overbooking cost minimization model},
+   year = {2023}
+}
+@article{Meersman2025,
+   author = {Tine Meersman and Broos Maenhout},
+   doi = {10.1007/S10729-025-09707-9},
+   journal = {Health Care Management Science},
+   title = {A decomposition-based approach for multi-level appointment planning and scheduling},
+   year = {2025}
+}
+@article{Jasaim2025,
+   abstract = {The research presents a proposed model for the role of using waiting queue models in improving the performance of health institutions in Iraq, Baghdad. The proposed model relies on a set of numerical methods, the most important of which is the quantitative programming method (QM for Windows). The model analyzes the stability of the system and simulations are performed to evaluate its performance. The main goal of this paper is to improve the performance of these government medical institutions in Iraq in a scientifically sound manner, so that the proposed model is applied to reduce crowding and waiting in health centers. This study was applied in one of the health centers in Baghdad, Palestine Street (Al-Idrisi neighborhood) during the period extending from 1/3/2019 to 3/1/2019. The study concluded by presenting an alternative model to improve the current situation in the institution under study, as this contributed the alternative is to improve all performance indicators. Other models can be evaluated using artificial intelligence, which enables us to enhance the system and improve prediction accuracy in different health center scenarios.},
+   author = {Saleemah H Jasaim and Iraq T Abbas},
+   doi = {10.24996/IJS.2025.66.8.27},
+   journal = {Iraqi Journal of Science},
+   title = {Using Waiting Queue Models to Study Reducing the Phenomenon of Delay in One of the Health Institutions in Baghdad},
+   year = {2025}
+}
+@article{Xie2022,
+   abstract = {Outpatient clinics typically face a critical issue in patient adherence to their clinic appointments and suffer a huge backlog of patients waiting to be seen. The goal of this study is to enhance care provider productivity and patient access through effective clinic appointment scheduling. To achieve this goal, we introduce discrete-time bulk-service queues to model the backlog dynamics accounting for the no-show behavior of patients and consider different overbooking strategies to reduce backlogs at a minimum risk of working overtime. Numerically stable solution procedures and approximation methods are introduced to significantly reduce the computational burden, making the queueing models a practical tool for outpatient appointment template design. The insights obtained from this work will support capacity planning decision-making and are critical to improving the operational efficiency of outpatient clinics. Note to Practitioners—The operation and management of appointment systems is becoming much more sophisticated these years; however, worldwide, outpatient clinics still suffer from a common conundrum, which is the extensive backlog accumulation. Patients not showing up to their clinic appointments are one of the major contributors to this issue. The overbooking approach, which redesigns the appointment system by releasing more appointment slots than budgeted, is typically employed to address this no-show issue. However, the practice of overbooking should be carried out carefully, and the performance of system backlog as well as the risk of overworking should be considered simultaneously. This work provides a practical tool to assist the management of appointment capacity in outpatient clinics.},
+   author = {Xiaolei Xie and Zhenghao Fan and Xiang Zhong},
+   doi = {10.1109/TASE.2021.3060567},
+   journal = {IEEE Transactions on Automation Science and Engineering},
+   title = {Appointment Capacity Planning With Overbooking for Outpatient Clinics With Patient No-Shows},
+   year = {2022}
 }
 
-% Livro com dois autores
-@book{Pressman2016,
-  author    = {Roger S. Pressman and Bruce R. Maxim},
-  title     = {Engenharia de Software: uma abordagem profissional},
-  publisher = {McGraw-Hill},
-  year      = {2016},
-  edition   = {8},
-  address   = {Porto Alegre}
-}
-
-% Livro com um autor (outro exemplo)
-@book{Sommerville2019,
-  author    = {Ian Sommerville},
-  title     = {Engenharia de Software},
-  publisher = {Pearson},
-  year      = {2019},
-  edition   = {10},
-  address   = {São Paulo}
-}
-
-% Livro traduzido
-@book{Gamma2000,
-  author    = {Erich Gamma and Richard Helm and Ralph Johnson and John Vlissides},
-  title     = {Padrões de Projeto: soluções reutilizáveis de software orientado a objetos},
-  publisher = {Bookman},
-  year      = {2000},
-  address   = {Porto Alegre},
-  note      = {Tradução de Luiz A. Meirelles Salgado}
-}
-
-% Livro em inglês
-@book{Cormen2009,
-  author    = {Thomas H. Cormen and Charles E. Leiserson and Ronald L. Rivest and Clifford Stein},
-  title     = {Introduction to Algorithms},
-  publisher = {MIT Press},
-  year      = {2009},
-  edition   = {3},
-  address   = {Cambridge}
-}
-
-
-% ---------------------------------------------------------------
-% EXEMPLOS DE ARTIGOS DE PERIODICOS
-% Formato ABNT: SOBRENOME, Nome. Titulo do artigo. Periodico, Local, v. X, n. Y, p. XX-YY, ano.
-% ---------------------------------------------------------------
-
-% Artigo em periódico nacional
-@article{Silva2022,
-  author  = {João Carlos Silva and Maria Aparecida Santos},
-  title   = {Aplicação de técnicas formais na validação de sistemas distribuídos},
-  journal = {Revista Brasileira de Computação Aplicada},
-  year    = {2022},
-  volume  = {14},
-  number  = {2},
-  pages   = {45--58},
-  doi     = {10.5335/rbca.v14i2.12345}
-}
-
-% Artigo em periódico internacional
-@article{LeCun2015,
-  author  = {Yann LeCun and Yoshua Bengio and Geoffrey Hinton},
-  title   = {Deep Learning},
-  journal = {Nature},
-  year    = {2015},
-  volume  = {521},
-  number  = {7553},
-  pages   = {436--444},
-  doi     = {10.1038/nature14539}
-}
-
-% Artigo com DOI
-@article{Kitchenham2004,
-  author  = {Barbara Kitchenham},
-  title   = {Procedures for Performing Systematic Reviews},
-  journal = {Keele University Technical Report},
-  year    = {2004},
-  volume  = {33},
-  pages   = {1--26}
-}
-
-
-% ---------------------------------------------------------------
-% EXEMPLOS DE ARTIGOS EM ANAIS DE EVENTOS
-% Formato ABNT: SOBRENOME, Nome. Titulo. In: EVENTO, Local. Anais. Editora, Ano.
-% ---------------------------------------------------------------
-
-% Artigo em congresso nacional
-@inproceedings{Oliveira2023,
-  author    = {Ana Paula Oliveira and Carlos Eduardo Ferreira},
-  title     = {Uma abordagem baseada em microsserviços para sistemas de e-commerce},
-  booktitle = {Anais do Simpósio Brasileiro de Engenharia de Software},
-  year      = {2023},
-  address   = {Campo Grande},
-  pages     = {112--121},
-  publisher = {SBC},
-  doi       = {10.5753/sbes.2023.00015}
-}
-
-% Artigo em congresso internacional
-@inproceedings{Chen2016,
-  author    = {Tianqi Chen and Carlos Guestrin},
-  title     = {{XGBoost}: A Scalable Tree Boosting System},
-  booktitle = {Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining},
-  year      = {2016},
-  address   = {San Francisco},
-  pages     = {785--794},
-  publisher = {ACM},
-  doi       = {10.1145/2939672.2939785}
-}
-
-
-% ---------------------------------------------------------------
-% EXEMPLOS DE DISSERTACOES E TESES
-% Formato ABNT: SOBRENOME, Nome. Titulo. Ano. Dissertacao/Tese - Instituicao, Local, Ano.
-% ---------------------------------------------------------------
-
-% Dissertação de mestrado
-@mastersthesis{Santos2021,
-  author  = {Pedro Henrique Santos},
-  title   = {Análise de desempenho de algoritmos de aprendizado de máquina aplicados à detecção de fraudes em transações financeiras},
-  school  = {Universidade de São Paulo},
-  year    = {2021},
-  address = {São Paulo},
-  type    = {Dissertação (Mestrado em Ciência da Computação)}
-}
-
-% Tese de doutorado
-@phdthesis{Ferreira2019,
-  author  = {Juliana Cristina Ferreira},
-  title   = {Modelos de deep learning para processamento de linguagem natural em português brasileiro},
-  school  = {Universidade Estadual de Campinas},
-  year    = {2019},
-  address = {Campinas},
-  type    = {Tese (Doutorado em Ciência da Computação)}
-}
-
-
-% ---------------------------------------------------------------
-% EXEMPLOS DE SITES E RECURSOS ONLINE
-% Formato ABNT: AUTOR ou ORGANIZACAO. Titulo. Ano. Disponivel em: URL. Acesso em: data.
-% ---------------------------------------------------------------
-
-% Site institucional
-@misc{IBGE2024,
-  author = {{IBGE}},
-  title  = {Pesquisa Nacional por Amostra de Domicílios Contínua -- {PNAD} Contínua},
-  year   = {2024},
-  url    = {https://www.ibge.gov.br/estatisticas/sociais/trabalho/9171-pesquisa-nacional-por-amostra-de-domicilios-continua-mensal.html},
-  note   = {Acesso em: 15 jan. 2025}
-}
-
-% Documentação técnica online
-@misc{ReactDocs2025,
-  author = {{Meta}},
-  title  = {React -- A JavaScript library for building user interfaces},
-  year   = {2025},
-  url    = {https://react.dev},
-  note   = {Acesso em: 20 jan. 2025}
-}
-
-% Artigo em blog técnico
-@misc{Fowler2014,
-  author = {Martin Fowler},
-  title  = {Microservices: a definition of this new architectural term},
-  year   = {2014},
-  url    = {https://martinfowler.com/articles/microservices.html},
-  note   = {Acesso em: 10 fev. 2025}
-}
-
-
-% ---------------------------------------------------------------
-% EXEMPLOS DE MANUAIS E DOCUMENTACAO TECNICA
-% Formato ABNT: ORGANIZACAO. Titulo. Local, Ano.
-% ---------------------------------------------------------------
-
-@manual{ABNT2018,
-  organization = {{Associação Brasileira de Normas Técnicas}},
-  title        = {{NBR} 6023: informação e documentação --- referências --- elaboração},
-  year         = {2018},
-  address      = {Rio de Janeiro}
-}
-
-@manual{ISO25010,
-  organization = {{International Organization for Standardization}},
-  title        = {{ISO/IEC} 25010:2011 --- Systems and software engineering --- Systems and software Quality Requirements and Evaluation ({SQuaRE}) --- System and software quality models},
-  year         = {2011},
-  address      = {Geneva}
-}
-
-
-% ===============================================================
-% DICAS PARA O ALUNO:
-% ===============================================================
-% 1. Use chaves consistentes (ex: Sobrenome+Ano: Wazlawick2020)
-% 2. Preencha todos os campos obrigatórios para cada tipo
-% 3. Para sites, sempre inclua a data de acesso no campo "note"
-% 4. Use {} ao redor de siglas e nomes próprios para preservar
-%    a capitalização (ex: {IBGE}, {XGBoost})
-% 5. Para autores corporativos, use chaves duplas: {{Nome}}
-% 6. Compile com: pdflatex -> bibtex -> pdflatex -> pdflatex
-% ===============================================================
