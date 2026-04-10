@@ -208,13 +208,23 @@ A revisão bibliográfica tem como finalidade apresentar o embasamento teórico 
 \section{Referencial teórico}
 \label{sec:referencial}
 
+\subsection{Overbooking}
+
+Overbooking é a venda de um número de produtos/serviços em maior número que o estoque atual/capacidade de serviço, sendo aplicado principalmente nas áreas de saúde e da aviação. O overbooking surgiu como uma maneira de compensar o lucro perdido derivado de clientes que não comparecem ou cancelam o serviço(no-shows) utilizando todo o estoque/capacidade de serviço disponível e para balancear a eficiência operacional e a qualidade do serviço. No contexto clínico, o principal trade-off do overbooking é entre a eficiência operacional e a qualidade do serviço: segundo Zeng et  al. (2013), o maior uso da equipe médica derivado do overbooking pode trazer benefícios como maior lucro e redução do atraso para conseguir uma consulta(appointment delay), porém, o mesmo também aumenta o tempo de espera no consultório para ser atendido(office delay) e pode até reduzir o lucro da clínica para valores críticos de panel-size.
+
+\subsection{Métricas}
+
+Para avaliar o modelo, serão utilizadas métricas baseadas na qualidade e eficiência de serviço, levando em consideração o overbooking e a estabilidade da clínica. A partir disso, escolhemos trabalhar com o tempo médio de espera dos pacientes até o atendimento(office delay), o tempo para obter a próxima consulta(appointment-delay) e a taxa de não comparacimento de clientes(no-show). Também serão utilizadas outras métricas como a taxa de utilização de recursos para garantir estabbiidade.
+
+\subsection{RNN}
+
+Uma Rede neural recorrente(RNN) é uma rede neural profunda(com diversas camadas escondidadas) treinada a partir de dados sequencias ou séries temporais com o objetivo de criar um modelo de aprendizado de máquina que faz previsões a partir de inputs sequencias. O principal difernecial das RNNs está em sua capacidade de utilizar informações de entradas prévias para influenciar o valor atual de entradas e saídas. Para uma determinada entrada, a RNN mantém um estado oculto responsável por acompanhar o contexto e agir como uma memória que armazena informações das entradas anteriores, processando a entrada atual junto com o o estado oculto da etapa anterior em cada etapa para que o RNN seja capaz de "lembrar" de dados antereiores para influenciar o valor da saída atual. No contexto clínico, utilizaremos a RNN para prever a probabilidade de no-shows e ajustar o nível de overbooking em função disso.
+
 % ---------------------------------------------------------------
 \section{Metodologia da pesquisa bibliográfica}
 \label{sec:metodologia_pesquisa}
 
-A pesquisa bibliográfica foi conduzida a partir da consulta a diferentes bases de dados acadêmicas e científicas, com o objetivo de identificar trabalhos relevantes sobre o tema.
-
-\textit{(Organizar os itens abaixo baseado no exemplo de descrição)}
+A pesquisa bibliográfica foi realizada nas bases Google Scholar, IEEE Xplore e ACM Digital Library, utilizando as palavras-chave ``machine learning'', ``classificação de texto'' e ``processamento de linguagem natural''. Foram selecionados artigos publicados entre 2018 e 2025, em português e inglês, que abordassem diretamente técnicas de classificação automática de documentos.
 
 \begin{itemize}
     \item \textbf{Bases de dados consultadas}: Google Scholar, IEEE Xplore, ACM Digital Library, SciELO, Periódicos CAPES, Semantic Scholar, Core e Taylor \& Francis Online;
@@ -223,26 +233,6 @@ A pesquisa bibliográfica foi conduzida a partir da consulta a diferentes bases 
     \item \textbf{Período de abrangência}: intervalo de anos das publicações consultadas.
 \end{itemize}
 
-Exemplo de descrição:
-
-\textit{A pesquisa bibliográfica foi realizada nas bases Google Scholar, IEEE Xplore e ACM Digital Library, utilizando as palavras-chave ``machine learning'', ``classificação de texto'' e ``processamento de linguagem natural''. Foram selecionados artigos publicados entre 2018 e 2025, em português e inglês, que abordassem diretamente técnicas de classificação automática de documentos.}
-
-% ---------------------------------------------------------------
-\section{Fundamentos}
-\label{sec:fundamentos}
-
-Aprofunde os conceitos técnicos que serão utilizados na solução proposta. Diferentemente do referencial teórico (que apresenta conceitos gerais), os fundamentos devem detalhar as tecnologias, algoritmos, frameworks ou metodologias específicas que serão empregados no desenvolvimento.
-
-Por exemplo:
-\begin{itemize}
-    \item Se o trabalho utiliza aprendizado de máquina, explique os algoritmos escolhidos (árvores de decisão, redes neurais, SVM, etc.);
-    \item Se o trabalho envolve desenvolvimento de software, descreva as tecnologias (linguagens, frameworks, bancos de dados);
-    \item Se envolve análise de dados, explique as métricas e técnicas estatísticas que serão aplicadas.
-\end{itemize}
-
-Utilize figuras, diagramas e tabelas para ilustrar conceitos quando apropriado.
-
-% ---------------------------------------------------------------
 \section{Trabalhos relacionados}
 \label{sec:trabalhos_relacionados}
 
