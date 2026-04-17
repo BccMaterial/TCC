@@ -35,6 +35,8 @@
 \usepackage{pgfgantt}               % Diagramas de Gantt
 \usepackage[brazilian,hyperpageref]{backref}  % Páginas com citações
 \usepackage[alf]{abntex2cite}       % Citações ABNT
+\usepackage{array}
+\usepackage{tabularx}
 
 % ---------------------------------------------------------------
 % CONFIGURAÇÕES DO PDF
@@ -251,6 +253,49 @@ Além disso, é possível observar que a falta de métricas como o tempo de fila
 % aborda resolver o overbooking no sistema de saúde , otimizando valores a partir de um modelo, para resolver foi abordado de tal forma onde o numero escolhido de overbooking seja o melhor, melhorando o lucro e otimizando sua eficiência , no estudo tem como resultado valores monetários perdidos pela faltar de organização e a não utilização do overbooking, além de outro resultado ser a complexidade para implementar , vários dados serão necessários e o custo financeiro para implementar seria relevante, no estudo foi encontrado 3 limitações principais, como foi feito na Arábia saudita em uma rede de hospitais, teve complicação para generalizar o modelo, outra limitação foi como o modelo foi feito deixando genérico de tal forma onde certas informações foram ignoradas, como gênero idade condição de saúde e geolocalização, ultima limitação foi que ele não foi testado empiricamente para notar se teve resultados condizentes mas tem previsão para ser testado, a grande diferença para nosso artigo é o foco monetário, nosso foco é otimizar pensando no tempo de espera , já nesse estudo o foco foi otimizar aumentando o lucro
 
 Esse trabalho aborda a resolução do \textit{overbooking} no sistema de saúde, otimizando valores a partir de um modelo, de forma que o número escolhido de \textit{overbooking} seja o melhor, otimizando sua eficiência. Dado os resultados, conclui-se que temos o prejuízo pela falta de organização, e não pelo \textit{overbooking} em si. Além disso, há problemas como a complexidade, necessidade de dados e o custo financeiro para a implementação do estudo. Outra dificuldade encontrada no trabalho foi a generalização do modelo, na qual foi voltada para uma rede de hospitais da Arábia Saudita, além de haver certas informações que foram ignoradas, como idade, gênero, condição de saúde, e geolocalização.
+
+\begin{table}[htb]
+    \centering
+    \caption{Comparação entre trabalhos relacionados}
+    \label{tab:trabalhos_relacionados}
+    
+    \footnotesize % reduz um pouco a fonte
+    
+    \setlength{\tabcolsep}{4pt} % reduz espaçamento entre colunas
+    
+    \begin{tabularx}{\textwidth}{p{2.5cm}|X|X|X}
+        \toprule
+        \textbf{Critério} & \textbf{Trabalho 1} & \textbf{Trabalho 2} & \textbf{Este trabalho} \\
+        \midrule
+
+        Objetivo 
+        & O problema de aderência dos pacientes, juntamente com a grande lista de espera em clínicas 
+        & Resolução do overbooking no sistema de saúde, otimizando valores 
+        & Organização do overbooking eventualmente impactando no aumento do lucro e na melhor experiência para o paciente \\
+        \midrule
+
+        Tecnologia 
+        & Utiliza-se provas matemáticas para comprovar a eficácia do modelo 
+        & Modelo para definir o número escolhido de overbooking seja o melhor, otimizando sua eficiência 
+        & Uso de RNN para prever no-shows \\
+        \midrule
+
+        Validação 
+        & Provas matemáticas para comprovar a eficácia do modelo 
+        & Dado os resultados, conclui-se que temos o prejuízo pela falta de organização, e não pelo overbooking em si 
+        & Combinação de conceitos matemáticos e estatísticos \\
+        \midrule
+
+        Limitação 
+        & Falta de métricas como o tempo de fila e o tempo de atendimento causa uma limitação na coleta de resultados 
+        & Complexidade, necessidade de dados, custo financeiro, dificuldade de generalização(rede de hospitais da Arábia Saudita) e ausência de informações como idade, gênero, condição de saúde e geolocalização 
+        & --- \\
+        
+        \bottomrule
+    \end{tabularx}
+    
+    \legend{Fonte: Elaborado pelo autor}
+\end{table}
 
 \subsection{Comparação}
 
