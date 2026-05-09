@@ -203,7 +203,7 @@ Com isso, será construído um modelo de processos capaz de representar o funcio
 % ---------------------------------------------------------------
 \section{Metodologia da pesquisa bibliográfica}
 
-A pesquisa bibliográfica foi conduzida a partir da consulta a diferentes bases de dados acadêmicas e científicas, com o objetivo de identificar trabalhos relevantes sobre o tema. Dentre as bases, foram consultadas: Google Scholar, Core, Taylor \& Francis Online, ProQuest e Semantic Scholar, onde foram considerados trabalhos publicados entre 2021 e 2026, nos idiomas português e inglês, incluindo artigos científicos e estudos de caso.
+A pesquisa bibliográfica foi conduzida a partir da consulta a diferentes bases de dados acadêmicas e científicas, com o objetivo de identificar trabalhos relevantes sobre o tema. Dentre as bases, foram consultadas: \textit{Google Scholar} e \textit{Semantic Scholar}, onde foram considerados trabalhos publicados entre 2021 e 2026, nos idiomas português, inglês e espanhol, incluindo artigos científicos e estudos de caso.
 
 Em cada base, foi utilizado um conjunto de strings de busca, onde, dado os resultados, foram selecionados artigos e estudos condizentes com a proposta deste trabalho. Segue abaixo uma tabela com os resultados obtidos, com base na string de busca e plataforma:
 
@@ -215,19 +215,30 @@ Em cada base, foi utilizado um conjunto de strings de busca, onde, dado os resul
 	\setlength{\tabcolsep}{4pt}
 	\begin{tabularx}{\textwidth}{p{3cm}|p{7cm}|p{2cm}|p{2cm}}
 		\toprule
-		\textbf{Base} & \textbf{String de busca} & \textbf{Resultados da busca} & \textbf{Artigos Selecionados} \\ 
-		\midrule
-		Semantic Scholar & \texttt{overbooking AND (queue OR simulation) AND health} & 849 & 6 \\ 
+		\textbf{Base(s)} & \textbf{String de busca} & \textbf{Resultados da busca} & \textbf{Artigos Selecionados} \\ 
 		\midrule
 		Google Scholar & \texttt{("teoria das filas" OR "modelo de filas") AND ("medicina" OR "saúde" OR "clínica") AND ("simulação" OR "mobile")} & 210 & 5 \\ 
 		\midrule
-		Google Scholar & \texttt{("teoria das filas" OR "modelo de filas") AND ("restaurante" OR "fast food" OR "fast-food") AND ("simulação" OR "mobile")} & 47 & 7 \\ 
+		Google Scholar & \texttt{"healthcare workflow optimization" waiting time bottleneck} & 31 & 2 \\ 
+		\midrule
+		Google Scholar & \texttt{"redução do tempo de espera" ambulatório simulação} & 59 & 7 \\ 
+		\midrule
+		Google Scholar & \texttt{"simulação de eventos" fundamentos "saúde" OR "clínica" -criptografia -emergência} & 103 & 2 \\ 
 		\bottomrule
 	\end{tabularx}
 	\label{tab:busca}
 \end{table}
 
-A partir dos resultados, e da seleção dos artigos, foi aplicado a técnica de "funil", no qual realiza-se o filtro dos artigos mais relevantes, e é definido os artigos principais de referência.
+A partir dos resultados, foi realizado a seleção dos artigos e suas citações, aplicando a técnica de "funil", no qual realiza-se o filtro dos artigos mais relevantes, para definir os artigos principais relacionados a este trabalho.
+
+Vale ressaltar que houve um contraste grande nos resultados da busca em relação à quantidade de artigos selecionados devido aos seguintes fatores:
+\begin{itemize}
+	\item \textbf{Aderência ao tema:} Muitos artigos não tinham, ou haviam pouca relação com o tema deste trabalho, sendo excluídos da seleção;
+	\item \textbf{Abordagens e problemas repetidos:} Como há muitos artigos com as mesmas abordagens ou os mesmos problemas, foram selecionados apenas os artigos nos quais haviam abordagens ou problemas diferentes uns dos outros;
+	\item \textbf{Deduplicação de artigos:} Dado as strings de busca acima, houveram artigos duplicados entre as buscas, sendo necessário a deduplicação dos artigos. Essa etapa foi feita através da ferramenta \textit{ResearchRabbit}, como centralizador de artigos.
+\end{itemize}
+
+Ao todo, foram totalizados 25 artigos selecionados para a aplicação do funil, onde foram selecionados 5 artigos como potenciais candidados à trabalhos relacionados, e dentre eles, 3 aptos como trabalhos relacionados.
 
 \section{Fundamentos}
 
