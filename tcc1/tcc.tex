@@ -187,13 +187,10 @@ Otimizar o uso de \textit{overbooking} em consultas médicas a partir da utiliza
 
 \subsection{Objetivos específicos}
 
-Além do objetivo geral, temos os seguintes objetivos:
-\begin{itemize}
-    \item Coletar dados a partir de um dataset e desenvolver um modelo baseado em conceitos probabilísticos;
-    \item Simular o modelo e avaliar seu desempenho e viabilidade por meio de métodos estocásticos;
-    \item Testar o modelo em um ou mais cenários de uso real;
-    \item Analisar o funcionamento do mecanismo de overbooking em sistemas de saúde.
-\end{itemize}
+Para o desenvolvivimento do projeto, é necessário compreender a linha de processos envolvida em um diagnóstico, identificando cada uma das etapas desde o início do atentimento até a entrega do diagnóstico. Esse mapeamento torna possível a compreenssão do funcionamento do processo, tornando viável o reconhecimento de pontos críticos, atrasos e falhas capazes de comprometer o tempo de diagnóstico. Essa análise torna plausível a identificação do momento onde ocorre o principal gargalo do sistema, ou seja, a sessão do processo onde existe o maior tempo de espera. Este gargalo pode estar presente em diversos momentos do processo, como na fila de espera para o atendimento inicial, no intervalo entre a realização dos exames e a devolução do diagnóstico ou em outras fases intermediárias. 
+
+Com isso, será construiído um modelo de processos capaz de representar o funcionamento dos mesmos. Esse modelos será capaz de testar múltiplos cenários, tornando possível a avaliação de como mudanças na organização do atendimento, na distriuição de recursos ou no fluxo de pacientes podem impactar o tempo de espera de devoluções. Depois da criação do modelo, simulações serão realizadas com o intuito de observar como o processo se comporta em diferentes condições para comparar cenários e identificar alternativs mais eficientes. Por último, em função dos resultados obtidos nas simulações, será desenvolvido um algoritmo de otimização com a finalidade de propor melhorias capazes de reduzir gargalos e tornar o processo de diagnóstico mais rápido. 
+
 
 % ---------------------------------------------------------------
 % ===============================================================
