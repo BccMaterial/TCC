@@ -217,15 +217,15 @@ Em cada base, foi utilizado um conjunto de strings de busca, onde, dado os resul
 		\toprule
 		\textbf{Base(s)} & \textbf{String de busca} & \textbf{Resultados da busca} & \textbf{Artigos Selecionados} \\ 
 		\midrule
-		Google Scholar & \texttt{"redução do tempo de espera" ambulatório simulação} & 59 & 7 \\ 
+		\textit{Google Scholar} & \texttt{"redução do tempo de espera" ambulatório simulação} & 59 & 7 \\ 
 		\midrule
-		Google Scholar & \texttt{("teoria das filas" OR "modelo de filas") AND ("medicina" OR "saúde" OR "clínica") AND ("simulação" OR "mobile")} & 210 & 5 \\ 
+		\textit{Google Scholar} & \texttt{("teoria das filas" OR "modelo de filas") AND ("medicina" OR "saúde" OR "clínica") AND ("simulação" OR "mobile")} & 210 & 5 \\ 
 		\midrule
-		Semantic Scholar & \texttt{"discrete event simulation" "patient flow" healthcare bottleneck optimization} & 98 & 4 \\ 
+		\textit{Semantic Scholar} & \texttt{"discrete event simulation" "patient flow" healthcare bottleneck optimization} & 98 & 4 \\ 
 		\midrule
-		Google Scholar & \texttt{"simulação de eventos" fundamentos "saúde" OR "clínica" -criptografia -emergência} & 103 & 2 \\ 
+		\textit{Google Scholar} & \texttt{"simulação de eventos" fundamentos "saúde" OR "clínica" -criptografia -emergência} & 103 & 2 \\ 
 		\midrule
-		Google Scholar & \texttt{"healthcare workflow optimization" waiting time bottleneck} & 31 & 2 \\ 
+		\textit{Google Scholar} & \texttt{"healthcare workflow optimization" waiting time bottleneck} & 31 & 2 \\ 
 		\bottomrule
 	\end{tabularx}
 	\label{tab:busca}
@@ -241,7 +241,12 @@ Vale ressaltar que houve um contraste grande nos resultados da busca em relaçã
 	\item \textbf{Deduplicação de artigos:} Dado as strings de busca acima, houveram artigos duplicados entre as buscas, sendo necessário a deduplicação dos artigos. Essa etapa foi feita através da ferramenta \textit{ResearchRabbit}, como centralizador de artigos.
 \end{itemize}
 
-Ao todo, foram totalizados 25 artigos selecionados para a aplicação do funil, onde foram selecionados 5 artigos como potenciais candidados à trabalhos relacionados, e dentre eles, 3 aptos como trabalhos relacionados.
+Ao todo, foram totalizados 25 artigos selecionados para a aplicação do funil, onde 20 artigos foram selecionados via string de busca, e 5 artigos foram selecionados via \textit{Google Scholar Labs} através de \textit{prompts}. Foram selecionados 5 artigos como potenciais candidados à trabalhos relacionados, e dentre eles, 3 aptos como trabalhos relacionados. 2 dos 5 trabalhos candidatos não foram selecionados por conta dos seguintes critérios:
+\begin{itemize}
+	\item Semelhança entre os trabalhos eleitos;
+	\item Menor referencial teórico em relação aos trabalhos eleitos;
+	\item Os trabalhos eleitos abordavam problemas semelhantes, ou o mesmo problema.
+\end{itemize}
 
 \section{Fundamentos}
 
