@@ -338,20 +338,21 @@ Neste capítulo, apresenta-se a solução proposta para o problema identificado,
 \section{Solução proposta}
 \label{sec:solucao}
 
-Descreva detalhadamente a solução que será desenvolvida para resolver o problema apresentado na introdução. A descrição deve incluir:
+A solução proposta do trabalho constitui-se na criação de um modelo de processos capaz de analisar e otimizar o fluxo de diagnóstico neuropsicológico em clínicas. O principal objetivo do modelo será a representação das etapas essências do processo desde a suspeita inicial e procura pelo atendimento especializado até a realização de exames, análise dos resultados e devolução do diagnóstico. 
 
-\begin{itemize}
-    \item \textbf{Visão geral da solução}: o que será desenvolvido (sistema, aplicativo, modelo, ferramenta, etc.);
-    \item \textbf{Arquitetura}: como os componentes da solução se organizam e interagem;
-    \item \textbf{Tecnologias e ferramentas}: quais linguagens, frameworks, bibliotecas, bancos de dados e ambientes serão utilizados, e por que foram escolhidos;
-    \item \textbf{Funcionalidades principais}: o que a solução fará para atender aos objetivos;
-    \item \textbf{Metodologia de desenvolvimento}: qual abordagem será utilizada (ágil, cascata, prototipação, etc.);
-    \item \textbf{Critérios de validação}: como será medido o sucesso da solução (métricas, testes, avaliação com usuários, etc.).
-\end{itemize}
+A solução será constituída por três principais partes: o mapeamento do processo, a criação de um modelo de simulação e a otimzação. A princípio, será efetuado uma listagem das etapas responsáveis por compor o processo de diagnóstico neuropsicológico, com fim de identificar os principais momentos de espera, recursos envolvidos, profissionais necessários e pontos em que o atraso é uma possibilidade. O mapeamento tornará possível a compreensão do funcionamento do fluxo de atendimento e servirá como a essência da criação do modelo.
 
-Utilize diagramas, fluxogramas ou mockups para ilustrar a solução. Exemplo de descrição de arquitetura:
+A seguir, um modelo com a capacidade de representar a clínica e seu funcionamente em diferentes cenários será desenvolvido. O modelo necessitará levar em consideração elementos como entrade de pacientes, disponibilidade de profissionais, numéro de sessões, tempo médio entre etapas e devolução do diagnóstico. Com isso, será possível a simulação do comportamento do processo e a observação de como determinadas variações podem alterar o tempo total de espera
 
-\textit{A solução proposta consiste em uma aplicação web composta por três camadas: front-end desenvolvido em React.js, back-end em Node.js com Express, e banco de dados PostgreSQL. A comunicação entre front-end e back-end será feita por meio de uma API REST.}
+A arquitetura da solução é dividida em 3 camadas: a primeira camada é responsável pela coleta e estruturação das informações do processo, a segunda pelo modelo de simulação, e a terceira pelo módulo de análise e otimização. A camada de coleta e estruturação contém dados relacionados a etapas do diagnóstico, disponibilidade de recursos e volume de pacientes. A camada do modelo de simulação é responsável pela representação do fluxo de atendimento e a execução de diferentes cenários. A camada do módulo de análise e otimização é encarregada a identificar gargalos e propor alternativas que permitam a redução de atrasos sem comprometer a qualidade e a confiabilidade da avaliação neuropsicológica.
+
+Python será a linguagem utilizada devido à sua vasta gama de bibliotecas com foco em análise estatística, manipulação de dados e simulação de processos. Serão utilizadas as bibliotecas Pandas e NumPy para auxiliar a organização e tratamento de dados. SimPy será utilizado devido a sua capacidade de representação de filas, recursos e eventos discretos com o passar do tempo.
+
+Como as principais funcionalidades da solução, teremos: mapeamento do processo de diagnóstico neuropsicológico, representação do fluxo de atendimento, identificação de gargalos, simulação de diferentes cenários de funcionamento e a identificação de alternativas de melhoria. Dentre os cenários possíveis, será plausível o teste de mudanças como o aumento ou redistribuição de profissionais, alteração na ordem de etapas, reorganização de agenda e redução de períodos ociosos entre fases do processo.
+
+Será adotada uma metodologia de desenvolvimento baseada em prototipação e simulação. Será inicialmente criado um modelo simplificado do processo contendo as principais etapas identificadas. Posteriormente, o modelo será refinado de acordo com os dados levantados e os gargalos encontrados. Com base nisso, serão executadas simulações com fim de comparar o funcionamento do processo em condições diferentes. Essa metodologia incremental permitirá o ajuste do modelo progressivamente, garantindo sua representação de forma mais adequada ao problema.
+
+Os critérios de avaliação estão ligados com a capacidade do modelo de representação do processo de diagnóstico e da indicação de melhorias viáveis. Serão utilizadas métricas como tempo médio total até a devolução do diagnóstico, tempo médio de espera em cada etapa, tamanho das filas, taxa de utilização dos profissionais e identificação do principal gargalo do sistema. Ademais, simulações de cenários simulados serão comparadas entre si com o intuito de verificar as estratégias que apresentam melhores resultados no que diz respeito à redução do tempo de espera, mantendo a qualidade necessária para realizar uma avaliação confiável.
 
 % ---------------------------------------------------------------
 \section{Cronograma de trabalho}
