@@ -199,7 +199,7 @@ Com isso, será construído um modelo de processos capaz de representar o funcio
 % ---------------------------------------------------------------
 \section{Referencial teórico}
 \label{sec:referencial}
-
+O principal conceito utilizado nesse trabalho será Pesquisa Operacional e outros conteúdos derivados do mesmo. Dentro esses conteúdos, temos:  teoria das filas para a otimização de tempo de espera e tamanho da fila, simulação de eventos discretos para geração de cenários e aplicação do modelo, a metodologia Lean Healthcare para a redução do gargalo, métricas como o tempo de fila , tamanho da fila, tempo de atendimento, tempo de espera entre processos, tempo total do processo e parâmetros como o número de seções, número de profissionais e disponibilidade médica.
 
 
 % ---------------------------------------------------------------
@@ -252,17 +252,19 @@ Ao todo, foram totalizados 25 artigos selecionados para a aplicação do funil, 
 
 \section{Fundamentos}
 
-\subsection{Overbooking}
+\subsection{Pesquisa Operacional}
+Pesquisa Operacional é um ramo da matemática aplicada composta por diversas técnicas de outras ciências matemáticas, como modelagem, estatística e otimização, com o fim de contribuir na tomada de decisões e gerenciamento, encontrando soluções ótimas ou quase-ótimas. Dentre essas técnicas, utilizaremos Simulação de Eventos e Teoria das Filas, ferramentas que serão essenciais no contexto do nosso problema para a reprodução de cenários e a construção de modelos.
 
-O \textit{overbooking} é a venda de um número de produtos ou serviços em maior número que o estoque atual ou a capacidade de serviço, sendo aplicado principalmente nas áreas da saúde e da aviação. O \textit{overbooking} surgiu como uma maneira de compensar o lucro perdido por conta de clientes que não comparecem ou cancelam o serviço (Denominado como \textit{no-shows}), utilizando todo o estoque ou capacidade do serviço disponível para balancear a eficiência operacional e a qualidade do serviço. No contexto clínico, o principal \textit{trade-off} do overbooking é entre a eficiência operacional e a qualidade do serviço: segundo Zeng et  al. (2013), o maior uso da equipe médica derivado do \textit{overbooking} pode trazer benefícios como maior lucro e redução do atraso para conseguir uma consulta (\textit{appointment-delay}). Porém, essa prática aumenta o tempo de espera no consultório para ser atendido (\textit{office-delay}) e pode até reduzir o lucro da clínica para valores críticos de \textit{panel-size}.
+\subsection{Teoria das Filas}
+Segundo Frederick S. Hillier e Gerald J. Lieberman (Introdução à pesquisa operacional, 2013), a teoria das filas é o estudo da espera em formas diversas, como a compra de um ingresso para um sessão de cinema ou fazer um depósito bancário. Modelos de filas são utilizados para representar sistemas de filas, com fórmulas para cada modelos responsáveis por indicar o funcionamento e o tempo médio de espera do mesmo em uma determinada série de circunstâncias.
 
 \subsection{Métricas}
 
-Para avaliar o modelo, serão utilizadas métricas baseadas na qualidade e eficiência de serviço, levando em consideração o \textit{overbooking} e a estabilidade da clínica. A partir disso, escolhemos trabalhar com o tempo médio de \textit{office-delay}, o tempo do \textit{appointment-delay} e a taxa de \textit{no-shows}. Também serão utilizadas outras métricas como a taxa de utilização de recursos para garantir estabilidade.
+Como métricas, temos: tempo de fila, tamanho da fila, tempo de atendimento, tempo de espera entre processos e tempo total de processo. Tempo de fila é o tempo de espera até o atendimento inicial. Tamanho da fila é o número de pessoas esperando por atendimento. Tempo de atendimento é a duração de um atendimento. Tempo de espera é a quantidade de tempo entre um atendimento e outro. Tempo total de processo é o tempo total até o diagnóstico. 
 
-\subsection{Rede Neural Recorrente}
+\subsection{Parâmetros}
 
-Uma Rede Neural Recorrente (Referenciada pela a sigla em inglês RNN -- \textit{Recurrent Neural Network}) é uma rede neural profunda, com diversas camadas escondidas, treinada a partir de dados sequenciais ou séries temporais, com o objetivo de criar um modelo de aprendizado de máquina para realizar predições. O principal diferencial das RNNs está em sua capacidade de utilizar informações de entradas prévias para influenciar o valor atual de entradas e saídas. Para uma determinada entrada, a RNN mantém um estado oculto, responsável por acompanhar o contexto e agir como uma memória que armazena informações das entradas anteriores, processando a entrada atual junto com o o estado oculto da etapa anterior em cada etapa, dando uma capacidade de "lembrar" dados anteriores, influenciando o valor da saída atual. No contexto clínico, utilizaremos a RNN para prever a probabilidade de \textit{no-shows} e ajustar o nível de \textit{overbooking} em função do modelo.
+Como parâmetros, temos: número de seções, número de profissionais e disponibilidade médica. Número de seções é o número de atendimentos necessários para realizar um diagnóstico. Número de profissionais é a quantidade de profissionais disponíveis. Disponibilidade média é o quantidade de profissionais disponíveis.
 
 \section{Trabalhos relacionados}
 \label{sec:trabalhos_relacionados}
