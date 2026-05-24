@@ -315,32 +315,36 @@ Abaixo uma tabela apresentando a diferença entre os trabalhos relacionados e es
     
     \setlength{\tabcolsep}{4pt} % reduz espaçamento entre colunas
     
-    \begin{tabularx}{\textwidth}{p{2.5cm}|X|X|X}
+    \begin{tabularx}{\textwidth}{p{1.95cm}|X|X|X|X}
         \toprule
-        \textbf{Critério} & \textbf{Trabalho 1} & \textbf{Trabalho 2} & \textbf{Este trabalho} \\
+        \textbf{Critério} & \textbf{Trabalho 1} & \textbf{Trabalho 2} & \textbf{Trabalho 3} & \textbf{Este trabalho} \\
         \midrule
 
         Objetivo 
         & O problema de aderência dos pacientes, juntamente com a grande lista de espera em clínicas 
         & Resolução do overbooking no sistema de saúde, otimizando valores 
-        & Organização do overbooking eventualmente impactando no aumento do lucro e na melhor experiência para o paciente \\
+				& Melhoria na eficiência de uma Central de Abastecimento Farmacêutico (CAF)
+        & Redução do tempo de espera ao obter o diagnóstico no processo de avaliação neuropsicológica \\
         \midrule
 
         Tecnologia 
         & Utiliza-se provas matemáticas para comprovar a eficácia do modelo 
         & Modelo para definir o número escolhido de overbooking seja o melhor, otimizando sua eficiência 
-        & Uso de RNN para prever no-shows \\
+				& Simulação de eventos discretos, \textit{Time Driven Activity Based Costing} e metodologia \textit{Lean Healthcare}
+        & Modelagem estatística a partir de conceitos de pesquisa operacional e simulação de eventos discretos. \\
         \midrule
 
         Validação 
-        & Provas matemáticas para comprovar a eficácia do modelo 
-        & Dado os resultados, conclui-se que temos o prejuízo pela falta de organização, e não pelo overbooking em si 
-        & Combinação de conceitos matemáticos e estatísticos \\
+        & Provas matemáticas para comprovar a eficácia do modelo.
+        & Dado os resultados, conclui-se que temos o prejuízo pela falta de organização, e não pelo overbooking em si.
+        & Dados extraídos das simulações, como horas produtivas por cenário, porcentagem de ociosidade, de expecição e de deslocamentos.
+        & Combinação de conceitos matemáticos e estatísticos, além da avaliação das métricas adquiridas pelas simulações de eventos \\
         \midrule
 
         Limitação 
-        & Falta de métricas como o tempo de fila e o tempo de atendimento causa uma limitação na coleta de resultados 
-        & Complexidade, necessidade de dados, custo financeiro, dificuldade de generalização(rede de hospitais da Arábia Saudita) e ausência de informações como idade, gênero, condição de saúde e geolocalização 
+        & Falta de métricas como o tempo de fila e o tempo de atendimento causa uma limitação na coleta de resultados.
+        & Falta de métricas como o tempo de fila e o tempo de atendimento causa uma limitação na coleta de resultados.
+        & Contexto diferente em relação ao nosso trabalho e a falta de uma implementação algoritmica.
         & --- \\
         
         \bottomrule
