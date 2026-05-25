@@ -256,10 +256,16 @@ Ao todo, foram totalizados 25 artigos selecionados para a aplicação do funil, 
 \section{Fundamentos}
 
 \subsection{Pesquisa Operacional}
-Pesquisa Operacional é um ramo da matemática aplicada composta por diversas técnicas de outras ciências matemáticas, como modelagem, estatística e otimização, com o fim de contribuir na tomada de decisões e gerenciamento, encontrando soluções ótimas ou quase-ótimas. Dentre essas técnicas, utilizaremos Simulação de Eventos e Teoria das Filas, ferramentas que serão essenciais no contexto do nosso problema para a reprodução de cenários e a construção de modelos.
+Pesquisa Operacional é um ramo da matemática aplicada composta por diversas técnicas de outras ciências matemáticas, como modelagem, estatística e otimização, com o fim de contribuir na tomada de decisões e gerenciamento, encontrando soluções ótimas ou quase-ótimas. Dentre essas técnicas, utilizaremos Simulação de Eventos e Teoria das Filas, ferramentas que serão essenciais no contexto do nosso problema para a reprodução de cenários e a construção de modelos. 
 
 \subsection{Simulação de Eventos}
-Segundo \citeonline{Lieberman2010}, Simulação é uma das técnicas com maior destaque por ser uma ferramenta flexível, poderosa e intuitiva. Essa técnica envolve a utilização de um computador para imitar a operação de um processo inteiro ou sistema, podendo ser utilizado em diversos cenários, como a análise de riscos em processos financeiros, simulando a evolução de transações envolvidas para gerar um quadro de possíveis resultados. 
+Segundo \citeonline{Lieberman2010}, Simulação é uma das técnicas com maior destaque por ser uma ferramenta flexível, poderosa e intuitiva. Essa técnica envolve a utilização de um computador para imitar a operação de um processo inteiro ou sistema, podendo ser utilizado em diversos cenários, como a análise de riscos em processos financeiros, simulando a evolução de transações envolvidas para gerar um quadro de possíveis resultados. O registro do desempenho de operações simuladas torna possível  a avaliação e a comparação de alternativas antes de escolher uma delas. Existem dois tipos de simulação: simulação de eventos discretos e simulação de eventos contínuos.
+
+Na simulação por eventos discretos, as mudanças no estado do sistema ocorrem de maneira instantânea em pontos aleatórios no tempo como o resultado da ocorrência desses eventos discretos. Por exemplo: em um sistema de filas onde o estado do sistema é o número de clientes no sistema, os eventos discretos responsáveis por mudar esse estado são a chegada e a saída de um cliente em decorrência da finalização do serviço.
+
+Na simulação contínua, as mudanças no estado do sistema ocorrem de maneira contínua ao longo do tempo. Por exemplo: assumindo que o sistema de interesse seja um avião em voo e seu estado seja a posição atual da aeronave, o estado irá mudar continuamente ao longo do tempo.
+
+Utilizaremos simulação por eventos discretos, já que ela condiz melhor com o nosso tema. No contexto de uma clínica, os eventos discretos que irão mudar o estado do sistema será a chegada e saída de clientes após a conclusão da sessão.
 
 \subsection{Teoria das Filas}
 Segundo \citeonline{Lieberman2010}, a teoria das filas é o estudo da espera em formas diversas, como a compra de um ingresso para um sessão de cinema ou fazer um depósito bancário. Ter de esperar em uma fila não é limitado apenas a transtornos pessoais não tão significantes: deixar máquinas a espera para serem reparadas pode gerar perdas na produção e aviões que que aguardam para decolar ou pousar podem afetar horários de voos futuros.
