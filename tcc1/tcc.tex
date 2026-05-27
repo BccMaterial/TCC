@@ -184,6 +184,8 @@ Existe um gargalo no fluxo da análise neuropsicológica responsável por afetar
 
 \section{Objetivos}
 
+Separamos os objetivos entre objetivo geral, no qual é a meta a ser atingida por este trabalho. Já os objetivos específicos, são os meios no qual desenvolveremos esta pesquisa.
+
 \subsection{Objetivo geral}
 
 O objetivo deste trabalho é propôr um modelo estatístico utilizando conceitos de pesquisa operacional, simulação de eventos discretos e teoria das filas, com o fim de diminuir o tempo mínimo para um paciente receber o diagnóstico dentro do processo de avaliação neuropsicológica, partindo da primeira consulta no psiquiatra, até o retorno dos resultados do exame.
@@ -255,10 +257,14 @@ Ao todo, foram totalizados 25 artigos selecionados para a aplicação do funil, 
 
 \section{Fundamentos}
 
+Nesta seção, apresentaremos quais são os principais conceitos que são necessários para o desenvolvimento deste trabalho.
+
 \subsection{Pesquisa Operacional}
-Pesquisa Operacional é um ramo da matemática aplicada composta por diversas técnicas de outras ciências matemáticas, como modelagem, estatística e otimização, com o fim de contribuir na tomada de decisões e gerenciamento, encontrando soluções ótimas ou quase-ótimas. Dentre essas técnicas, utilizaremos Simulação de Eventos e Teoria das Filas, ferramentas que serão essenciais no contexto do nosso problema para a reprodução de cenários e a construção de modelos. 
+
+Pesquisa Operacional é um ramo da matemática aplicada composta por diversas técnicas de outras ciências matemáticas, como modelagem, estatística e otimização, com o fim de contribuir na tomada de decisões e gerenciamento, encontrando soluções ótimas ou quase-ótimas \cite{Lieberman2010}. Dentre essas técnicas, utilizaremos Simulação de Eventos e Teoria das Filas, ferramentas que serão essenciais no contexto do nosso problema para a reprodução de cenários e a construção de modelos. 
 
 \subsection{Simulação de Eventos}
+
 Segundo \citeonline{Lieberman2010}, Simulação é uma das técnicas com maior destaque por ser uma ferramenta flexível, poderosa e intuitiva. Essa técnica envolve a utilização de um computador para imitar a operação de um processo inteiro ou sistema, podendo ser utilizado em diversos cenários, como a análise de riscos em processos financeiros, simulando a evolução de transações envolvidas para gerar um quadro de possíveis resultados. O registro do desempenho de operações simuladas torna possível  a avaliação e a comparação de alternativas antes de escolher uma delas. Existem dois tipos de simulação: simulação de eventos discretos e simulação de eventos contínuos.
 
 Na simulação por eventos discretos, as mudanças no estado do sistema ocorrem de maneira instantânea em pontos aleatórios no tempo como o resultado da ocorrência desses eventos discretos. Por exemplo: em um sistema de filas onde o estado do sistema é o número de clientes no sistema, os eventos discretos responsáveis por mudar esse estado são a chegada e a saída de um cliente em decorrência da finalização do serviço.
@@ -268,6 +274,7 @@ Na simulação contínua, as mudanças no estado do sistema ocorrem de maneira c
 Utilizaremos simulação por eventos discretos, já que ela condiz melhor com o nosso tema. No contexto de uma clínica, os eventos discretos que irão mudar o estado do sistema será a chegada e saída de clientes após a conclusão da sessão.
 
 \subsection{Teoria das Filas}
+
 Segundo \citeonline{Lieberman2010}, a teoria das filas é o estudo da espera em formas diversas, como a compra de um ingresso para um sessão de cinema ou fazer um depósito bancário. Ter de esperar em uma fila não é limitado apenas a transtornos pessoais não tão significantes: deixar máquinas a espera para serem reparadas pode gerar perdas na produção e aviões que que aguardam para decolar ou pousar podem afetar horários de voos futuros.
 
 Modelos de filas são a principal ferramenta utilizada para a representação de sistemas de filas, com fórmulas para cada modelo responsáveis por indicar o funcionamento e o tempo médio de espera do mesmo em uma determinada série de circunstâncias. Utilizaremos modelos de fila que possuem as determinadas características: um único canal e uma única fila, um único canal e múltiplas filas, vários canais e uma única fila e vários canais e múltiplas filas. Em múltiplos cenários, utilizaremos os modelos de fila citados, com o intuito de encontrar o modelo ideal para encontrar o melhor tempo possível no processo de diagnóstico.
