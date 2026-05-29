@@ -410,7 +410,15 @@ A arquitetura da solução é dividida em 3 camadas: a primeira camada é respon
 
 Python será a linguagem utilizada devido à sua vasta gama de bibliotecas com foco em análise estatística, manipulação de dados e simulação de processos. Serão utilizadas as bibliotecas Pandas e NumPy para auxiliar a organização e tratamento de dados. SimPy será utilizado devido a sua capacidade de representação de filas, recursos e eventos discretos com o passar do tempo.
 
-Como as principais funcionalidades da solução, teremos: mapeamento do processo de diagnóstico neuropsicológico, representação do fluxo de atendimento, identificação de gargalos, simulação de diferentes cenários de funcionamento e a identificação de alternativas de melhoria. Dentre os cenários possíveis, será plausível o teste de mudanças como o aumento ou redistribuição de profissionais, alteração na ordem de etapas, reorganização de agenda e redução de períodos ociosos entre fases do processo.
+Como as principais funcionalidades da solução, teremos: mapeamento do processo de diagnóstico neuropsicológico, representação do fluxo de atendimento, identificação de gargalos, simulação de diferentes cenários de funcionamento e a identificação de alternativas de melhoria. Dentre os cenários possíveis, será plausível o teste de mudanças como o aumento ou redistribuição de profissionais, alteração na ordem de etapas, reorganização de agenda e redução de períodos ociosos entre fases do processo. Abaixo há uma figura apresentando um esboço do processo com base no fluxo de pessoas do processo como um todo:
+
+\begin{figure}[H]
+	\caption{Esboço do processo}
+	\centering
+	\includegraphics[width=10cm]{assets/fluxograma_pacientes_medicina.drawio.png}
+	\label{fig:ano_diagnostico}
+	\legend{Fonte: Elaborado pelos autores}
+\end{figure}
 
 Será adotada uma metodologia de desenvolvimento baseada em prototipação e simulação. Será inicialmente criado um modelo simplificado do processo contendo as principais etapas identificadas. Posteriormente, o modelo será refinado de acordo com os dados levantados e os gargalos encontrados. Com base nisso, serão executadas simulações com fim de comparar o funcionamento do processo em condições diferentes. Essa metodologia incremental permitirá o ajuste do modelo progressivamente, garantindo sua representação de forma mais adequada ao problema.
 
