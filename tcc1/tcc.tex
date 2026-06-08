@@ -445,24 +445,75 @@ O cronograma a seguir apresenta, no formato de diagrama de Gantt, as atividades 
     bar height=0.7,
     bar/.append style={fill=purple!55},
     title label font=\bfseries\scriptsize,
-    bar label font=\larger,
-    group label font=\scriptsize
-]{2025-07-15}{2025-11-30}
+    bar label font=\small,
+    group label font=\larger
+]{2026-07-20}{2026-11-29}
 
 \gantttitlecalendar{month=name, week} \\
 
-\ganttbar{Entrevista e coleta de dados}{2025-07-15}{2025-08-03} \\
-\ganttbar{Modelagem do problema e dos dados}{2025-08-04}{2025-08-17} \\
-\ganttbar{Parte matemática e estatística}{2025-08-18}{2025-08-31} \\
-\ganttbar{Cenários com os dados}{2025-09-01}{2025-09-07} \\
-\ganttbar{Desenvolver simulador e reproduzir cenários}{2025-09-08}{2025-09-28} \\
-\ganttbar{Analisar resultados}{2025-09-29}{2025-10-05} \\
-\ganttbar{Modelar algoritmo de otimização}{2025-10-06}{2025-10-12} \\
-\ganttbar{Criação do algoritmo}{2025-10-13}{2025-10-26} \\
-\ganttbar{Teste do algoritmo e otimização}{2025-10-27}{2025-11-09} \\
-\ganttbar{Integração simulador-algoritmo}{2025-11-10}{2025-11-16} \\
-\ganttbar{Interface de recomendação}{2025-11-17}{2025-11-23} \\
-\ganttbar{Refinamento dos códigos}{2025-11-24}{2025-11-30}
+% Fase 1 - Dados e Modelagem
+\ganttgroup[
+  group/.append style={
+		fill=blue!30,
+		draw=blue
+  }
+]{\textbf{Fase 1 - Dados e Modelagem}}{2026-07-20}{2026-08-23} \\
+	\ganttbar[bar/.append style={fill=blue!20}]
+		{Entrevista e coleta de dados}{2026-07-20}{2026-08-09} \\
+	\ganttbar[bar/.append style={fill=blue!20}]
+		{Modelagem do problema}{2026-07-27}{2026-08-16} \\
+	\ganttbar[bar/.append style={fill=blue!20}]
+		{Modelagem dos dados}{2026-07-27}{2026-08-16} \\
+	\ganttbar[bar/.append style={fill=blue!20}]
+		{Fundamentação de Métricas e Parâmetros}{2026-08-17}{2026-08-23} \\
+
+% Fase 2 - Cenários e Simulações
+\ganttgroup[
+  group/.append style={
+		fill=purple!30,
+    draw=purple
+  }
+]{\textbf{Fase 2 - Cenários e Simulações}}{2026-08-24}{2026-10-11} \\
+	\ganttbar[bar/.append style={fill=purple!20}]
+		{Criar cenários}{2026-08-24}{2026-09-06} \\
+	\ganttbar[bar/.append style={fill=purple!20}]
+		{Desenvolver simulador}{2026-08-24}{2026-09-06} \\
+	\ganttbar[bar/.append style={fill=purple!20}]
+		{Testar simulador}{2026-09-07}{2026-09-13} \\
+	\ganttbar[bar/.append style={fill=purple!20}]
+		{Refinar simulador}{2026-09-07}{2026-09-13} \\
+	\ganttbar[bar/.append style={fill=purple!20}]
+		{Simular cenários}{2026-09-14}{2026-11-10} \\
+	\ganttbar[bar/.append style={fill=purple!20}]
+		{Analisar resultados}{2026-09-14}{2026-10-11} \\
+
+% Fase 3 - Algoritmo
+\ganttgroup[
+  group/.append style={
+		fill=green!30,
+		draw=green
+  }
+]{\textbf{Fase 3 - Algoritmo}}{2026-10-12}{2026-11-29} \\
+	\ganttbar[bar/.append style={fill=green!20}]
+		{Modelagem do algoritmo}{2026-10-12}{2026-10-18} \\
+	\ganttbar[bar/.append style={fill=green!20}]
+		{Criação do algoritmo}{2026-10-12}{2026-10-25} \\
+	\ganttbar[bar/.append style={fill=green!20}]
+		{Teste do algoritmo}{2026-10-12}{2026-10-25} \\
+	\ganttbar[bar/.append style={fill=green!20}]
+		{Otimização do algoritmo}{2026-10-19}{2026-10-25} \\
+	\ganttbar[bar/.append style={fill=green!20}]
+		{Otimização do algoritmo}{2026-10-26}{2026-11-01} \\
+	\ganttbar[bar/.append style={fill=green!20}]
+		{Desenvolvimento de interface}{2026-10-26}{2026-11-08} \\
+	\ganttbar[bar/.append style={fill=green!20}]
+		{Refinamento do código}{2026-11-02}{2026-11-15} \\
+
+% Global
+\ganttbar[bar/.append style={fill=black!20}]
+	{Escrita do TCC}{2026-08-17}{2026-11-08} \\
+\ganttbar[bar/.append style={fill=black!20}]
+	{Revisão do TCC}{2026-11-09}{2026-11-15} \\
 
 \end{ganttchart}
 }
