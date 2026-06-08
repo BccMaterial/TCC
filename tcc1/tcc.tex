@@ -64,6 +64,12 @@
 % ---------------------------------------------------------------
 \definecolor{blue}{RGB}{41,5,195}
 
+
+% ---------------------------------------------------------------
+% TIPOS DE COLUNA
+% ---------------------------------------------------------------
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
 % ---------------------------------------------------------------
 % INFORMAÇÕES DO DOCUMENTO
 % ---------------------------------------------------------------
@@ -346,11 +352,11 @@ Abaixo uma tabela apresentando a diferença entre os trabalhos relacionados e es
     \caption{Comparação entre trabalhos relacionados}
     \label{tab:trabalhos_relacionados}
     
-    \footnotesize % reduz um pouco a fonte
+    \tiny % reduz um pouco a fonte
     
     \setlength{\tabcolsep}{4pt} % reduz espaçamento entre colunas
     
-    \begin{tabularx}{\textwidth}{p{1.95cm}|X|X|X|X}
+    \begin{tabularx}{\textwidth}{p{1.5cm}|Y|Y|Y|Y}
         \toprule
         \textbf{Critério} & \textbf{Trabalho 1} & \textbf{Trabalho 2} & \textbf{Trabalho 3} & \textbf{Este trabalho} \\
         \midrule
