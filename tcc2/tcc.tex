@@ -1,0 +1,587 @@
+% ---------------------------------------------------------------
+% TEMPLATE TCC1 - SENAC SANTO AMARO
+% ---------------------------------------------------------------
+% Trabalho de Conclusão de Curso 1
+% Elaborado para apresentação da proposta inicial do TCC
+% Estrutura: 4 capítulos (Introdução, Revisão Bibliográfica,
+%            Desenvolvimento, Referências Bibliográficas)
+% ---------------------------------------------------------------
+
+\documentclass[
+    12pt,                % tamanho da fonte
+    openright,           % capítulos começam em página ímpar
+    oneside,             % para impressão em apenas um lado do papel
+    a4paper,             % tamanho do papel
+    english,             % idioma adicional
+    brazil               % idioma principal
+]{abntex2}
+
+% ---------------------------------------------------------------
+% PACOTES
+% ---------------------------------------------------------------
+\usepackage{lmodern}                % Fonte Latin Modern
+\usepackage[T1]{fontenc}            % Seleção de códigos de fonte
+\usepackage[utf8]{inputenc}         % Codificação do documento
+\usepackage{lastpage}               % Usado pela Ficha catalográfica
+\usepackage{indentfirst}            % Indenta o primeiro parágrafo
+\usepackage{color}                  % Controle de cores
+\usepackage{graphicx}               % Inclusão de gráficos
+\usepackage{microtype}              % Melhorias de justificação
+\usepackage{float}                  % Para posicionamento de figuras
+\usepackage{booktabs}               % Tabelas profissionais
+\usepackage{multirow}               % Células mescladas em tabelas
+\usepackage{longtable}              % Tabelas longas
+\usepackage{amsmath,amssymb}        % Símbolos matemáticos
+\usepackage{pgfgantt}               % Diagramas de Gantt
+\usepackage[brazilian,hyperpageref]{backref}  % Páginas com citações
+\usepackage[alf]{abntex2cite}       % Citações ABNT
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{pdflscape}
+\usepackage{geometry}
+
+% ---------------------------------------------------------------
+% CONFIGURAÇÕES DO PDF
+% ---------------------------------------------------------------
+\makeatletter
+\hypersetup{
+    pdftitle={\@title},
+    pdfauthor={\@author},
+    pdfsubject={TCC1 - SENAC Santo Amaro},
+    pdfcreator={LaTeX with abnTeX2},
+    pdfkeywords={tcc}{senac}{santo amaro}{trabalho de conclusão},
+    colorlinks=true,        % false: links em caixas; true: links coloridos
+    linkcolor=blue,         % cor dos links internos
+    citecolor=blue,         % cor dos links para bibliografia
+    filecolor=magenta,      % cor dos links para arquivos
+    urlcolor=blue,
+    bookmarksdepth=4
+}
+\makeatother
+
+% ---------------------------------------------------------------
+% CONFIGURAÇÕES DE APARÊNCIA DO PDF FINAL
+% ---------------------------------------------------------------
+\definecolor{blue}{RGB}{41,5,195}
+
+
+% ---------------------------------------------------------------
+% TIPOS DE COLUNA
+% ---------------------------------------------------------------
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+% ---------------------------------------------------------------
+% INFORMAÇÕES DO DOCUMENTO
+% ---------------------------------------------------------------
+\titulo{Otimização do tempo total do processo de avaliação neuropsicológica utilizando Simulação de eventos discretos e Teoria das filas
+}
+\autor{Caio Troiano Collino (1142491237) \\ Thiago Pereira Lins da Silva (1142515180) \\ Vinícius Vianna Egydio de Carvalho (1142446597)}
+\local{São Paulo}
+\data{2026}
+\orientador{Prof. Alessandro Ranulfo Lima Nery}
+% \coorientador{Prof. Nome do Coorientador} % Descomente se houver coorientador
+
+\instituicao{%
+  SENAC -- Serviço Nacional de Aprendizagem Comercial
+  \par
+  Unidade Santo Amaro
+  \par
+  Curso de Ciência da Computação
+}
+
+\tipotrabalho{Trabalho de Conclusão de Curso I}
+
+\preambulo{Proposta de Trabalho de Conclusão de Curso apresentado ao SENAC Santo Amaro como requisito parcial para aprovação na disciplina de TCC1 do curso de Ciência da Computação.}
+
+% ---------------------------------------------------------------
+% COMPILA O ÍNDICE
+% ---------------------------------------------------------------
+\makeindex
+
+% ---------------------------------------------------------------
+% INÍCIO DO DOCUMENTO
+% ---------------------------------------------------------------
+\begin{document}
+
+% Seleciona o idioma do documento
+\selectlanguage{brazil}
+
+% Retira espaço extra obsoleto entre as frases
+\frenchspacing
+
+% ---------------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ---------------------------------------------------------------
+\pretextual
+
+% ---------------------------------------------------------------
+% CAPA
+% ---------------------------------------------------------------
+\imprimircapa
+
+% ---------------------------------------------------------------
+% FOLHA DE ROSTO
+% ---------------------------------------------------------------
+\imprimirfolhaderosto
+
+% ---------------------------------------------------------------
+% RESUMO
+% ---------------------------------------------------------------
+\begin{resumo}
+Este documento apresenta a proposta inicial do Trabalho de Conclusão de Curso (TCC1) desenvolvido no SENAC Santo Amaro. O objetivo deste trabalho é demonstrar que um modelo estatístico pode reduzir o tempo mínimo necessário para a obtenção da devolução de um diagnóstico neuropsicológico. A justificativa para este estudo baseia-se na dificuldade de acesso dos pacientes a tratamentos e adaptações necessários devido a atrasos no diagnóstico e na lacuna existente na aplicação de métodos de otimização computacional no contexto dessa avaliação. A revisão bibliográfica abrange principalmente Pesquisa operacional, Teoria das filas e Simulação de eventos discretos. Como solução proposta, pretende-se criar um modelo de processos capaz de representar as etapas essencias do diagnóstico e simular as mesmas, utilizando como ferramenta princial Python e bibliotecas do mesmo, como Pandas, NumPy e SimPy. Este trabalho está organizado em três capítulos que apresentam a introdução ao tema, a revisão bibliográfica que fundamenta a pesquisa, o desenvolvimento com a solução proposta e o cronograma de trabalho, seguidos das referências bibliográficas.
+
+\vspace{\onelineskip}
+
+\noindent
+\textbf{Palavras-chave}: Pesquisa Operacional. Lean HealthCare. Simulação. Avaliação neuropsicológica. Teoria das Filas.
+\end{resumo}
+
+% ---------------------------------------------------------------
+% LISTA DE ILUSTRAÇÕES
+% ---------------------------------------------------------------
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\cleardoublepage
+
+% ---------------------------------------------------------------
+% LISTA DE TABELAS
+% ---------------------------------------------------------------
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+
+% ---------------------------------------------------------------
+% SUMÁRIO
+% ---------------------------------------------------------------
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+
+% ---------------------------------------------------------------
+% ELEMENTOS TEXTUAIS
+% ---------------------------------------------------------------
+\textual
+
+% ===============================================================
+% CAPÍTULO 1 - INTRODUÇÃO
+% ===============================================================
+\chapter{Introdução}
+\label{sec:introducao}
+Este trabalho tem como tema a otimização do tempo no processo de diagnóstico neuropsicológico, considerando que o mesmo parte de uma suspeita inicial, passa pela procura de um profissional especializado e termina com a devolução de um diagnósitco completo. Esse processo, devido a sua natureza extensa e composição de múltiplas etapas, pode conter longos períodos de espera, ainda mais em um cenário de alta demanda e com um número limitado de profissionais na área. Ademais, um reconhecimento crescente na importância da avaliação neuropsicológica contribui para o aumento da procura por essa categoria de atendimento.
+
+\section{Contexto}
+No presente momento de desenvolvimento deste trabalho, observa-se uma grande procura por avaliações neuropsicológicas: 69,6\% dos diagnósticos de autismo foram entre 2020 e 2024 \cite{Mab2026}. A principal causa para essa busca reside na maior divulgação do tema em mídias tradicionais e digitas, especialmente em discussões relacionadas ao Transtorno do Espectro Autista (TEA) e outros transtornos do neurodesenvolvimento. Na figura abaixo, podemos observar o crescimento de diagnósticos por ano:
+
+\begin{figure}[H]
+	\caption{Ano do diagnóstico}
+	\centering
+	\includegraphics[width=15cm]{assets/ano_do_diagnostico_mab.png}
+	\label{fig:ano_diagnostico}
+	\legend{Fonte: \citeonline{Mab2026}}
+\end{figure}
+
+Contudo, quando uma pessoa busca por esse tipo de avaliação, ela constantemente se depara com longas filas de espera, um processo que excede o tempo esperado e até um intervalo maior que um ano desde a suspeita inicial até a devolução do diagnóstico. O período de espera até a conclusão do processo é um problema sério e relevante, já que ele atrasa intervenções, tratamentos, adaptações escolares, acadêmicas, profissionais e sociais.
+
+Ademais, a falta de uma organização clara e processos bem definidos pode tornar o diagnóstico mais vulnerável a atrasos em múltiplas etapas. Considerando esse cenário, a computação tem uma contribuição significativa na análise, modelagem e melhoria do processo, tornando possível a identificação de gargalos, a simulação de cenários e a proposição de estratégias adequadas para tornar o fluxo de atendimento mais eficiente.
+
+\section{Justificativa}
+
+Por mais que existam diversos trabalhos na área acadêmica relacionados ao estudo de fluxos de trabalho em processos diagnósticos, muitos deles são direcionados a locais específicos, diagnósticos específicos ou contextos clínicos restritos. Como um processo amplo capaz de auxiliar na formação de diferentes diagnósticos, a avaliação neuropsicológica ainda é pouco explorada em um contexto de otimização computacional. 
+
+Assim sendo, este trabalho se justifica a partir de sua relevância social, acadêmica e prática. Atrasos ou ausências de diagnósticos podem resultar impactos signifcativos na vida dos pacientes, especialmente em um contexto escolar, acadêmico, profissional e social. Tanto crianças quanto adultos estão vulneráveis a esses impactos, tornando difícil o acesso a intervenções adequadas, adaptações necessárias e acompanhamento terapêutico.
+
+A realização de diagnósticos em momentos adequados possibilita o início de tratamentos, terapias, adaptações pedagógicas e outras formas de suporte para o paciente. Contanto, busca-se estudar meios capazes de reduzir o tempo de espera do processo de diagnóstico sem nenhum prejuízo no tempo mínimo necessário para garantir precisão, qualidade e confiabilidade na avaliação.
+
+\section{Hipótese}
+
+Existe um gargalo no fluxo da análise neuropsicológica responsável por afetar a eficiência temporal e o tempo final do diagnóstico. Ao identificar e otimizar esse gargalo, espera-se reduzir o tempo mínimo de diagnóstico, melhorando a experiência do paciente e facilitando o processo.
+
+\section{Objetivos}
+
+Separamos os objetivos entre objetivo geral, no qual é a meta a ser atingida por este trabalho. Já os objetivos específicos, são os meios no qual desenvolveremos esta pesquisa.
+
+\subsection{Objetivo geral}
+
+O objetivo deste trabalho é demonstrar que um modelo estatístico desenvolvido com conceitos de pesquisa operacional, simulação de eventos discretos e teoria das filas pode reduzir o tempo necessário para a devolução de um diagnóstico no processo de avaliação neuropsicológica, considerando que o processo incorpora desde a primeira consulta até o retorno com o resultado dos exames.
+
+\subsection{Objetivos específicos}
+
+Para o desenvolvimento do projeto, é necessário completar os seguintes objetivos específicos: mapeamento da linha de processos no diagnóstico, construção de um modelo de processos, realização de simulações com o modelo criado e o desenvolvimento de um algoritmo de otimização que proponha melhorias redutoras de gargalo. 
+
+O mapeamento torna possível a compreensão do funcionamento do processo, tornando viável o reconhecimento de pontos críticos, atrasos e falhas capazes de comprometer o tempo de diagnóstico. Essa análise torna plausível a identificação do momento onde ocorre o principal gargalo do sistema, ou seja, a sessão do processo onde existe o maior tempo de espera. Este gargalo pode estar presente em diversos momentos do processo, como na fila de espera para o atendimento inicial, no intervalo entre a realização dos exames e a devolução do diagnóstico ou em outras fases intermediárias. 
+
+Com isso, será construído um modelo de processos capaz de representar o funcionamento dos mesmos. Esse modelos será capaz de testar múltiplos cenários, tornando possível a avaliação de como mudanças na organização do atendimento, na distribuição de recursos ou no fluxo de pacientes podem impactar o tempo de espera de devoluções. Depois da criação do modelo, simulações serão realizadas com o intuito de observar como o processo se comporta em diferentes condições para comparar cenários e identificar alternativas mais eficientes. Por último, em função dos resultados obtidos nas simulações, será desenvolvido um algoritmo de otimização com a finalidade de propor melhorias capazes de reduzir gargalos e tornar o processo de diagnóstico mais rápido.
+ 
+
+% ===============================================================
+% CAPÍTULO 2 - REVISÃO BIBLIOGRÁFICA
+% ===============================================================
+\chapter{Revisão bibliográfica}
+
+\section{Referencial teórico}
+\label{sec:referencial}
+O principal conceito utilizado nesse trabalho será Pesquisa Operacional e outros conteúdos derivados do mesmo. Dentro esses conteúdos, temos:  teoria das filas para a otimização de tempo de espera e tamanho da fila, simulação de eventos discretos para geração de cenários e aplicação do modelo, a metodologia \textit{Lean Healthcare} para a redução do gargalo, métricas como o tempo de fila, tamanho da fila, tempo de atendimento, tempo de espera entre processos, tempo total do processo e parâmetros como o número de seções, número de profissionais e disponibilidade médica.
+
+
+% ---------------------------------------------------------------
+\section{Metodologia da pesquisa bibliográfica}
+
+A pesquisa bibliográfica foi conduzida a partir da consulta a diferentes bases de dados acadêmicas e científicas, com o objetivo de identificar trabalhos relevantes sobre o tema. Dentre as bases, foram consultadas: \textit{Google Scholar} e \textit{Semantic Scholar}, onde foram considerados trabalhos publicados entre 2021 e 2026, nos idiomas português, inglês e espanhol, incluindo artigos científicos e estudos de caso.
+
+Em cada base, foi utilizado um conjunto de strings de busca, onde, dado os resultados, foram selecionados artigos e estudos condizentes com a proposta deste trabalho. Segue abaixo uma tabela com os resultados obtidos, com base na string de busca e plataforma:
+
+
+\begin{table}[H]
+	\centering
+	\footnotesize
+	\caption{Resultados de busca nas bases de artigos}
+	\setlength{\tabcolsep}{4pt}
+	\begin{tabularx}{\textwidth}{p{3cm}|p{7cm}|p{2cm}|p{2cm}}
+		\toprule
+		\textbf{Base(s)} & \textbf{String de busca} & \textbf{Resultados da busca} & \textbf{Artigos Selecionados} \\ 
+		\midrule
+		\textit{Google Scholar} & "redução do tempo de espera"\ AND\ "ambulatório"\ AND\ "simulação" & 59 & 7 \\ 
+		\midrule
+		\textit{Google Scholar} & ("teoria das filas"\ OR\ "modelo de filas")\ AND\ ("medicina"\ OR\ "saúde"\ OR\ "clínica")\ AND\ ("simulação"\ OR\ "mobile") & 210 & 5 \\ 
+		\midrule
+		\textit{Semantic Scholar} & "discrete\ event\ simulation"\ AND\ "patient\ flow"\ AND\ healthcare\ bottleneck\ AND\ optimization & 98 & 4 \\ 
+		\midrule
+		\textit{Google Scholar} & "simulação\ de\ eventos"\ AND\ fundamentos\ AND\ "saúde"\ OR "clínica"\ -criptografia\ -emergência & 103 & 2 \\ 
+		\midrule
+		\textit{Google Scholar} & "healthcare workflow optimization" AND "waiting time" AND bottleneck & 31 & 2 \\ 
+		\bottomrule
+	\end{tabularx}
+	\label{tab:busca}
+	\legend{Fonte: Elaborado pelos autores}
+\end{table}
+
+A partir dos resultados, foi realizado a seleção dos artigos e suas citações, aplicando a técnica de "funil", no qual realiza-se o filtro dos artigos mais relevantes, para definir os artigos principais relacionados a este trabalho.
+
+Vale ressaltar que houve um contraste grande nos resultados da busca em relação à quantidade de artigos selecionados devido aos seguintes fatores:
+\begin{itemize}
+	\item \textbf{Aderência ao tema:} Muitos artigos não tinham, ou haviam pouca relação com o tema deste trabalho, sendo excluídos da seleção;
+	\item \textbf{Abordagens e problemas repetidos:} Como há muitos artigos com as mesmas abordagens ou os mesmos problemas, foram selecionados apenas os artigos nos quais haviam abordagens ou problemas diferentes uns dos outros;
+	\item \textbf{Deduplicação de artigos:} Dado as strings de busca acima, houveram artigos duplicados entre as buscas, sendo necessário a deduplicação dos artigos. Essa etapa foi feita através da ferramenta \textit{ResearchRabbit}, como centralizador de artigos.
+\end{itemize}
+
+Ao todo, foram totalizados 25 artigos selecionados para a aplicação do funil, onde 20 artigos foram selecionados via string de busca, e 5 artigos foram selecionados via \textit{Google Scholar Labs} através de \textit{prompts}. Foram selecionados 5 artigos como potenciais candidados à trabalhos relacionados, e dentre eles, 3 aptos como trabalhos relacionados. 2 dos 5 trabalhos candidatos não foram selecionados por conta dos seguintes critérios:
+\begin{itemize}
+	\item Semelhança entre os trabalhos eleitos;
+	\item Menor referencial teórico em relação aos trabalhos eleitos;
+	\item Os trabalhos eleitos abordavam problemas semelhantes, ou o mesmo problema.
+\end{itemize}
+
+\section{Fundamentos}
+
+Nesta seção, apresentaremos quais são os principais conceitos que são necessários para o desenvolvimento deste trabalho.
+
+\subsection{Pesquisa Operacional}
+A Pesquisa Operacional (PO) é uma ciência aplicada voltada para a resolução de problemas reais que objetiva fornecer ferramentas quantitativas ao processo de tomada de decisões \cite{Rodriguez2009}. Dentre as diversas técnicas existentes de PO, utilizaremos Simulação de Eventos e Teoria das filas, que serão essenciais no nosso contexto para para a reprodução de cenários e a construção de modelos.
+
+\subsection{Simulação de Eventos}
+
+Segundo \citeonline{Lieberman2013}, Simulação é uma das técnicas com maior destaque por ser uma ferramenta flexível, poderosa e intuitiva. Essa técnica envolve a utilização de um computador para imitar a operação de um processo inteiro ou sistema, podendo ser utilizado em diversos cenários, como a análise de riscos em processos financeiros, simulando a evolução de transações envolvidas para gerar um quadro de possíveis resultados. O registro do desempenho de operações simuladas torna possível  a avaliação e a comparação de alternativas antes de escolher uma delas. Existem dois tipos de simulação: simulação de eventos discretos e simulação de eventos contínuos.
+
+Na simulação por eventos discretos, as mudanças no estado do sistema ocorrem de maneira instantânea em pontos aleatórios no tempo como o resultado da ocorrência desses eventos discretos. Por exemplo: em um sistema de filas onde o estado do sistema é o número de clientes no sistema, os eventos discretos responsáveis por mudar esse estado são a chegada e a saída de um cliente em decorrência da finalização do serviço.
+
+Na simulação contínua, as mudanças no estado do sistema ocorrem de maneira contínua ao longo do tempo. Por exemplo: assumindo que o sistema de interesse seja um avião em voo e seu estado seja a posição atual da aeronave, o estado irá mudar continuamente ao longo do tempo.
+
+Utilizaremos simulação por eventos discretos, já que ela condiz melhor com o nosso tema. No contexto de uma clínica, os eventos discretos que irão mudar o estado do sistema será a chegada e saída de clientes após a conclusão da sessão.
+
+\subsection{Teoria das Filas}
+
+Segundo \citeonline{Lieberman2013}, a teoria das filas é o estudo da espera em formas diversas, como a compra de um ingresso para um sessão de cinema ou fazer um depósito bancário. Ter de esperar em uma fila não é limitado apenas a transtornos pessoais não tão significantes: deixar máquinas a espera para serem reparadas pode gerar perdas na produção e aviões que que aguardam para decolar ou pousar podem afetar horários de voos futuros.
+
+Modelos de filas são a principal ferramenta utilizada para a representação de sistemas de filas, com fórmulas para cada modelo responsáveis por indicar o funcionamento e o tempo médio de espera do mesmo em uma determinada série de circunstâncias. Utilizaremos modelos de fila que possuem as determinadas características: um único canal e uma única fila, um único canal e múltiplas filas, vários canais e uma única fila e vários canais e múltiplas filas. Em múltiplos cenários, utilizaremos os modelos de fila citados, com o intuito de encontrar o modelo ideal para encontrar o melhor tempo possível no processo de diagnóstico.
+
+\subsection{Lean Healthcare}
+
+Segundo o livro \citeonline{Graban2013}, o \textit{Lean Healthcare} é um conjunto de ferramentas, um sistema de gestão e uma filosofia, que pode mudar a forma pela qual os hospitais são organizados e administrados. Vale ressaltar que essa metodologia é uma variação da \textit{Lean}. A metodologia promove a redução de erros e a redução do tempo de espera, proporcionando uma melhoria no tempo de espera para o paciente, além de valorizar o profissional, que por ser um recurso escasso, o seu uso deve ser otimizado. Há dois fatores muito importantes associados ao \textit{Lean}: A melhoria contínua ("\textit{kaizen}" em japonês) e o respeito. Ambos vêm da filosofia japonesa, sendo um método originário da Toyota. Ao falar de respeito, referimos ao respeito ao paciente, ao seu tempo, e à sua presença, ou seja, o fato de querermos otimizar o tempo de espera do paciente demonstra respeito à ele.
+
+A melhoria contínua ou "\textit{kaizen}" é citado no livro \citeonline{Graban2013}. Esses esforços de melhoria tem como foco frequentemente a redução do desperdício existente no tratamento do paciente ou no trabalho dos profissionais. O desperdício é relacionado ao termo japonês "\textit{muda}", e nesse contexto, é toda e qualquer atividade que não beneficie o paciente ou não agilize o processo de tratamento ou diagnóstico.
+
+\subsection{Métricas}
+
+Como métricas, temos: tempo de fila, tamanho da fila, tempo de atendimento, tempo de espera entre processos e tempo total de processo. Tempo de fila é o tempo de espera até o atendimento inicial. Tamanho da fila é o número de pessoas esperando por atendimento. Tempo de atendimento é a duração de um atendimento. Tempo de espera é a quantidade de tempo entre um atendimento e outro. Tempo total de processo é o tempo total até o diagnóstico. 
+
+\subsection{Parâmetros}
+
+Como parâmetros, temos: número de seções, número de profissionais e disponibilidade médica. Número de seções é o número de atendimentos necessários para realizar um diagnóstico. Número de profissionais é a quantidade de profissionais disponíveis. Disponibilidade média é o quantidade de profissionais disponíveis.
+
+\section{Trabalhos relacionados}
+\label{sec:trabalhos_relacionados}
+
+Com base no problema deste trabalho, e em sua proposta de solução, foram encontrados 3 artigos relevantes, com problemas e soluções semelhantes. 
+
+\subsection{Trabalho 1: Redução do tempo de espera para realização de avaliação neuropsicológica: um projeto de intervenção \cite{Silva2023}}
+
+Este trabalho abordou o problema de tempo de espera dos pacientes. Nele, é identificado que a avaliação neuropsicológica é uma demanda que existe, mas não é devidamente atendida, resultando em excesso de atendimentos e tempos de espera de até 1 ano.
+
+Além disso, o trabalho apresenta como proposta de solução a aplicação de práticas a serem seguidas, como a padronização de laudos, a utilização de triagem telefônica e a redução do uso da quantidade de testes.
+
+A principal diferença entre este trabalho e o nosso, é a proposta de solução. Enquanto o trabalho 1 apresenta soluções administrativas nas quais os testes foram feitos de forma empírica e sem apresentação de dados estatísticos, o nosso trabalho propõe a construção de um modelo estatístico e com simulação de cenários.
+
+\subsection{Trabalho 2: Estudo de caso da aplicação de simulação de eventos discretos num processo de radioterapia \cite{Galves2022}}
+
+O trabalho 2 aplica a simulação de eventos discretos em um processo de exame de radioterapia, onde há a modelagem do processo como um todo. Nele, é feito o modelo das filas hospitalares, aplicando simulações para identificar gargalos na operação com o objetivo de detectar melhorias a serem feitas na operação.
+
+Os autores propõem como solução o uso de simulação de eventos discretos nos softwares SIMUL8 e ARENA, a partir de amostra de dados de pacientes da clínica que foram analisados e tratados. Com isso, foi possível analisar as distribuições e as expressões que representam o tempo gasto em cada etapa do processo de radioterapia, para assim gerar um modelo computacional no qual foi validado com tesde de Lavene, além de ser comparado com o sistema real, demonstrando que ambos os sistemas não possuem diferenças estatísticas significativas.
+
+A partir das simulações, foi possível um apoio nas tomadas de decisão na gestão de operações, chegando no tamanho da janela de agendamento mais adequado como 10 minutos por paciente no nível da demanda na realização do estudo de caso, além de ser validado que, ao testar a quantidade de técnicos, não houve melhoria nem no tempo de saída dos pacientes e nem na proporção de pacientes com espera.
+
+O nosso trabalho diferencia-se do trabalho 2 no problema a ser abordado. O trabalho 1 aborda o gargalo em um processo de radioterapia, enquanto o nosso aborda o tempo de espera para o diagnóstico neuropsicológico.
+
+\subsection{Trabalho 3: Simulação por eventos discretos e o uso do TDABC como ferramentas de avaliação do desempenho de operações melhoradas por meio do Lean Healthcare: caso na Assistência Farmacêutica \cite{Bittencourt2022}}
+
+O problema que o trabalho 3 tentou resolver foi como melhorar a eficiência das operações de armazenamento e distribuição de medicamento em uma Central de Abastecimento Farmacêutico (CAF). Como solução, a autora propõe a adoção da abordagem \textit{Lean Healthcare} (LH) com o fim de redesenhar e melhorar processos da CAF, e depois avaliar estas melhorias a partir de simulações por eventos discretos e \textit{Time Driven Activity Based Costing} (TDABC).
+
+Os resultados identificaram diversos desperdícios e problemas operacionais na Central de Abastecimento Farmacêutico, especialmente nas etapas de separação, conferência e carregamento de medicamentos. Ademais, valores baixos foram obtidos após medir a eficiência das operações: 40\% na separação, 49\% na conferência e 30\% no carregamento.
+
+A autora aponta limitações em sua solução, como a dificuldade na coleta de dados devido ao COVID-19, um escopo de estudo reduzido focado apenas nas etapas de armazenamento e distribuição da Assistência Farmacêutica, limitações na amostragem dos tempos coletados na CAF, uma alta complexidade da simulação que requer conhecimento técnico e cuidado na modelagem e a implementação incompleta das práticas \textit{Lean}.
+
+A principal diferença entre este trabalho e o trabalho 3 está no problema abordado, no qual é a baixa eficiência de armazenamento e distribuição de medicamento.
+
+\subsection{Comparação}
+
+% Notamos que ambos os trabalhos tratam do mesmo assunto, que são problemas em clinicas médicas. Porém vemos abordagens diferentes e resultados diferentes, onde ambos podem ser utilizados como base para melhor nosso trabalho, gerando uma combinação de conceitos matemáticos e estatísticos do primeiro artigo, junto com a ideia de criar um modelo e "organizar" o \textit{overbooking} eventualmente impactando no auento do lucro e na melhor experiência para o paciente. Ou seja, nosso trabalho olha para ambos e complementa usando RNN para prever \textit{no-shows}. 
+
+Abaixo uma tabela apresentando a diferença entre os trabalhos relacionados e este trabalho:
+
+\begin{table}[H]
+    \centering
+    \caption{Comparação entre trabalhos relacionados}
+    \label{tab:trabalhos_relacionados}
+    
+    \tiny % reduz um pouco a fonte
+    
+    \setlength{\tabcolsep}{4pt} % reduz espaçamento entre colunas
+    
+    \begin{tabularx}{\textwidth}{p{1.5cm}|Y|Y|Y|Y}
+        \toprule
+        \textbf{Critério} & \textbf{Trabalho 1} & \textbf{Trabalho 2} & \textbf{Trabalho 3} & \textbf{Este trabalho} \\
+        \midrule
+
+        Objetivo 
+        & Reduzir o tempo de espera para a realização da avaliação neuropsicológica 
+        & Investigar meios de maximizar o desempenho no atendimento, reduzindo o tempo de espera em um processo de radioterapia 
+				& Melhoria na eficiência de uma Central de Abastecimento Farmacêutico (CAF)
+        & Redução do tempo de espera ao obter o diagnóstico no processo de avaliação neuropsicológica \\
+        \midrule
+
+        Tecnologia 
+        & Estratégias de gestão e triagem, além de padronização de protocolos e laudos
+				& Simulação de Eventos Discretos, aplicada em diversos softwares 
+				& \textit{Time Driven Activity Based Costing}, metodologia \textit{Lean Healthcare} e Simulação de Eventos Discretos
+        & Modelagem estatística a partir de conceitos de pesquisa operacional e Simulação de Eventos Discretos \\
+        \midrule
+
+        Validação 
+        & Aplicação do projeto de intervenção de forma empírica
+        & Com os dados vindos das simulações dos softwares, foram utilizados conceitos estatísticos como o teste de Levene, em comparação com o processo real
+        & Dados extraídos das simulações, como horas produtivas por cenário, porcentagem de ociosidade, de expecição e de deslocamentos
+        & Combinação de conceitos matemáticos e estatísticos, além da avaliação das métricas adquiridas pelas simulações de eventos \\
+        \midrule
+
+        Limitação 
+        & Não demonstra métricas, simulações ou modelagens matemáticas
+        & Não contempla o fluxo neuropsicológico
+        & Contexto diferente em relação ao nosso trabalho e a falta de uma implementação algoritmica.
+        & --- \\
+        
+        \bottomrule
+    \end{tabularx}
+    
+    \legend{Fonte: Elaborado pelos autores}
+\end{table}
+
+Dado essa comparação, é possível observar que o nosso trabalho diferencia-se principalmente na implementação algoritmica, no qual não está presente em nenhum dos 3 artigos, e na utilização de conceitos matemáticos e estatísticos, tanto para validar as simulações realizadas quanto para a construção do modelo.
+
+% ===============================================================
+% CAPÍTULO 3 - DESENVOLVIMENTO
+% ===============================================================
+\chapter{Desenvolvimento}
+\label{cap:desenvolvimento}
+
+Neste capítulo, apresenta-se a solução proposta para o problema identificado, bem como o cronograma de trabalho previsto para o desenvolvimento completo do projeto no TCC2.
+
+% ---------------------------------------------------------------
+\section{Solução proposta}
+\label{sec:solucao}
+
+A solução proposta do trabalho constitui-se na criação de um modelo de processos capaz de analisar e otimizar o fluxo de diagnóstico neuropsicológico em clínicas. O principal objetivo do modelo será a representação das etapas essências do processo desde a suspeita inicial e procura pelo atendimento especializado até a realização de exames, análise dos resultados e devolução do diagnóstico. 
+
+A solução será constituída por três principais partes: o mapeamento do processo, a criação de um modelo de simulação e a otimzação. A princípio, será efetuado uma listagem das etapas responsáveis por compor o processo de diagnóstico neuropsicológico, com fim de identificar os principais momentos de espera, recursos envolvidos, profissionais necessários e pontos em que o atraso é uma possibilidade. O mapeamento tornará possível a compreensão do funcionamento do fluxo de atendimento e servirá como a essência da criação do modelo.
+
+A seguir, um modelo com a capacidade de representar a clínica e seu funcionamente em diferentes cenários será desenvolvido. O modelo necessitará levar em consideração elementos como entrade de pacientes, disponibilidade de profissionais, numéro de sessões, tempo médio entre etapas e devolução do diagnóstico. Com isso, será possível a simulação do comportamento do processo e a observação de como determinadas variações podem alterar o tempo total de espera
+
+A arquitetura da solução é dividida em 3 camadas: a primeira camada é responsável pela coleta e estruturação das informações do processo, a segunda pelo modelo de simulação, e a terceira pelo módulo de análise e otimização. A camada de coleta e estruturação contém dados relacionados a etapas do diagnóstico, disponibilidade de recursos e volume de pacientes. A camada do modelo de simulação é responsável pela representação do fluxo de atendimento e a execução de diferentes cenários. A camada do módulo de análise e otimização é encarregada a identificar gargalos e propor alternativas que permitam a redução de atrasos sem comprometer a qualidade e a confiabilidade da avaliação neuropsicológica.
+
+Python será a linguagem utilizada devido à sua vasta gama de bibliotecas com foco em análise estatística, manipulação de dados e simulação de processos. Serão utilizadas as bibliotecas Pandas e NumPy para auxiliar a organização e tratamento de dados. SimPy será utilizado devido a sua capacidade de representação de filas, recursos e eventos discretos com o passar do tempo.
+
+Como as principais funcionalidades da solução, teremos: mapeamento do processo de diagnóstico neuropsicológico, representação do fluxo de atendimento, identificação de gargalos, simulação de diferentes cenários de funcionamento e a identificação de alternativas de melhoria. Dentre os cenários possíveis, será plausível o teste de mudanças como o aumento ou redistribuição de profissionais, alteração na ordem de etapas, reorganização de agenda e redução de períodos ociosos entre fases do processo. Abaixo há uma figura apresentando um esboço do processo com base no fluxo de pessoas do processo como um todo:
+
+\begin{figure}[H]
+	\caption{Esboço do processo}
+	\centering
+	\includegraphics[width=10cm]{assets/fluxograma_pacientes_medicina.drawio.png}
+	\label{fig:ano_diagnostico}
+	\legend{Fonte: Elaborado pelos autores}
+\end{figure}
+
+Será adotada uma metodologia de desenvolvimento baseada em prototipação e simulação. Será inicialmente criado um modelo simplificado do processo contendo as principais etapas identificadas. Posteriormente, o modelo será refinado de acordo com os dados levantados e os gargalos encontrados. Com base nisso, serão executadas simulações com fim de comparar o funcionamento do processo em condições diferentes. Essa metodologia incremental permitirá o ajuste do modelo progressivamente, garantindo sua representação de forma mais adequada ao problema.
+
+Os critérios de avaliação estão ligados com a capacidade do modelo de representação do processo de diagnóstico e da indicação de melhorias viáveis. Serão utilizadas métricas como tempo médio total até a devolução do diagnóstico, tempo médio de espera em cada etapa, tamanho das filas, taxa de utilização dos profissionais e identificação do principal gargalo do sistema. Ademais, simulações de cenários simulados serão comparadas entre si com o intuito de verificar as estratégias que apresentam melhores resultados no que diz respeito à redução do tempo de espera, mantendo a qualidade necessária para realizar uma avaliação confiável.
+
+% ---------------------------------------------------------------
+\section{Resultados esperados}
+Espera-se, a partir da simulações de diferentes cenários realizadas com o modelo de processos e o algoritmo construído, que seja possível encontrar gargalos comprometedores no diagnóstico neuropsicológico. Com base nos resultados obtidos, também espera-se uma redução do tempo de diagnóstico. Além disso, almeja-se que o algoritmo contribua ao usuário final, de forma que o próprio consiga gerenciar e simular seus próprios cenários apoiando na tomada de decisões.
+
+
+\section{Cronograma de trabalho}
+\label{sec:cronograma}
+
+O cronograma a seguir apresenta, no formato de diagrama de Gantt, as atividades previstas para o desenvolvimento do TCC2, distribuídas ao longo das semanas do semestre.
+
+\begin{figure}[H]
+\caption{Cronograma de desenvolvimento do trabalho}
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{ganttchart}[
+    hgrid,
+    vgrid,
+    time slot format=isodate,
+    x unit=0.21cm,
+    y unit chart=0.75cm,
+    bar height=0.7,
+    bar/.append style={fill=purple!55},
+    title label font=\bfseries\scriptsize,
+    bar label font=\small,
+    group label font=\larger
+]{2026-07-20}{2026-11-29}
+
+\gantttitlecalendar{month=name, week} \\
+
+% Fase 1 - Dados e Modelagem
+\ganttgroup[
+  group/.append style={
+		fill=blue!30,
+		draw=blue
+  }
+]{\textbf{Fase 1 - Dados e Modelagem}}{2026-07-20}{2026-08-23} \\
+	\ganttbar[bar/.append style={fill=blue!20}]
+		{Entrevista e coleta de dados}{2026-07-20}{2026-08-09} \\
+	\ganttbar[bar/.append style={fill=blue!20}]
+		{Modelagem do problema}{2026-07-27}{2026-08-16} \\
+	\ganttbar[bar/.append style={fill=blue!20}]
+		{Modelagem dos dados}{2026-07-27}{2026-08-16} \\
+	\ganttbar[bar/.append style={fill=blue!20}]
+		{Fundamentação de Métricas e Parâmetros}{2026-08-17}{2026-08-23} \\
+
+% Fase 2 - Cenários e Simulações
+\ganttgroup[
+  group/.append style={
+		fill=purple!30,
+    draw=purple
+  }
+]{\textbf{Fase 2 - Cenários e Simulações}}{2026-08-24}{2026-10-11} \\
+	\ganttbar[bar/.append style={fill=purple!20}]
+		{Criar cenários}{2026-08-24}{2026-09-06} \\
+	\ganttbar[bar/.append style={fill=purple!20}]
+		{Desenvolver simulador}{2026-08-24}{2026-09-06} \\
+	\ganttbar[bar/.append style={fill=purple!20}]
+		{Testar simulador}{2026-09-07}{2026-09-13} \\
+	\ganttbar[bar/.append style={fill=purple!20}]
+		{Refinar simulador}{2026-09-07}{2026-09-13} \\
+	\ganttbar[bar/.append style={fill=purple!20}]
+		{Simular cenários}{2026-09-14}{2026-11-10} \\
+	\ganttbar[bar/.append style={fill=purple!20}]
+		{Analisar resultados}{2026-09-14}{2026-10-11} \\
+
+% Fase 3 - Algoritmo
+\ganttgroup[
+  group/.append style={
+		fill=green!30,
+		draw=green
+  }
+]{\textbf{Fase 3 - Algoritmo}}{2026-10-12}{2026-11-29} \\
+	\ganttbar[bar/.append style={fill=green!20}]
+		{Modelagem do algoritmo}{2026-10-12}{2026-10-18} \\
+	\ganttbar[bar/.append style={fill=green!20}]
+		{Criação do algoritmo}{2026-10-12}{2026-10-25} \\
+	\ganttbar[bar/.append style={fill=green!20}]
+		{Teste do algoritmo}{2026-10-12}{2026-10-25} \\
+	\ganttbar[bar/.append style={fill=green!20}]
+		{Otimização do algoritmo}{2026-10-19}{2026-10-25} \\
+	\ganttbar[bar/.append style={fill=green!20}]
+		{Otimização do algoritmo}{2026-10-26}{2026-11-01} \\
+	\ganttbar[bar/.append style={fill=green!20}]
+		{Desenvolvimento de interface}{2026-10-26}{2026-11-08} \\
+	\ganttbar[bar/.append style={fill=green!20}]
+		{Refinamento do código}{2026-11-02}{2026-11-15} \\
+
+% Global
+\ganttbar[bar/.append style={fill=black!20}]
+	{Escrita do TCC}{2026-08-17}{2026-11-08} \\
+\ganttbar[bar/.append style={fill=black!20}]
+	{Revisão do TCC}{2026-11-09}{2026-11-29} \\
+
+\end{ganttchart}
+}
+\legend{Fonte: Elaborado pelos autores}
+\end{figure}
+
+% ---------------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS
+% ---------------------------------------------------------------
+\postextual
+
+% ===============================================================
+% CAPÍTULO 4 - REFERÊNCIAS BIBLIOGRÁFICAS
+% ===============================================================
+% As referências bibliográficas são geradas automaticamente a partir
+% do arquivo bibliografia.bib, seguindo o padrão ABNT (NBR 6023).
+%
+% COMO CITAR no texto:
+%   \cite{chave}         -> (SOBRENOME, ano) — citação indireta
+%   \citeonline{chave}   -> Sobrenome (ano) — citação direta no texto
+%
+% TIPOS DE REFERÊNCIA no arquivo .bib:
+%   @book        -> Livros
+%   @article     -> Artigos de periódicos
+%   @inproceedings -> Artigos em anais de eventos
+%   @mastersthesis -> Dissertações de mestrado
+%   @phdthesis   -> Teses de doutorado
+%   @misc        -> Sites, vídeos e outros materiais
+%   @manual      -> Documentação técnica
+%
+% Veja o arquivo bibliografia.bib para exemplos de cada tipo.
+% ---------------------------------------------------------------
+\bibliography{bibliografia}
+
+% ---------------------------------------------------------------
+% APÊNDICES (se necessário)
+% ---------------------------------------------------------------
+% \begin{apendicesenv}
+% \partapendices
+%
+% \chapter{Nome do Apêndice}
+% \label{ap:apendice1}
+%
+% Conteúdo do apêndice (material elaborado pelo próprio autor).
+%
+% \end{apendicesenv}
+
+% ---------------------------------------------------------------
+% ANEXOS (se necessário)
+% ---------------------------------------------------------------
+% \begin{anexosenv}
+% \partanexos
+%
+% \chapter{Nome do Anexo}
+% \label{an:anexo1}
+%
+% Conteúdo do anexo (material de terceiros).
+%
+% \end{anexosenv}
+
+\end{document}
