@@ -128,7 +128,7 @@
 % RESUMO
 % ---------------------------------------------------------------
 \begin{resumo}
-Este documento apresenta a proposta inicial do Trabalho de Conclusão de Curso (TCC1) desenvolvido no SENAC Santo Amaro. O objetivo deste trabalho é demonstrar que um modelo estatístico pode reduzir o tempo mínimo necessário para a obtenção da devolução de um diagnóstico neuropsicológico. A justificativa para este estudo baseia-se na dificuldade de acesso dos pacientes a tratamentos e adaptações necessários devido a atrasos no diagnóstico e na lacuna existente na aplicação de métodos de otimização computacional no contexto dessa avaliação. A revisão bibliográfica abrange principalmente Pesquisa operacional, Teoria das filas e Simulação de eventos discretos. Como solução proposta, pretende-se criar um modelo de processos capaz de representar as etapas essencias do diagnóstico e simular as mesmas, utilizando como ferramenta princial Python e bibliotecas do mesmo, como Pandas, NumPy e SimPy. Este trabalho está organizado em três capítulos que apresentam a introdução ao tema, a revisão bibliográfica que fundamenta a pesquisa, o desenvolvimento com a solução proposta e o cronograma de trabalho, seguidos das referências bibliográficas.
+	Este documento apresenta a proposta inicial do Trabalho de Conclusão de Curso (TCC1) desenvolvido no SENAC Santo Amaro. O objetivo deste trabalho é demonstrar que um modelo estatístico pode reduzir o tempo mínimo necessário para a obtenção da devolução de um diagnóstico neuropsicológico. A justificativa para este estudo baseia-se na dificuldade de acesso dos pacientes a tratamentos e adaptações necessários devido a atrasos no diagnóstico e na lacuna existente na aplicação de métodos de otimização computacional no contexto dessa avaliação. A revisão bibliográfica abrange principalmente Pesquisa operacional, Teoria das filas e Simulação de eventos discretos. Como solução proposta, pretende-se criar um modelo de processos capaz de representar as etapas essenciais do diagnóstico e simular as mesmas, utilizando como ferramenta principal Python e bibliotecas do mesmo, como Pandas, NumPy e SimPy. Este trabalho está organizado em três capítulos que apresentam a introdução ao tema, a revisão bibliográfica que fundamenta a pesquisa, o desenvolvimento com a solução proposta e o cronograma de trabalho, seguidos das referências bibliográficas.
 
 \vspace{\onelineskip}
 
@@ -167,7 +167,7 @@ Este documento apresenta a proposta inicial do Trabalho de Conclusão de Curso (
 % ===============================================================
 \chapter{Introdução}
 \label{sec:introducao}
-Este trabalho tem como tema a otimização do tempo no processo de diagnóstico neuropsicológico, considerando que o mesmo parte de uma suspeita inicial, passa pela procura de um profissional especializado e termina com a devolução de um diagnósitco completo. Esse processo, devido a sua natureza extensa e composição de múltiplas etapas, pode conter longos períodos de espera, ainda mais em um cenário de alta demanda e com um número limitado de profissionais na área. Ademais, um reconhecimento crescente na importância da avaliação neuropsicológica contribui para o aumento da procura por essa categoria de atendimento.
+Este trabalho tem como tema a otimização do tempo no processo de diagnóstico neuropsicológico, considerando que o mesmo parte de uma suspeita inicial, passa pela procura de um profissional especializado e termina com a devolução de um diagnóstico completo. Esse processo, devido a sua natureza extensa e composição de múltiplas etapas, pode conter longos períodos de espera, ainda mais em um cenário de alta demanda e com um número limitado de profissionais na área. Ademais, um reconhecimento crescente na importância da avaliação neuropsicológica contribui para o aumento da procura por essa categoria de atendimento.
 
 \section{Contexto}
 No presente momento de desenvolvimento deste trabalho, observa-se uma grande procura por avaliações neuropsicológicas: 69,6\% dos diagnósticos de autismo foram entre 2020 e 2024 \cite{Mab2026}. A principal causa para essa busca reside na maior divulgação do tema em mídias tradicionais e digitas, especialmente em discussões relacionadas ao Transtorno do Espectro Autista (TEA) e outros transtornos do neurodesenvolvimento. Na figura abaixo, podemos observar o crescimento de diagnósticos por ano:
@@ -188,7 +188,7 @@ Ademais, a falta de uma organização clara e processos bem definidos pode torna
 
 Por mais que existam diversos trabalhos na área acadêmica relacionados ao estudo de fluxos de trabalho em processos diagnósticos, muitos deles são direcionados a locais específicos, diagnósticos específicos ou contextos clínicos restritos. Como um processo amplo capaz de auxiliar na formação de diferentes diagnósticos, a avaliação neuropsicológica ainda é pouco explorada em um contexto de otimização computacional. 
 
-Assim sendo, este trabalho se justifica a partir de sua relevância social, acadêmica e prática. Atrasos ou ausências de diagnósticos podem resultar impactos signifcativos na vida dos pacientes, especialmente em um contexto escolar, acadêmico, profissional e social. Tanto crianças quanto adultos estão vulneráveis a esses impactos, tornando difícil o acesso a intervenções adequadas, adaptações necessárias e acompanhamento terapêutico.
+Assim sendo, este trabalho se justifica a partir de sua relevância social, acadêmica e prática. Atrasos ou ausências de diagnósticos podem resultar impactos significativos na vida dos pacientes, especialmente em um contexto escolar, acadêmico, profissional e social. Tanto crianças quanto adultos estão vulneráveis a esses impactos, tornando difícil o acesso a intervenções adequadas, adaptações necessárias e acompanhamento terapêutico.
 
 A realização de diagnósticos em momentos adequados possibilita o início de tratamentos, terapias, adaptações pedagógicas e outras formas de suporte para o paciente. Contanto, busca-se estudar meios capazes de reduzir o tempo de espera do processo de diagnóstico sem nenhum prejuízo no tempo mínimo necessário para garantir precisão, qualidade e confiabilidade na avaliação.
 
@@ -230,7 +230,6 @@ A pesquisa bibliográfica foi conduzida a partir da consulta a diferentes bases 
 
 Em cada base, foi utilizado um conjunto de strings de busca, onde, dado os resultados, foram selecionados artigos e estudos condizentes com a proposta deste trabalho. Segue abaixo uma tabela com os resultados obtidos, com base na string de busca e plataforma:
 
-
 \begin{table}[H]
 	\centering
 	\footnotesize
@@ -264,7 +263,7 @@ Vale ressaltar que houve um contraste grande nos resultados da busca em relaçã
 	\item \textbf{Deduplicação de artigos:} Dado as strings de busca acima, houveram artigos duplicados entre as buscas, sendo necessário a deduplicação dos artigos. Essa etapa foi feita através da ferramenta \textit{ResearchRabbit}, como centralizador de artigos.
 \end{itemize}
 
-Ao todo, foram totalizados 25 artigos selecionados para a aplicação do funil, onde 20 artigos foram selecionados via string de busca, e 5 artigos foram selecionados via \textit{Google Scholar Labs} através de \textit{prompts}. Foram selecionados 5 artigos como potenciais candidados à trabalhos relacionados, e dentre eles, 3 aptos como trabalhos relacionados. 2 dos 5 trabalhos candidatos não foram selecionados por conta dos seguintes critérios:
+Ao todo, foram totalizados 25 artigos selecionados para a aplicação do funil, onde 20 artigos foram selecionados via string de busca, e 5 artigos foram selecionados via \textit{Google Scholar Labs} através de \textit{prompts}. Foram selecionados 5 artigos como potenciais candidatos à trabalhos relacionados, e dentre eles, 3 aptos como trabalhos relacionados. 2 dos 5 trabalhos candidatos não foram selecionados por conta dos seguintes critérios:
 \begin{itemize}
 	\item Semelhança entre os trabalhos eleitos;
 	\item Menor referencial teórico em relação aos trabalhos eleitos;
@@ -325,7 +324,7 @@ A principal diferença entre este trabalho e o nosso, é a proposta de solução
 
 O trabalho 2 aplica a simulação de eventos discretos em um processo de exame de radioterapia, onde há a modelagem do processo como um todo. Nele, é feito o modelo das filas hospitalares, aplicando simulações para identificar gargalos na operação com o objetivo de detectar melhorias a serem feitas na operação.
 
-Os autores propõem como solução o uso de simulação de eventos discretos nos softwares SIMUL8 e ARENA, a partir de amostra de dados de pacientes da clínica que foram analisados e tratados. Com isso, foi possível analisar as distribuições e as expressões que representam o tempo gasto em cada etapa do processo de radioterapia, para assim gerar um modelo computacional no qual foi validado com tesde de Lavene, além de ser comparado com o sistema real, demonstrando que ambos os sistemas não possuem diferenças estatísticas significativas.
+Os autores propõem como solução o uso de simulação de eventos discretos nos softwares SIMUL8 e ARENA, a partir de amostra de dados de pacientes da clínica que foram analisados e tratados. Com isso, foi possível analisar as distribuições e as expressões que representam o tempo gasto em cada etapa do processo de radioterapia, para assim gerar um modelo computacional no qual foi validado com teste de Lavene, além de ser comparado com o sistema real, demonstrando que ambos os sistemas não possuem diferenças estatísticas significativas.
 
 A partir das simulações, foi possível um apoio nas tomadas de decisão na gestão de operações, chegando no tamanho da janela de agendamento mais adequado como 10 minutos por paciente no nível da demanda na realização do estudo de caso, além de ser validado que, ao testar a quantidade de técnicos, não houve melhoria nem no tempo de saída dos pacientes e nem na proporção de pacientes com espera.
 
@@ -378,14 +377,14 @@ Abaixo uma tabela apresentando a diferença entre os trabalhos relacionados e es
         Validação 
         & Aplicação do projeto de intervenção de forma empírica
         & Com os dados vindos das simulações dos softwares, foram utilizados conceitos estatísticos como o teste de Levene, em comparação com o processo real
-        & Dados extraídos das simulações, como horas produtivas por cenário, porcentagem de ociosidade, de expecição e de deslocamentos
+        & Dados extraídos das simulações, como horas produtivas por cenário, porcentagem de ociosidade, de expedição e de deslocamentos
         & Combinação de conceitos matemáticos e estatísticos, além da avaliação das métricas adquiridas pelas simulações de eventos \\
         \midrule
 
         Limitação 
         & Não demonstra métricas, simulações ou modelagens matemáticas
         & Não contempla o fluxo neuropsicológico
-        & Contexto diferente em relação ao nosso trabalho e a falta de uma implementação algoritmica.
+        & Contexto diferente em relação ao nosso trabalho e a falta de uma implementação algorítmica.
         & --- \\
         
         \bottomrule
@@ -394,7 +393,7 @@ Abaixo uma tabela apresentando a diferença entre os trabalhos relacionados e es
     \legend{Fonte: Elaborado pelos autores}
 \end{table}
 
-Dado essa comparação, é possível observar que o nosso trabalho diferencia-se principalmente na implementação algoritmica, no qual não está presente em nenhum dos 3 artigos, e na utilização de conceitos matemáticos e estatísticos, tanto para validar as simulações realizadas quanto para a construção do modelo.
+Dado essa comparação, é possível observar que o nosso trabalho diferencia-se principalmente na implementação algorítmica, no qual não está presente em nenhum dos 3 artigos, e na utilização de conceitos matemáticos e estatísticos, tanto para validar as simulações realizadas quanto para a construção do modelo.
 
 % ===============================================================
 % CAPÍTULO 3 - DESENVOLVIMENTO
@@ -410,9 +409,9 @@ Neste capítulo, apresenta-se a solução proposta para o problema identificado,
 
 A solução proposta do trabalho constitui-se na criação de um modelo de processos capaz de analisar e otimizar o fluxo de diagnóstico neuropsicológico em clínicas. O principal objetivo do modelo será a representação das etapas essências do processo desde a suspeita inicial e procura pelo atendimento especializado até a realização de exames, análise dos resultados e devolução do diagnóstico. 
 
-A solução será constituída por três principais partes: o mapeamento do processo, a criação de um modelo de simulação e a otimzação. A princípio, será efetuado uma listagem das etapas responsáveis por compor o processo de diagnóstico neuropsicológico, com fim de identificar os principais momentos de espera, recursos envolvidos, profissionais necessários e pontos em que o atraso é uma possibilidade. O mapeamento tornará possível a compreensão do funcionamento do fluxo de atendimento e servirá como a essência da criação do modelo.
+A solução será constituída por três principais partes: o mapeamento do processo, a criação de um modelo de simulação e a otimização. A princípio, será efetuado uma listagem das etapas responsáveis por compor o processo de diagnóstico neuropsicológico, com fim de identificar os principais momentos de espera, recursos envolvidos, profissionais necessários e pontos em que o atraso é uma possibilidade. O mapeamento tornará possível a compreensão do funcionamento do fluxo de atendimento e servirá como a essência da criação do modelo.
 
-A seguir, um modelo com a capacidade de representar a clínica e seu funcionamente em diferentes cenários será desenvolvido. O modelo necessitará levar em consideração elementos como entrade de pacientes, disponibilidade de profissionais, numéro de sessões, tempo médio entre etapas e devolução do diagnóstico. Com isso, será possível a simulação do comportamento do processo e a observação de como determinadas variações podem alterar o tempo total de espera
+A seguir, um modelo com a capacidade de representar a clínica e seu funcionamento em diferentes cenários será desenvolvido. O modelo necessitará levar em consideração elementos como entrada de pacientes, disponibilidade de profissionais, número de sessões, tempo médio entre etapas e devolução do diagnóstico. Com isso, será possível a simulação do comportamento do processo e a observação de como determinadas variações podem alterar o tempo total de espera
 
 A arquitetura da solução é dividida em 3 camadas: a primeira camada é responsável pela coleta e estruturação das informações do processo, a segunda pelo modelo de simulação, e a terceira pelo módulo de análise e otimização. A camada de coleta e estruturação contém dados relacionados a etapas do diagnóstico, disponibilidade de recursos e volume de pacientes. A camada do modelo de simulação é responsável pela representação do fluxo de atendimento e a execução de diferentes cenários. A camada do módulo de análise e otimização é encarregada a identificar gargalos e propor alternativas que permitam a redução de atrasos sem comprometer a qualidade e a confiabilidade da avaliação neuropsicológica.
 
