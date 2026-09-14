@@ -16,12 +16,21 @@ Cada avaliação, tem a duração de uma hora, e geralmente os pacientes levam e
 
 É esperado que a simulação dure alguns meses (Provavelmente de 3-6 meses). E como as avaliações são feitas em dias diferentes, os pacientes que vieram na clínica antes voltam, só que sem realizar a etapa da triagem.
 
+> [!INFO]
+> A versão mais recente do artigo está em `./articles/tcc2`
+
 # Setup
 
 Para instalar as depedências, é necessário utilizar o poetry:
 ```bash
 poetry install
 ```
+
+Atualmente, temos os seguintes scripts no `taskipy`:
+- `task run`: Executa o código contendo a simulação
+- `task lint:black:check`: Checa se os arquivos estão formatados de acordo com a biblioteca `black`
+- `task lint:black:fix`: Formata os arquivos de acordo com a biblioteca `black`
+- `task build:article`: Compila o latex usando o `mklatex` em `./articles/tcc2`
 
 # TODOs
 
