@@ -16,7 +16,8 @@ dependencies = ["simpy (>=4.1.2,<5.0.0)"]
 
 [dependency-groups]
 dev = [
-    "taskipy (>=1.14.1,<2.0.0)"
+    "taskipy (>=1.14.1,<2.0.0)",
+    "black (>=26.5.1,<27.0.0)"
 ]
 
 [build-system]
@@ -26,3 +27,5 @@ build-backend = "poetry.core.masonry.api"
 [tool.taskipy.tasks]
 "run" = "python src/main.py"
 "build:article" = "cd ./tcc2 && latexmk -f -pdf tcc.tex"
+"lint:black:check" = "black --check ."
+"lint:black:fix" = "black ."
