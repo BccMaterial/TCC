@@ -1,4 +1,4 @@
-# TCC-Code
+# TCC
 
 TCC de Ciência da Computação, no qual o tema é a redução do tempo de espera (ou tempo total de fila) no diagnóstico com avaliação neuropsicológica, utilizando Simulação de Eventos Discretos para análise de resultados
 
