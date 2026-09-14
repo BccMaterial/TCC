@@ -16,7 +16,7 @@ Cada avaliação, tem a duração de uma hora, e geralmente os pacientes levam e
 
 É esperado que a simulação dure alguns meses (Provavelmente de 3-6 meses). E como as avaliações são feitas em dias diferentes, os pacientes que vieram na clínica antes voltam, só que sem realizar a etapa da triagem.
 
-> [!INFO]
+> [!TIP]
 > A versão mais recente do artigo está em `./articles/tcc2`
 
 # Setup
