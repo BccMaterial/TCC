@@ -4,7 +4,9 @@ version = "0.0.1"
 description = "Trabalho de conclusão de curso de ciência da computação"
 
 authors = [
-    {name = "thiagopls1",email = "thiagopls1@hotmail.com"}
+    { name = "thiagopls1", email = "thiagopls1@hotmail.com" },
+    { name = "Resutemon1", email = "resutemon@gmail.com" },
+    { name = "viniciusegydio", email = "egydiovinicius022@gmail.com" },
 ]
 
 license = "MIT"
