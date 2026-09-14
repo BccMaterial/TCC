@@ -18,7 +18,7 @@ Cada avaliação, tem a duração de uma hora, e geralmente os pacientes levam e
 
 # Setup
 
-Para instalar as depedência, é necessário utilizar o poetry:
+Para instalar as depedências, é necessário utilizar o poetry:
 ```bash
 poetry install
 ```
