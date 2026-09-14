@@ -31,6 +31,7 @@ _minted*
 .latexmkrc
 .idea/
 .vscode/
+__pycache__
 *.brf
 
 # Pasta de arquivos locais (PDFs, livros, materiais de apoio)
@@ -38,3 +39,4 @@ arquivos/
 
 # Configurações do Claude Code
 .claude/
+
