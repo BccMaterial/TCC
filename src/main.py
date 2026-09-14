@@ -3,7 +3,7 @@ import random
 import simpy
 
 from classes import Paciente
-from enums.suspeitas import Suspeita
+from enums import Suspeita
 
 
 def paciente(env, paciente: Paciente, profissional):

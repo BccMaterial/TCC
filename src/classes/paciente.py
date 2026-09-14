@@ -1,6 +1,6 @@
 import uuid
 
-from enums.suspeitas import Suspeita
+from enums import Suspeita
 
 
 class Paciente:
