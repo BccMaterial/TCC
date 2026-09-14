@@ -1,5 +1,7 @@
 import uuid
 
+from enums.suspeitas import Suspeita
+
 
 class Paciente:
     """
@@ -10,7 +12,7 @@ class Paciente:
     Atributos:
         id: UUID
             ID de identificação do paciente
-        suspeita : str
+        suspeita : Suspeita
             Nome do transtorno que o paciente apresenta.
         num_avaliacoes : int, default=0
             Número de avaliações já realizadas para esse paciente.
@@ -19,9 +21,9 @@ class Paciente:
     """
 
     def __init__(
-        self, suspeita: str, num_avaliacoes: int = 0, triagem_feita: bool = False
+        self, suspeita: Suspeita, num_avaliacoes: int = 0, triagem_feita: bool = False
     ) -> None:
         self.id: uuid.UUID = uuid.uuid4()
-        self.suspeita: str = suspeita
+        self.suspeita: Suspeita = suspeita
         self.num_avaliacoes: int = num_avaliacoes
         self.triagem_feita: bool = triagem_feita
