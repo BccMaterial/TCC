@@ -31,6 +31,7 @@ testpaths = ["tests"]
 
 [tool.taskipy.tasks]
 "run" = "python src/main.py"
+"test" = "pytest ./tests"
 "build:article" = "cd ./tcc2 && latexmk -f -pdf tcc.tex"
 "lint:black:check" = "black --check ."
 "lint:black:fix" = "black ."
