@@ -30,7 +30,7 @@ def paciente(env, paciente: Paciente, equipe: Equipe):
     finally:
         equipe.release(profissional)
 
-    print(f"Paciente {paciente.id} terminou em {env.now:.2f}")
+    # print(f"Paciente {paciente.id} terminou em {env.now:.2f}")
 
 
 def chegada_pacientes(env, equipe: Equipe):
@@ -48,7 +48,6 @@ if __name__ == "__main__":
     env = simpy.Environment()
     equipe = Equipe(
         env,
-        quantidade=3,
         nomes=["Fulano", "Beltrano", "Ciclano"],
     )
     equipe.monitorar(intervalo=1)
