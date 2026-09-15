@@ -2,37 +2,43 @@ import random
 
 import simpy
 
-from classes import Paciente, Profissional
+from classes import Equipe, Paciente
 from enums import Suspeita
 
+pacientes: list[Paciente] = []
 
-def paciente(env, paciente: Paciente, profissional: Profissional):
+
+def paciente(env, paciente: Paciente, equipe: Equipe):
     chegada = env.now
-    print(f"{paciente.id} chegou em {chegada:.2f}")
+    # print(f"{paciente.id} chegou em {chegada:.2f}")
 
-    with profissional.request() as request:
-        yield request
-
+    profissional = yield equipe.request()
+    try:
         espera = env.now - chegada
-        print(
-            f"Paciente {paciente.id} com suspeita de {paciente.suspeita} começou atendimento após esperar {espera:.2f}"
-        )
+        # print(
+        #     f"Paciente {paciente.id} com suspeita de {paciente.suspeita} "
+        #     f"começou atendimento com {profissional} após esperar {espera:.2f}"
+        # )
+
+        # TODO: Alterar para 60 minutos fixo
         tempo_avaliacao = random.uniform(30, 60)
         inicio_atendimento = env.now
 
         yield env.timeout(tempo_avaliacao)
 
-        fim_atendimento = env.now
-        profissional.registrar_atendimento(inicio_atendimento, fim_atendimento)
+        profissional.registrar_atendimento(inicio_atendimento, env.now)
+    finally:
+        equipe.release(profissional)
 
     print(f"Paciente {paciente.id} terminou em {env.now:.2f}")
 
 
-def chegada_pacientes(env, profissional):
+def chegada_pacientes(env, equipe: Equipe):
     while True:
         suspeita = random.choice(list(Suspeita))
         p = Paciente(suspeita)
-        env.process(paciente(env, p, profissional))
+        pacientes.append(p)
+        env.process(paciente(env, p, equipe))
 
         intervalo = random.expovariate(1 / 20)
         yield env.timeout(intervalo)
@@ -40,16 +46,28 @@ def chegada_pacientes(env, profissional):
 
 if __name__ == "__main__":
     env = simpy.Environment()
-    profissional = Profissional(env, nome="Fulano de tal")
-    env.process(profissional.monitorar(intervalo=1))
-    env.process(chegada_pacientes(env, profissional))
+    equipe = Equipe(
+        env,
+        quantidade=3,
+        nomes=["Fulano", "Beltrano", "Ciclano"],
+    )
+    equipe.monitorar(intervalo=1)
+    env.process(chegada_pacientes(env, equipe))
     env.run(until=480)  # 480 minutos = 8 horas
 
-    resumo = profissional.resumo()
-    print("\n=== Métricas do profissional ===")
-    print(f"Nome: {resumo['nome']}")
-    print(f"Pacientes atendidos: {resumo['pacientes_atendidos']}")
-    print(f"Tempo médio de atendimento: {resumo['tempo_medio_atendimento']:.2f} min")
-    print(f"Tempo ocioso: {resumo['tempo_ocioso']:.2f} min")
-    print(f"Taxa de ocupação: {resumo['taxa_ocupacao']:.2%}")
-    print(f"Amostras da série temporal: {len(resumo['serie_temporal'])}")
+    resumos = equipe.resumos()
+    total_atendidos = sum(resumo["pacientes_atendidos"] for resumo in resumos)
+    print(f"\n=== Resumo da simulação ===")
+    print(f"Pacientes que chegaram: {len(pacientes)}")
+    print(f"Pacientes atendidos: {total_atendidos}")
+    print(f"Pacientes ainda não atendidos: {len(pacientes) - total_atendidos}")
+
+    for resumo in resumos:
+        print(f"\n=== Métricas de {resumo['nome']} ===")
+        print(f"Pacientes atendidos: {resumo['pacientes_atendidos']}")
+        print(
+            f"Tempo médio de atendimento: {resumo['tempo_medio_atendimento']:.2f} min"
+        )
+        print(f"Tempo ocioso: {resumo['tempo_ocioso']:.2f} min")
+        print(f"Taxa de ocupação: {resumo['taxa_ocupacao']:.2%}")
+        print(f"Amostras da série temporal: {len(resumo['serie_temporal'])}")

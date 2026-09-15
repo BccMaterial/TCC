@@ -27,14 +27,11 @@ class Profissional:
             Tempo total (em minutos) ocupado com atendimentos.
     """
 
-    def __init__(
-        self, env: simpy.Environment, capacidade: int = 1, nome: str | None = None
-    ) -> None:
+    def __init__(self, env: simpy.Environment, nome: str | None = None) -> None:
         self.id: uuid.UUID = uuid.uuid4()
         self.nome: str = nome or f"Profissional {str(self.id)[:8]}"
-        self.capacidade: int = capacidade
         self.env: simpy.Environment = env
-        self.resource: simpy.Resource = simpy.Resource(env, capacity=capacidade)
+        self.resource: simpy.Resource = simpy.Resource(env, capacity=1)
 
         self.num_pacientes_atendidos: int = 0
         self.tempo_total_atendimento: float = 0.0
