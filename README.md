@@ -21,7 +21,7 @@ Cada avaliação, tem a duração de uma hora, e geralmente os pacientes levam e
 
 # Setup
 
-Para instalar as depedências, é necessário utilizar o poetry:
+Para instalar as dependências, é necessário utilizar o poetry:
 ```bash
 poetry install
 ```
@@ -32,6 +32,13 @@ Atualmente, temos os seguintes scripts no `taskipy`:
 - `task lint:black:check`: Checa se os arquivos estão formatados de acordo com a biblioteca `black`
 - `task lint:black:fix`: Formata os arquivos de acordo com a biblioteca `black`
 - `task build:article`: Compila o latex usando o `mklatex` em `./articles/tcc2`
+
+# Arquitetura de pastas
+
+- `./src`: Contém o código fonte das aplicações
+- `./tests`: Contém os testes automatizados das aplicações
+- `./articles`: Contém os artigos em LaTeX, incluindo o TCC
+- `./docs`: Rascunhos, documentações, orientações e anotações do projeto
 
 # TODOs
 
