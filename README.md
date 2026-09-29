@@ -26,6 +26,11 @@ Para instalar as dependências, é necessário utilizar o poetry:
 poetry install
 ```
 
+É possível carregar o ambiente virtual do python com o seguinte comando:
+```bash
+poetry env activate
+```
+
 Atualmente, temos os seguintes scripts no `taskipy`:
 - `task run`: Executa o código contendo a simulação
 - `task test`: Roda os testes automatizados
