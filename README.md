@@ -21,9 +21,18 @@ Cada avaliação, tem a duração de uma hora, e geralmente os pacientes levam e
 
 # Setup
 
+## Pré-requisitos
+- Python >= 3.13
+- Poetry instalado (Instruções de instalação: https://python-poetry.org/docs/)
+
 Para instalar as dependências, é necessário utilizar o poetry:
 ```bash
 poetry install
+```
+
+É possível carregar o ambiente virtual do python com o seguinte comando:
+```bash
+poetry env activate
 ```
 
 Atualmente, temos os seguintes scripts no `taskipy`:
