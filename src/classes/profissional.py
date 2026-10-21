@@ -27,8 +27,17 @@ class Profissional:
             Tempo total (em minutos) ocupado com atendimentos.
     """
 
-    def __init__(self, env: simpy.Environment, nome: str | None = None) -> None:
-        self.id: uuid.UUID = uuid.uuid4()
+    def __init__(
+        self,
+        env: simpy.Environment,
+        nome: str | None = None,
+        id_profissional: str | None = None,
+    ) -> None:
+        if id_profissional is not None and not id_profissional.strip():
+            raise ValueError("O ID do profissional não pode ser vazio.")
+        self.id: uuid.UUID | str = (
+            id_profissional if id_profissional is not None else uuid.uuid4()
+        )
         self.nome: str = nome or f"Profissional {str(self.id)[:8]}"
         self.env: simpy.Environment = env
         self.resource: simpy.Resource = simpy.Resource(env, capacity=1)

@@ -12,7 +12,7 @@ authors = [
 license = "MIT"
 readme = "README.md"
 requires-python = ">=3.13,<4.0"
-dependencies = ["simpy (>=4.1.2,<5.0.0)"]
+dependencies = ["simpy (>=4.1.2,<5.0.0)", "openpyxl (>=3.1.5,<4.0.0)"]
 
 [dependency-groups]
 dev = [

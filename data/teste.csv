@@ -1,0 +1,13 @@
+ID do Paciente,ID do Profissional,ID de Agendamento,Nome do Paciente,Nome do Profissional,Início da agenda,Fim da agenda,Suspeita do paciente,Status da agenda
+PAC-001,PROF-001,AGEN-001,Ana Exemplo,Profissional A,2026-10-19T09:00:00-03:00,2026-10-19T10:00:00-03:00,Autismo,Concluída
+PAC-002,PROF-002,AGEN-002,Bruno Exemplo,Profissional B,2026-10-19T10:00:00-03:00,2026-10-19T11:00:00-03:00,TDAH,Falta
+PAC-003,PROF-001,AGEN-003,Camila Exemplo,Profissional A,2026-10-20T09:00:00-03:00,2026-10-20T10:00:00-03:00,TDAH,Concluída
+PAC-001,PROF-001,AGEN-004,Ana Exemplo,Profissional A,2026-10-21T14:00:00-03:00,2026-10-21T15:00:00-03:00,Autismo,Pendente
+PAC-004,PROF-002,AGEN-005,Diego Exemplo,Profissional B,2026-10-22T11:00:00-03:00,2026-10-22T12:00:00-03:00,Autismo,Concluída
+PAC-005,PROF-001,AGEN-006,Elisa Exemplo,Profissional A,2026-10-23T13:00:00-03:00,2026-10-23T14:00:00-03:00,TDAH,Falta
+PAC-006,PROF-002,AGEN-007,Felipe Exemplo,Profissional B,2026-10-26T09:00:00-03:00,2026-10-26T10:00:00-03:00,Autismo,Concluída
+PAC-003,PROF-001,AGEN-008,Camila Exemplo,Profissional A,2026-10-27T15:00:00-03:00,2026-10-27T16:00:00-03:00,TDAH,Pendente
+PAC-007,PROF-002,AGEN-009,Giovana Exemplo,Profissional B,2026-10-28T10:00:00-03:00,2026-10-28T11:00:00-03:00,Autismo,Concluída
+PAC-008,PROF-001,AGEN-010,Heitor Exemplo,Profissional A,2026-10-29T14:00:00-03:00,2026-10-29T15:00:00-03:00,TDAH,Concluída
+PAC-009,PROF-002,AGEN-011,Isabela Exemplo,Profissional B,2026-10-30T09:00:00-03:00,2026-10-30T10:00:00-03:00,Autismo,Falta
+PAC-010,PROF-001,AGEN-012,João Exemplo,Profissional A,2026-10-30T11:00:00-03:00,2026-10-30T12:00:00-03:00,TDAH,Concluída

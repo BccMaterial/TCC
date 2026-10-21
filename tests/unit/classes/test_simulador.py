@@ -20,3 +20,15 @@ def test_when_creating_simulator_without_patients():
 
     assert simulador.equipe is equipe
     assert simulador.pacientes == []
+
+
+def test_simulador_sem_parametros_preserva_geracao_de_chegadas(monkeypatch):
+    env = simpy.Environment()
+    equipe = Equipe(env, quantidade=1)
+    simulador = Simulador(equipe)
+    monkeypatch.setattr("classes.simulador.random.expovariate", lambda _: 10)
+
+    simulador.iniciar(duracao=20)
+
+    assert simulador.parametros is None
+    assert len(simulador.pacientes) == 2
