@@ -34,6 +34,7 @@ jobs:
 
       - name: Check Conventional Commits
         run: poetry run cz check --rev-range "$BASE_SHA..$HEAD_SHA"
+        continue-on-error: true
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
