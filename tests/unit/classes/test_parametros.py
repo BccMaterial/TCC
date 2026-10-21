@@ -58,6 +58,9 @@ def test_carregar_csv_estima_distribuicoes_e_exclui_pendentes_no_no_show(tmp_pat
     assert parametros.probabilidade_no_show == 1
     assert parametros.probabilidades_profissionais == {"prof1": 1}
     assert parametros.probabilidades_suspeitas == {Suspeita.AUTISMO: 1}
+    assert sum(parametros.distribuicao_horarios.values()) == pytest.approx(1)
+    assert sum(parametros.probabilidades_profissionais.values()) == pytest.approx(1)
+    assert sum(parametros.probabilidades_suspeitas.values()) == pytest.approx(1)
     assert parametros.taxa_agendamentos_por_hora == {(0, 9): 2}
     assert parametros.registros[0].inicio.utcoffset().total_seconds() == -10800
 
@@ -86,6 +89,7 @@ def test_taxa_horaria_considera_outras_datas_observadas_do_mesmo_dia():
         ]
     )
 
+    assert sum(parametros.distribuicao_horarios.values()) == pytest.approx(1)
     assert parametros.taxa_agendamentos_por_hora[(0, 9)] == 0.5
     assert parametros.taxa_agendamentos_por_hora[(0, 10)] == 0.5
 
