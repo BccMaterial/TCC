@@ -38,6 +38,7 @@ poetry env activate
 Atualmente, temos os seguintes scripts no `taskipy`:
 - `task run`: Executa o código contendo a simulação
 - `task test`: Roda os testes automatizados
+- `task commit`: Cria um commit interativamente com Commitizen
 - `task lint:black:check`: Checa se os arquivos estão formatados de acordo com a biblioteca `black`
 - `task lint:black:fix`: Formata os arquivos de acordo com a biblioteca `black`
 - `task build:article`: Compila o latex usando o `mklatex` em `./articles/tcc2`
