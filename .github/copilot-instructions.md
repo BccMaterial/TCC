@@ -39,3 +39,13 @@ poetry run pytest tests/unit/classes/test_equipe.py::test_when_requesting_and_re
 ## Commit messages
 
 Use Conventional Commit-style prefixes followed by a concise description, for example `feat: add patient triage`, `test: cover team release`, `fix: correct class imports`, or `ci: configure package mode`. Keep the subject focused on the change.
+
+## CI and Commitizen
+
+The pull-request workflow uses Python 3.14 and runs the test and Black checks; its Commitizen Conventional Commit check is advisory (`continue-on-error: true`). `poetry run task commit` starts the interactive Commitizen commit flow.
+
+The README defines `poetry run task build:article` to compile `articles/tcc2/tcc.tex`. Do not run this task: it can modify generated thesis materials under `articles/`.
+
+## Pull requests and commit language
+
+Write pull request titles and descriptions in Portuguese. Write commit messages in English, following the Conventional Commit format described above.
