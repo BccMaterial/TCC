@@ -1,175 +1,107 @@
 % ---------------------------------------------------------------
-% TEMPLATE TCC1 - SENAC SANTO AMARO
+% TEMPLATE TCC2 - SENAC SANTO AMARO
 % ---------------------------------------------------------------
-% Trabalho de Conclusão de Curso 1
-% Elaborado para apresentação da proposta inicial do TCC
-% Estrutura: 4 capítulos (Introdução, Revisão Bibliográfica,
-%            Desenvolvimento, Referências Bibliográficas)
+% Trabalho de Conclusão de Curso 2
 % ---------------------------------------------------------------
 
 \documentclass[
-    12pt,                % tamanho da fonte
-    openright,           % capítulos começam em página ímpar
-    oneside,             % para impressão em apenas um lado do papel
-    a4paper,             % tamanho do papel
-    english,             % idioma adicional
-    brazil               % idioma principal
+    12pt,
+    openright,
+    oneside,
+    a4paper,
+    english,
+    brazil
 ]{abntex2}
 
-% ---------------------------------------------------------------
-% PACOTES
-% ---------------------------------------------------------------
-\usepackage{lmodern}                % Fonte Latin Modern
-\usepackage[T1]{fontenc}            % Seleção de códigos de fonte
-\usepackage[utf8]{inputenc}         % Codificação do documento
-\usepackage{lastpage}               % Usado pela Ficha catalográfica
-\usepackage{indentfirst}            % Indenta o primeiro parágrafo
-\usepackage{color}                  % Controle de cores
-\usepackage{graphicx}               % Inclusão de gráficos
-\usepackage{microtype}              % Melhorias de justificação
-\usepackage{float}                  % Para posicionamento de figuras
-\usepackage{booktabs}               % Tabelas profissionais
-\usepackage{multirow}               % Células mescladas em tabelas
-\usepackage{longtable}              % Tabelas longas
-\usepackage{amsmath,amssymb}        % Símbolos matemáticos
-\usepackage{pgfgantt}               % Diagramas de Gantt
-\usepackage[brazilian,hyperpageref]{backref}  % Páginas com citações
-\usepackage[alf]{abntex2cite}       % Citações ABNT
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lastpage}
+\usepackage{indentfirst}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{amsmath,amssymb}
+\usepackage[brazilian,hyperpageref]{backref}
+\usepackage[alf]{abntex2cite}
 \usepackage{array}
 \usepackage{tabularx}
 \usepackage{pdflscape}
 \usepackage{geometry}
 
-% ---------------------------------------------------------------
-% CONFIGURAÇÕES DO PDF
-% ---------------------------------------------------------------
+\definecolor{blue}{RGB}{41,5,195}
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
 \makeatletter
 \hypersetup{
     pdftitle={\@title},
     pdfauthor={\@author},
-    pdfsubject={TCC1 - SENAC Santo Amaro},
+    pdfsubject={TCC2 - SENAC Santo Amaro},
     pdfcreator={LaTeX with abnTeX2},
-    pdfkeywords={tcc}{senac}{santo amaro}{trabalho de conclusão},
-    colorlinks=true,        % false: links em caixas; true: links coloridos
-    linkcolor=blue,         % cor dos links internos
-    citecolor=blue,         % cor dos links para bibliografia
-    filecolor=magenta,      % cor dos links para arquivos
+    pdfkeywords={tcc2}{senac}{santo amaro}{trabalho de conclusão},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    filecolor=magenta,
     urlcolor=blue,
     bookmarksdepth=4
 }
 \makeatother
 
-% ---------------------------------------------------------------
-% CONFIGURAÇÕES DE APARÊNCIA DO PDF FINAL
-% ---------------------------------------------------------------
-\definecolor{blue}{RGB}{41,5,195}
-
-
-% ---------------------------------------------------------------
-% TIPOS DE COLUNA
-% ---------------------------------------------------------------
-\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
-
-% ---------------------------------------------------------------
-% INFORMAÇÕES DO DOCUMENTO
-% ---------------------------------------------------------------
-\titulo{Otimização do tempo total do processo de avaliação neuropsicológica utilizando Simulação de eventos discretos e Teoria das filas
-}
+\titulo{Otimização do tempo total do processo de avaliação neuropsicológica utilizando Simulação de eventos discretos e Teoria das filas}
 \autor{Caio Troiano Collino (1142491237) \\ Thiago Pereira Lins da Silva (1142515180) \\ Vinícius Vianna Egydio de Carvalho (1142446597)}
 \local{São Paulo}
 \data{2026}
 \orientador{Prof. Alessandro Ranulfo Lima Nery}
-% \coorientador{Prof. Nome do Coorientador} % Descomente se houver coorientador
-
+\tipotrabalho{Trabalho de Conclusão de Curso II}
 \instituicao{%
   SENAC -- Serviço Nacional de Aprendizagem Comercial
   \par
   Unidade Santo Amaro
   \par
-  Curso de Ciência da Computação
+  Curso de Bacharelado em Ciência da Computação
 }
+\preambulo{Trabalho de Conclusão de Curso II apresentado ao SENAC Santo Amaro como requisito para conclusão do curso de Bacharelado em Ciência da Computação.}
 
-\tipotrabalho{Trabalho de Conclusão de Curso I}
-
-\preambulo{Proposta de Trabalho de Conclusão de Curso apresentado ao SENAC Santo Amaro como requisito parcial para aprovação na disciplina de TCC1 do curso de Ciência da Computação.}
-
-% ---------------------------------------------------------------
-% COMPILA O ÍNDICE
-% ---------------------------------------------------------------
 \makeindex
 
-% ---------------------------------------------------------------
-% INÍCIO DO DOCUMENTO
-% ---------------------------------------------------------------
 \begin{document}
 
-% Seleciona o idioma do documento
 \selectlanguage{brazil}
-
-% Retira espaço extra obsoleto entre as frases
 \frenchspacing
 
-% ---------------------------------------------------------------
-% ELEMENTOS PRÉ-TEXTUAIS
-% ---------------------------------------------------------------
 \pretextual
 
-% ---------------------------------------------------------------
-% CAPA
-% ---------------------------------------------------------------
 \imprimircapa
-
-% ---------------------------------------------------------------
-% FOLHA DE ROSTO
-% ---------------------------------------------------------------
 \imprimirfolhaderosto
 
-% ---------------------------------------------------------------
-% RESUMO
-% ---------------------------------------------------------------
 \begin{resumo}
-	Este documento apresenta a proposta inicial do Trabalho de Conclusão de Curso (TCC1) desenvolvido no SENAC Santo Amaro. O objetivo deste trabalho é demonstrar que um modelo estatístico pode reduzir o tempo mínimo necessário para a obtenção da devolução de um diagnóstico neuropsicológico. A justificativa para este estudo baseia-se na dificuldade de acesso dos pacientes a tratamentos e adaptações necessários devido a atrasos no diagnóstico e na lacuna existente na aplicação de métodos de otimização computacional no contexto dessa avaliação. A revisão bibliográfica abrange principalmente Pesquisa operacional, Teoria das filas e Simulação de eventos discretos. Como solução proposta, pretende-se criar um modelo de processos capaz de representar as etapas essenciais do diagnóstico e simular as mesmas, utilizando como ferramenta principal Python e bibliotecas do mesmo, como Pandas, NumPy e SimPy. Este trabalho está organizado em três capítulos que apresentam a introdução ao tema, a revisão bibliográfica que fundamenta a pesquisa, o desenvolvimento com a solução proposta e o cronograma de trabalho, seguidos das referências bibliográficas.
-
-\vspace{\onelineskip}
-
-\noindent
-\textbf{Palavras-chave}: Pesquisa Operacional. Lean HealthCare. Simulação. Avaliação neuropsicológica. Teoria das Filas.
+Este documento apresenta a proposta inicial do Trabalho de Conclusão de Curso (TCC1) desenvolvido no SENAC Santo Amaro. O objetivo deste trabalho é demonstrar que um modelo estatístico pode reduzir o tempo mínimo necessário para a obtenção da devolução de um diagnóstico neuropsicológico. A justificativa para este estudo baseia-se na dificuldade de acesso dos pacientes a tratamentos e adaptações necessários devido a atrasos no diagnóstico e na lacuna existente na aplicação de métodos de otimização computacional no contexto dessa avaliação. A revisão bibliográfica abrange principalmente Pesquisa operacional, Teoria das filas e Simulação de eventos discretos. Como solução proposta, pretende-se criar um modelo de processos capaz de representar as etapas essenciais do diagnóstico e simular as mesmas, utilizando como ferramenta principal Python e bibliotecas do mesmo, como Pandas, NumPy e SimPy. Este trabalho está organizado em três capítulos que apresentam a introdução ao tema, a revisão bibliográfica que fundamenta a pesquisa, o desenvolvimento com a solução proposta e o cronograma de trabalho, seguidos das referências bibliográficas.
 \end{resumo}
 
-% ---------------------------------------------------------------
-% LISTA DE ILUSTRAÇÕES
-% ---------------------------------------------------------------
-\pdfbookmark[0]{\listfigurename}{lof}
-\listoffigures*
-\cleardoublepage
+\begin{resumo}[Abstract]
+This document follows the TCC structure proposed by Wazlawick for Computer Science, emphasizing the research problem, objectives, proposed method, development details, and scientific analysis of results.
+\end{resumo}
 
-% ---------------------------------------------------------------
-% LISTA DE TABELAS
-% ---------------------------------------------------------------
-\pdfbookmark[0]{\listtablename}{lot}
-\listoftables*
-\cleardoublepage
-
-% ---------------------------------------------------------------
-% SUMÁRIO
-% ---------------------------------------------------------------
-\pdfbookmark[0]{\contentsname}{toc}
 \tableofcontents*
 \cleardoublepage
 
-% ---------------------------------------------------------------
-% ELEMENTOS TEXTUAIS
-% ---------------------------------------------------------------
 \textual
 
-% ===============================================================
-% CAPÍTULO 1 - INTRODUÇÃO
-% ===============================================================
+% ---------------------------------------------------------------
+% INTRODUÇÃO
+% ---------------------------------------------------------------
 \chapter{Introdução}
-\label{sec:introducao}
+
 Este trabalho tem como tema a otimização do tempo no processo de diagnóstico neuropsicológico, considerando que o mesmo parte de uma suspeita inicial, passa pela procura de um profissional especializado e termina com a devolução de um diagnóstico completo. Esse processo, devido a sua natureza extensa e composição de múltiplas etapas, pode conter longos períodos de espera, ainda mais em um cenário de alta demanda e com um número limitado de profissionais na área. Ademais, um reconhecimento crescente na importância da avaliação neuropsicológica contribui para o aumento da procura por essa categoria de atendimento.
 
-\section{Contexto}
+\section{Contextualização do problema}
+
 No presente momento de desenvolvimento deste trabalho, observa-se uma grande procura por avaliações neuropsicológicas: 69,6\% dos diagnósticos de autismo foram entre 2020 e 2024 \cite{Mab2026}. A principal causa para essa busca reside na maior divulgação do tema em mídias tradicionais e digitais, especialmente em discussões relacionadas ao Transtorno do Espectro Autista (TEA) e outros transtornos do neurodesenvolvimento. Na figura abaixo, podemos observar o crescimento de diagnósticos por ano:
 
 \begin{figure}[H]
@@ -184,7 +116,40 @@ Contudo, quando uma pessoa busca por esse tipo de avaliação, ela constantement
 
 Ademais, a falta de uma organização clara e processos bem definidos pode tornar o diagnóstico mais vulnerável a atrasos em múltiplas etapas. Considerando esse cenário, a computação tem uma contribuição significativa na análise, modelagem e melhoria do processo, tornando possível a identificação de gargalos, a simulação de cenários e a proposição de estratégias adequadas para tornar o fluxo de atendimento mais eficiente.
 
+\section{Formulação do problema}
+Coloque o problema em forma de pergunta clara, delimitando o que será investigado e qual resultado se espera atingir dentro da Computação.
+
+\section{Objetivos e hipótese}
+
+Separamos os objetivos entre objetivo geral, no qual é a meta a ser atingida por este trabalho. Já os objetivos específicos, são os meios no qual desenvolveremos esta pesquisa.
+
+\subsection{Objetivo geral}
+% Declare o propósito principal do TCC2 em uma frase direta, conectando-o ao problema e deixando claro se o foco é compreender, comparar, validar ou propor algo novo.
+
+O objetivo deste trabalho é demonstrar que um modelo estatístico desenvolvido com conceitos de pesquisa operacional, simulação de eventos discretos e teoria das filas pode reduzir o tempo necessário para a devolução de um diagnóstico no processo de avaliação neuropsicológica, considerando que o processo incorpora desde a primeira consulta até o retorno com o resultado dos exames.
+
+\subsection{Objetivos específicos}
+% Liste objetivos mensuráveis que estruturam o plano de trabalho. Tente utilizar verbos como revisar, comparar, modelar, quantificar ou validar. Exemplos:
+% \begin{itemize}
+%     \item Revisar obras-chave sobre [tema] e identificar lacunas;
+%     \item Modelar ou prototipar a abordagem proposta;
+%     \item Implementar experimentos controlados;
+%     \item Avaliar o desempenho por métricas (ex.: acurácia, latência).
+% \end{itemize}
+
+Para o desenvolvimento do projeto, é necessário completar os seguintes objetivos específicos: mapeamento da linha de processos no diagnóstico, construção de um modelo de processos, realização de simulações com o modelo criado e o desenvolvimento de um algoritmo de otimização que proponha melhorias redutoras de gargalo. 
+
+O mapeamento torna possível a compreensão do funcionamento do processo, tornando viável o reconhecimento de pontos críticos, atrasos e falhas capazes de comprometer o tempo de diagnóstico. Essa análise torna plausível a identificação do momento onde ocorre o principal gargalo do sistema, ou seja, a sessão do processo onde existe o maior tempo de espera. Este gargalo pode estar presente em diversos momentos do processo, como na fila de espera para o atendimento inicial, no intervalo entre a realização dos exames e a devolução do diagnóstico ou em outras fases intermediárias. 
+
+Com isso, será construído um modelo de processos capaz de representar o funcionamento dos mesmos. Esse modelos será capaz de testar múltiplos cenários, tornando possível a avaliação de como mudanças na organização do atendimento, na distribuição de recursos ou no fluxo de pacientes podem impactar o tempo de espera de devoluções. Depois da criação do modelo, simulações serão realizadas com o intuito de observar como o processo se comporta em diferentes condições para comparar cenários e identificar alternativas mais eficientes. Por último, em função dos resultados obtidos nas simulações, será desenvolvido um algoritmo de otimização com a finalidade de propor melhorias capazes de reduzir gargalos e tornar o processo de diagnóstico mais rápido.
+
+\subsection{Hipótese ou critério de validação}
+% Descreva a hipótese que será testada ou o critério usado para afirmar que o objetivo geral foi atingido. Caso não haja hipótese formal, explique como as métricas escolhidas demonstrarão o sucesso esperado.
+
+Existe um gargalo no fluxo da análise neuropsicológica responsável por afetar a eficiência temporal e o tempo final do diagnóstico. Ao identificar e otimizar esse gargalo, espera-se reduzir o tempo mínimo de diagnóstico, melhorando a experiência do paciente e facilitando o processo.
+
 \section{Justificativa}
+% Ressalte a importância do problema para a Computação, destacando contribuições acadêmicas, sociais ou industriais. Explique como a proposta evita se tornar um “manual de ferramenta”.
 
 Por mais que existam diversos trabalhos na área acadêmica relacionados ao estudo de fluxos de trabalho em processos diagnósticos, muitos deles são direcionados a locais específicos, diagnósticos específicos ou contextos clínicos restritos. Como um processo amplo capaz de auxiliar na formação de diferentes diagnósticos, a avaliação neuropsicológica ainda é pouco explorada em um contexto de otimização computacional. 
 
@@ -192,89 +157,15 @@ Assim sendo, este trabalho se justifica a partir de sua relevância social, acad
 
 A realização de diagnósticos em momentos adequados possibilita o início de tratamentos, terapias, adaptações pedagógicas e outras formas de suporte para o paciente. Portanto, busca-se estudar meios capazes de reduzir o tempo de espera do processo de diagnóstico sem nenhum prejuízo no tempo mínimo necessário para garantir precisão, qualidade e confiabilidade na avaliação.
 
-\section{Hipótese}
-
-Existe um gargalo no fluxo da análise neuropsicológica responsável por afetar a eficiência temporal e o tempo final do diagnóstico. Ao identificar e otimizar esse gargalo, espera-se reduzir o tempo mínimo de diagnóstico, melhorando a experiência do paciente e facilitando o processo.
-
-\section{Objetivos}
-
-Separamos os objetivos entre objetivo geral, no qual é a meta a ser atingida por este trabalho. Já os objetivos específicos, são os meios no qual desenvolveremos esta pesquisa.
-
-\subsection{Objetivo geral}
-
-O objetivo deste trabalho é demonstrar que um modelo estatístico desenvolvido com conceitos de pesquisa operacional, simulação de eventos discretos e teoria das filas pode reduzir o tempo necessário para a devolução de um diagnóstico no processo de avaliação neuropsicológica, considerando que o processo incorpora desde a primeira consulta até o retorno com o resultado dos exames.
-
-\subsection{Objetivos específicos}
-
-Para o desenvolvimento do projeto, é necessário completar os seguintes objetivos específicos: mapeamento da linha de processos no diagnóstico, construção de um modelo de processos, realização de simulações com o modelo criado e o desenvolvimento de um algoritmo de otimização que proponha melhorias redutoras de gargalo. 
-
-O mapeamento torna possível a compreensão do funcionamento do processo, tornando viável o reconhecimento de pontos críticos, atrasos e falhas capazes de comprometer o tempo de diagnóstico. Essa análise torna plausível a identificação do momento onde ocorre o principal gargalo do sistema, ou seja, a sessão do processo onde existe o maior tempo de espera. Este gargalo pode estar presente em diversos momentos do processo, como na fila de espera para o atendimento inicial, no intervalo entre a realização dos exames e a devolução do diagnóstico ou em outras fases intermediárias. 
-
-Com isso, será construído um modelo de processos capaz de representar o funcionamento dos mesmos. Esse modelos será capaz de testar múltiplos cenários, tornando possível a avaliação de como mudanças na organização do atendimento, na distribuição de recursos ou no fluxo de pacientes podem impactar o tempo de espera de devoluções. Depois da criação do modelo, simulações serão realizadas com o intuito de observar como o processo se comporta em diferentes condições para comparar cenários e identificar alternativas mais eficientes. Por último, em função dos resultados obtidos nas simulações, será desenvolvido um algoritmo de otimização com a finalidade de propor melhorias capazes de reduzir gargalos e tornar o processo de diagnóstico mais rápido.
- 
-
-% ===============================================================
-% CAPÍTULO 2 - REVISÃO BIBLIOGRÁFICA
-% ===============================================================
-\chapter{Revisão bibliográfica}
-
-\section{Referencial teórico}
-\label{sec:referencial}
-OBS: O segundo parágrafo está bem incompleto e precisa ser revisado também. 
-
-O principal conceito utilizado nesse trabalho será Pesquisa Operacional e outros conteúdos derivados do mesmo. Dentro esses conteúdos, temos:  teoria das filas para a otimização de tempo de espera e tamanho da fila, simulação de eventos discretos para geração de cenários e aplicação do modelo, métricas como o tempo de fila, tamanho da fila, tempo de atendimento, tempo de espera entre processos, tempo total do processo e parâmetros como o número de seções, número de profissionais e disponibilidade médica.
-
-Da área da psicologia, utilizaremos o Manual de Diagnóstico e Estatístico de Transtornos Mentais (DSM 5) como a principal fonte para a compreensão de transtornos e seus diagnósticos. Também, será utilizado a definição de avaliação neuropsicológica para entender como a mesma funciona e facilitar o mapeamento do processo.
-
-
 % ---------------------------------------------------------------
-\section{Metodologia da pesquisa bibliográfica}
+% REVISÃO BIBLIOGRÁFICA
+% ---------------------------------------------------------------
+\chapter{Revisão Bibliográfica / Trabalhos Relacionados}
 
-A pesquisa bibliográfica foi conduzida a partir da consulta a diferentes bases de dados acadêmicas e científicas, com o objetivo de identificar trabalhos relevantes sobre o tema. Dentre as bases, foram consultadas: \textit{Google Scholar} e \textit{Semantic Scholar}, onde foram considerados trabalhos publicados entre 2021 e 2026, nos idiomas português, inglês e espanhol, incluindo artigos científicos e estudos de caso.
+\section{Fundamentos teóricos necessários}
+% Explique os conceitos essenciais, definindo termos e equações quando necessário. Utilize blocos de texto ou pequenos quadros comparativos para sintetizar modelos.
 
-Em cada base, foi utilizado um conjunto de strings de busca, onde, dado os resultados, foram selecionados artigos e estudos condizentes com a proposta deste trabalho. Segue abaixo uma tabela com os resultados obtidos, com base na string de busca e plataforma:
-
-\begin{table}[H]
-	\centering
-	\footnotesize
-	\caption{Resultados de busca nas bases de artigos}
-	\setlength{\tabcolsep}{4pt}
-	\begin{tabularx}{\textwidth}{p{3cm}|p{7cm}|p{2cm}|p{2cm}}
-		\toprule
-		\textbf{Base(s)} & \textbf{String de busca} & \textbf{Resultados da busca} & \textbf{Artigos Selecionados} \\ 
-		\midrule
-		\textit{Google Scholar} & "redução do tempo de espera"\ AND\ "ambulatório"\ AND\ "simulação" & 59 & 7 \\ 
-		\midrule
-		\textit{Google Scholar} & ("teoria das filas"\ OR\ "modelo de filas")\ AND\ ("medicina"\ OR\ "saúde"\ OR\ "clínica")\ AND\ ("simulação"\ OR\ "mobile") & 210 & 5 \\ 
-		\midrule
-		\textit{Semantic Scholar} & "discrete\ event\ simulation"\ AND\ "patient\ flow"\ AND\ healthcare\ bottleneck\ AND\ optimization & 98 & 4 \\ 
-		\midrule
-		\textit{Google Scholar} & "simulação\ de\ eventos"\ AND\ fundamentos\ AND\ "saúde"\ OR "clínica"\ -criptografia\ -emergência & 103 & 2 \\ 
-		\midrule
-		\textit{Google Scholar} & "healthcare workflow optimization" AND "waiting time" AND bottleneck & 31 & 2 \\ 
-		\bottomrule
-	\end{tabularx}
-	\label{tab:busca}
-	\legend{Fonte: Elaborado pelos autores}
-\end{table}
-
-A partir dos resultados, foi realizado a seleção dos artigos e suas citações, aplicando a técnica de "funil", no qual realiza-se o filtro dos artigos mais relevantes, para definir os artigos principais relacionados a este trabalho.
-
-Vale ressaltar que houve um contraste grande nos resultados da busca em relação à quantidade de artigos selecionados devido aos seguintes fatores:
-\begin{itemize}
-	\item \textbf{Aderência ao tema:} Muitos artigos não tinham, ou haviam pouca relação com o tema deste trabalho, sendo excluídos da seleção;
-	\item \textbf{Abordagens e problemas repetidos:} Como há muitos artigos com as mesmas abordagens ou os mesmos problemas, foram selecionados apenas os artigos nos quais haviam abordagens ou problemas diferentes uns dos outros;
-	\item \textbf{Deduplicação de artigos:} Dado as strings de busca acima, houveram artigos duplicados entre as buscas, sendo necessário a deduplicação dos artigos. Essa etapa foi feita através da ferramenta \textit{ResearchRabbit}, como centralizador de artigos.
-\end{itemize}
-
-Ao todo, foram totalizados 25 artigos selecionados para a aplicação do funil, onde 20 artigos foram selecionados via string de busca, e 5 artigos foram selecionados via \textit{Google Scholar Labs} através de \textit{prompts}. Foram selecionados 5 artigos como potenciais candidatos à trabalhos relacionados, e dentre eles, 3 aptos como trabalhos relacionados. 2 dos 5 trabalhos candidatos não foram selecionados por conta dos seguintes critérios:
-\begin{itemize}
-	\item Semelhança entre os trabalhos eleitos;
-	\item Menor referencial teórico em relação aos trabalhos eleitos;
-	\item Os trabalhos eleitos abordavam problemas semelhantes, ou o mesmo problema.
-\end{itemize}
-
-\section{Fundamentos}
+% Um exemplo de citação direta poderia ser `\citeonline{Silva2022}` para reforçar que determinados métodos exigem validação empírica; uma citação indireta pode ser escrita como “vários estudos destacam ...” seguido de `\cite{Wazlawick2020}`.
 
 Nesta seção, apresentaremos quais são os principais conceitos que são necessários para o desenvolvimento deste trabalho.
 
@@ -306,24 +197,41 @@ Como métricas, temos: tempo de fila, tamanho da fila, tempo de atendimento, tem
 Como parâmetros, temos: número de seções, número de profissionais e disponibilidade médica. Número de seções é o número de atendimentos necessários para realizar um diagnóstico. Número de profissionais é a quantidade de profissionais disponíveis. Disponibilidade média é o quantidade de profissionais disponíveis.
 
 \subsection{DSM 5}
-OBS: Incompleto, polir e completar depois
+% OBS: Incompleto, polir e completar depois
 
 O Manual diagnóstico e estatístico de transtornos mentais (DSM), segundo a \citeonline{Apa2023}, é a principal ferramenta utilizada no diagnóstico neuropsicológico, servindo como uma classificação dos transtornos mentais e critérios associados, elaborada de modo que seja facilitado o diagnóstico confiável desses transtornos.
 
 Utilizaremos o DSM para compreender o processo diagnóstico de certos transtornos, facilitando a modelagem na simulação e durante a triagem.
 
 \subsection{Avaliação Neuropsicológica}
-OBS: Não tenho certeza se a primeira citação deve ser em relação ao próprio livro ou o autor referenciado pelo livro
+% OBS: Não tenho certeza se a primeira citação deve ser em relação ao próprio livro ou o autor referenciado pelo livro
 
 Segundo \citeonline{Malloy2018}, uma avaliação, empreendida com fins profissionais, é a descrição de aspectos relevantes de uma pessoa através de técnicas e teorias científicas particulares, com o fim de responder questões específicas. De forma generalizada, uma avaliação deve atender diferentes propósitos, como a descrição do funcionamento atual do indivíduo(ressaltando suas forças e dificuldades), de sua capacidade de viver de modo autônomo e independente e as possibilidades de adaptação social, profissional e pessoal do mesmo, levando em consideração a minimização de seu sofrimento físico e psicológico. Além disso, a avaliação deve identificar necessidades terapêuticas, recomendar intervenções e apontar resultados possíveis destas e contribuir para o diagnóstico diferencial de distúrbios emocionais, cognitivos e comportamentais. A avaliação também pode monitorar a evolução do tratamento e identificar novas questões que possam requerer atenção profissional. Por último, segundo o \citeonline{Meyer2001}, devolutivas devem ser oferecidas de maneira competente e empática a respeito dos resultados de todo o processo. 
 
 A avaliação neuropsicológica, segundo \citeonline{Malloy2018}, é uma atividade emergente do campo da neuropsicologia, se tratando de um método capaz de investigar as funções cognitivas e o comportamento de um indivíduo, relacionando-os com o funcionamento normal ou deficitário do sistema nervoso central (SNC), de modo que seja possível o diagnóstico, determinação da natureza ou etiologia dos sintomas, a gravidade das sequelas, o prognóstico, a evolução do caso e o oferecimento de bases que contribuam para a reabilitação.
 
+\section{Técnicas, métodos ou abordagens existentes}
+Apresente abordagens já empregadas no contexto e destaque o que funcionou ou falhou. Inclua uma tabela comparativa simples para clarificar diferenças:
+\begin{table}[htb]
+  \centering
+  \caption{Comparativo de abordagens relacionadas}
+  \begin{tabular}{p{4cm}p{3cm}p{4cm}}
+    \toprule
+    Abordagem & Domínio & Limitação principal \\
+    \midrule
+    Técnica A & IoT & Falta de validação em larga escala \\
+    Técnica B & Redes neurais & Alto custo computacional \\
+    \bottomrule
+  \end{tabular}
+  \legend{Tabela ilustrativa com limitações observadas.}
+\end{table}
 
-\section{Trabalhos relacionados}
-\label{sec:trabalhos_relacionados}
+\section{Trabalhos correlatos e limitações}
+% Liste artigos diretamente relacionados e explique por que cada um não resolve totalmente o problema (ex.: falta de comparação, escopo diferente, dados limitados). Relacione essas lacunas com o que sua pesquisa pretende preencher.
 
-Com base no problema deste trabalho, e em sua proposta de solução, foram encontrados 3 artigos relevantes, com problemas e soluções semelhantes. 
+% \textit{Evite a “síndrome da intersecção esquecida”: inclua trabalhos que aplicaram a técnica na mesma área.}
+
+Com base no problema deste trabalho, e em sua proposta de solução, foram encontrados 3 artigos relevantes, com problemas e soluções semelhantes.
 
 \subsection{Trabalho 1: Redução do tempo de espera para realização de avaliação neuropsicológica: um projeto de intervenção \cite{Silva2023}}
 
@@ -355,7 +263,7 @@ A principal diferença entre este trabalho e o trabalho 3 está no problema abor
 
 \subsection{Comparação}
 
-% Notamos que ambos os trabalhos tratam do mesmo assunto, que são problemas em clinicas médicas. Porém vemos abordagens diferentes e resultados diferentes, onde ambos podem ser utilizados como base para melhor nosso trabalho, gerando uma combinação de conceitos matemáticos e estatísticos do primeiro artigo, junto com a ideia de criar um modelo e "organizar" o \textit{overbooking} eventualmente impactando no auento do lucro e na melhor experiência para o paciente. Ou seja, nosso trabalho olha para ambos e complementa usando RNN para prever \textit{no-shows}. 
+% Notamos que ambos os trabalhos tratam do mesmo assunto, que são problemas em clinicas médicas. Porém vemos abordagens diferentes e resultados diferentes, onde ambos podem ser utilizados como base para melhor nosso trabalho, gerando uma combinação de conceitos matemáticos e estatísticos do primeiro artigo, junto com a ideia de criar um modelo e "organizar" o \textit{overbooking} eventualmente impactando no aumento do lucro e na melhor experiência para o paciente. Ou seja, nosso trabalho olha para ambos e complementa usando RNN para prever \textit{no-shows}. 
 
 Abaixo uma tabela apresentando a diferença entre os trabalhos relacionados e este trabalho:
 
@@ -408,17 +316,16 @@ Abaixo uma tabela apresentando a diferença entre os trabalhos relacionados e es
 
 Dado essa comparação, é possível observar que o nosso trabalho diferencia-se principalmente na implementação algorítmica, no qual não está presente em nenhum dos 3 artigos, e na utilização de conceitos matemáticos e estatísticos, tanto para validar as simulações realizadas quanto para a construção do modelo.
 
-% ===============================================================
-% CAPÍTULO 3 - DESENVOLVIMENTO
-% ===============================================================
-\chapter{Desenvolvimento}
-\label{cap:desenvolvimento}
-
-Neste capítulo, apresenta-se a solução proposta para o problema identificado, bem como o cronograma de trabalho previsto para o desenvolvimento completo do projeto no TCC2.
 
 % ---------------------------------------------------------------
-\section{Solução proposta}
-\label{sec:solucao}
+% METODOLOGIA
+% ---------------------------------------------------------------
+\chapter{Metodologia}
+
+\section{Tipo de pesquisa e hipótese}
+Informe qual tipo de pesquisa será conduzido (exploratória, empírica, formal etc.) e registre as hipóteses que serão avaliadas. Caso não haja hipótese formal, descreva o critério de sucesso esperado.
+
+\section{Solução Proposta}
 
 A solução proposta do trabalho constitui-se na criação de um modelo de processos capaz de analisar e otimizar o fluxo de diagnóstico neuropsicológico em clínicas. O principal objetivo do modelo será a representação das etapas essências do processo desde a suspeita inicial e procura pelo atendimento especializado até a realização de exames, análise dos resultados e devolução do diagnóstico. 
 
@@ -444,149 +351,125 @@ Será adotada uma metodologia de desenvolvimento baseada em prototipação e sim
 
 Os critérios de avaliação estão ligados com a capacidade do modelo de representação do processo de diagnóstico e da indicação de melhorias viáveis. Serão utilizadas métricas como tempo médio total até a devolução do diagnóstico, tempo médio de espera em cada etapa, tamanho das filas, taxa de utilização dos profissionais e identificação do principal gargalo do sistema. Ademais, simulações de cenários simulados serão comparadas entre si com o intuito de verificar as estratégias que apresentam melhores resultados no que diz respeito à redução do tempo de espera, mantendo a qualidade necessária para realizar uma avaliação confiável.
 
+
+\section{Procedimentos da abordagem proposta}
+Detalhe etapas da metodologia em ordem cronológica. Use listas numeradas, diagramas de fluxo ou pseudocódigo para tornar o processo claro.
+
+\section{Ferramentas, tecnologias e ambientes}
+Liste softwares, linguagens, bibliotecas, frameworks e ambientes (laboratórios, nuvem, simulação) que serão usados. Justifique a escolha com base no problema e nas métricas.
+
+\section{Procedimentos experimentais e métricas}
+Explique como os experimentos serão configurados, quais variáveis serão controladas e quais métricas demonstram que a proposta cumpre os objetivos (ex.: acurácia, latência, custo). Inclua tabelas que antecipem o plano de coleta, por exemplo:
+\begin{table}[htb]
+  \centering
+  \caption{Plano de experimentação}
+  \begin{tabular}{lccc}
+    \toprule
+    Experimento & Variável controlada & Métrica principal \\
+    \midrule
+    Comparação com baseline & algoritmo & acurácia \\
+    Escalabilidade & carga & tempo médio \\
+    \bottomrule
+  \end{tabular}
+  \legend{Exemplo de como documentar experimentos.}
+\end{table}
+
+\textit{Propor algo não basta: demonstre como será validado.}
+
 % ---------------------------------------------------------------
-\section{Resultados esperados}
-Espera-se, a partir da simulações de diferentes cenários realizadas com o modelo de processos e o algoritmo construído, que seja possível encontrar gargalos comprometedores no diagnóstico neuropsicológico. Com base nos resultados obtidos, também espera-se uma redução do tempo de diagnóstico. Além disso, almeja-se que o algoritmo contribua ao usuário final, de forma que o próprio consiga gerenciar e simular seus próprios cenários apoiando na tomada de decisões.
+% DESENVOLVIMENTO
+% ---------------------------------------------------------------
+\chapter{Desenvolvimento / Implementação / Experimentos}
 
+\section{Modelagem e arquitetura}
+Apresente diagramas (UML, blocos ou fluxogramas) que mostram como os módulos se relacionam, identificando componentes críticos e como eles atendem ao problema e à metodologia.
 
-\section{Cronograma de trabalho}
-\label{sec:cronograma}
+\section{Detalhes de implementação}
+Explique escolhas tecnológicas, estruturas de dados e integrações. Inclua trechos de código relevantes ou pseudoexemplos se esclarecerem decisões de pesquisa.
 
-O cronograma a seguir apresenta, no formato de diagrama de Gantt, as atividades previstas para o desenvolvimento do TCC2, distribuídas ao longo das semanas do semestre.
+\section{Experimentos e cenários de teste}
+Descreva os cenários planejados, parâmetros testados e por que cada experimento está alinhado aos objetivos. Liste os conjuntos de dados, variações e número de repetições.
 
-\begin{figure}[H]
-\caption{Cronograma de desenvolvimento do trabalho}
-\centering
-\resizebox{\textwidth}{!}{%
-\begin{ganttchart}[
-    hgrid,
-    vgrid,
-    time slot format=isodate,
-    x unit=0.21cm,
-    y unit chart=0.75cm,
-    bar height=0.7,
-    bar/.append style={fill=purple!55},
-    title label font=\bfseries\scriptsize,
-    bar label font=\small,
-    group label font=\larger
-]{2026-08-17}{2026-11-29}
+\section{Coleta e tratamento de dados}
+Explique como os dados foram coletados (logs, sensores, APIs), armazenados e preparados (limpeza, normalização, anonimização). Registre ferramentas usadas no pré-processamento.
 
-\gantttitlecalendar{month=name, week} \\
+\textit{O desenvolvimento só é pesquisa se estiver claramente ligado ao problema e à metodologia definida.}
 
-% Fase 1 (NOVA) - Correções & Fundamentação
-\ganttgroup[
-  group/.append style={
-		fill=blue!30,
-		draw=blue
-  }
-]{\textbf{Fase 1 - Correções, Fundamentação \& Dados}}{2026-08-17}{2026-09-27} \\
-	\ganttbar[bar/.append style={fill=blue!20}]
-		{Fundamentação - Psicologia (DSM 5 e CID 11)}{2026-08-17}{2026-09-07} \\
-	\ganttbar[bar/.append style={fill=blue!20}]
-		{Fundamentação - Pesquisa de artigos em inglês}{2026-08-17}{2026-09-07} \\
-	\ganttbar[bar/.append style={fill=blue!20}]
-		{Fundamentação - Processos e Definição}{2026-08-24}{2026-09-07} \\
-	\ganttbar[bar/.append style={fill=blue!20}]
-		{Pesquisa - Obtenção de Dados}{2026-08-31}{2026-09-27} \\
-	\ganttbar[bar/.append style={fill=blue!20}]
-		{Melhoria - Lacuna Identificada}{2026-09-06}{2026-09-27} \\
-	\ganttbar[bar/.append style={fill=blue!20}]
-		{Revisão - Diagnóstico/Escopo (Douglas)}{2026-08-17}{2026-09-27} \\
-	\ganttbar[bar/.append style={fill=blue!20}]
-		{Revisão - Modelagem/Processo (Ranulfo)}{2026-08-17}{2026-09-27} \\
+% ---------------------------------------------------------------
+% RESULTADOS
+% ---------------------------------------------------------------
+\chapter{Resultados e Análise}
 
+\section{Apresentação dos resultados}
+Mostre resultados com tabelas, gráficos e figuras. Diferencie:
+\begin{itemize}
+  \item \textbf{Figura:} imagens, diagramas conceituais ou arquiteturais que ilustram estrutura ou fluxo.
+  \item \textbf{Gráfico:} plot de dados (linhas, barras, boxplots) que compara métricas obtidas.
+\end{itemize}
 
-% Fase 2 (NOVA) - Simulações
-\ganttgroup[
-  group/.append style={
-		fill=purple!30,
-    draw=purple
-  }
-]{\textbf{Fase 2 - Simulações}}{2026-09-28}{2026-11-15} \\
-	\ganttbar[bar/.append style={fill=purple!20}]
-		{Criar cenários}{2026-09-28}{2026-10-04} \\
-	\ganttbar[bar/.append style={fill=purple!20}]
-		{Desenvolver simulador}{2026-10-05}{2026-10-25} \\
-	\ganttbar[bar/.append style={fill=purple!20}]
-		{Simular cenários}{2026-10-18}{2026-11-15} \\
-	\ganttbar[bar/.append style={fill=purple!20}]
-		{Analisar resultados}{2026-10-18}{2026-11-15} \\
+Exemplo de tabela:
+\begin{table}[htb]
+  \centering
+  \caption{Comparação de métricas reportadas}
+  \begin{tabular}{lcc}
+    \toprule
+    Método & Acurácia & Tempo médio (ms) \\
+    \midrule
+    Proposta & 92\% & 180 \\
+    Baseline & 88\% & 220 \\
+    \bottomrule
+  \end{tabular}
+  \legend{Tabela exemplificando como comparar métricas.}
+\end{table}
 
-% Fase 3 (NOVA) - Algoritmo
-\ganttgroup[
-  group/.append style={
-		fill=green!30,
-		draw=green
-  }
-]{\textbf{Fase 3 - Interfaces \& Visualização}}{2026-11-16}{2026-11-29} \\
-	\ganttbar[bar/.append style={fill=green!20}]
-		{Desenvolvimento de interface}{2026-11-16}{2026-11-29} \\
-	\ganttbar[bar/.append style={fill=green!20}]
-		{Refinamento do código}{2026-11-23}{2026-11-29} \\
-
-% Global
-\ganttbar[bar/.append style={fill=black!20}]
-	{Escrita do TCC}{2026-08-17}{2026-11-08} \\
-\ganttbar[bar/.append style={fill=black!20}]
-	{Revisão do TCC}{2026-11-09}{2026-11-29} \\
-
-\end{ganttchart}
-}
-\legend{Fonte: Elaborado pelos autores}
+Ao inserir um gráfico (por exemplo `assets/figures/desempenho.png`), use:
+\begin{verbatim}
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=0.8\textwidth]{assets/figures/desempenho.png}
+  \caption{Gráfico de comparação das métricas de acurácia.}
+  \label{fig:grafico-desempenho}
 \end{figure}
+\end{verbatim}
+
+\section{Análise crítica e comparação}
+Discuta as descobertas com base na revisão bibliográfica e na hipótese. Evidencie ganhos e perdas.
+
+\section{Discussão}
+Relacione os resultados aos objetivos e à hipótese, explicitando se o critério de sucesso foi atingido.
+
+\textit{Resultados devem ser analisados, não apenas exibidos.}
 
 % ---------------------------------------------------------------
-% ELEMENTOS PÓS-TEXTUAIS
+% CONCLUSÃO
 % ---------------------------------------------------------------
+\chapter{Conclusão}
+
+\section{Retomada do problema e dos objetivos}
+Retome o problema e destaque o que foi atingido.
+
+\section{Contribuições para a Computação}
+Explique o que a pesquisa trouxe de novo.
+
+\section{Limitações e trabalhos futuros}
+Liste limites e sugira próximos passos coerentes.
+
+% ---------------------------------------------------------------
+% OBSERVAÇÕES DO AUTOR
+% ---------------------------------------------------------------
+\chapter*{Observações importantes}
+\addcontentsline{toc}{chapter}{Observações importantes}
+
+Para graduação, Wazlawick aceita trabalhos aplicados desde que:
+\begin{itemize}
+    \item O problema seja preciso;
+    \item A solução esteja fundamentada;
+    \item Haja análise crítica;
+    \item Não seja apenas entrega funcional.
+\end{itemize}
+
 \postextual
 
-% ===============================================================
-% CAPÍTULO 4 - REFERÊNCIAS BIBLIOGRÁFICAS
-% ===============================================================
-% As referências bibliográficas são geradas automaticamente a partir
-% do arquivo bibliografia.bib, seguindo o padrão ABNT (NBR 6023).
-%
-% COMO CITAR no texto:
-%   \cite{chave}         -> (SOBRENOME, ano) — citação indireta
-%   \citeonline{chave}   -> Sobrenome (ano) — citação direta no texto
-%
-% TIPOS DE REFERÊNCIA no arquivo .bib:
-%   @book        -> Livros
-%   @article     -> Artigos de periódicos
-%   @inproceedings -> Artigos em anais de eventos
-%   @mastersthesis -> Dissertações de mestrado
-%   @phdthesis   -> Teses de doutorado
-%   @misc        -> Sites, vídeos e outros materiais
-%   @manual      -> Documentação técnica
-%
-% Veja o arquivo bibliografia.bib para exemplos de cada tipo.
-% ---------------------------------------------------------------
 \bibliography{bibliografia}
-
-% ---------------------------------------------------------------
-% APÊNDICES (se necessário)
-% ---------------------------------------------------------------
-% \begin{apendicesenv}
-% \partapendices
-%
-% \chapter{Nome do Apêndice}
-% \label{ap:apendice1}
-%
-% Conteúdo do apêndice (material elaborado pelo próprio autor).
-%
-% \end{apendicesenv}
-
-% ---------------------------------------------------------------
-% ANEXOS (se necessário)
-% ---------------------------------------------------------------
-% \begin{anexosenv}
-% \partanexos
-%
-% \chapter{Nome do Anexo}
-% \label{an:anexo1}
-%
-% Conteúdo do anexo (material de terceiros).
-%
-% \end{anexosenv}
 
 \end{document}
