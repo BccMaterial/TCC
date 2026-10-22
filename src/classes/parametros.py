@@ -1,11 +1,9 @@
-import csv
 import random
-from collections import Counter, defaultdict
 from dataclasses import dataclass
-from datetime import date, datetime
+from datetime import datetime
 from pathlib import Path
 
-from openpyxl import load_workbook
+import pandas as pd
 
 from enums import Suspeita
 
@@ -49,60 +47,68 @@ class Parametros:
             raise ValueError("O arquivo não contém registros de agenda.")
         self.registros = tuple(registros)
 
-        por_faixa: Counter[FaixaHorario] = Counter()
-        por_profissional: Counter[str] = Counter()
-        por_suspeita: Counter[Suspeita] = Counter()
-        por_data_faixa: Counter[tuple[date, FaixaHorario]] = Counter()
-        datas_observadas_por_dia: dict[int, set[date]] = defaultdict(set)
-        desfechos = Counter()
-        pacientes = Counter()
-        self.nomes_profissionais: dict[str, str] = {}
-
-        for registro in registros:
-            faixa = (registro.inicio.weekday(), registro.inicio.hour)
-            data = registro.inicio.date()
-            por_faixa[faixa] += 1
-            por_profissional[registro.id_profissional] += 1
-            por_suspeita[registro.suspeita] += 1
-            por_data_faixa[(data, faixa)] += 1
-            datas_observadas_por_dia[faixa[0]].add(data)
-            pacientes[registro.id_paciente] += 1
-            if registro.nome_profissional:
-                self.nomes_profissionais[registro.id_profissional] = (
-                    registro.nome_profissional
-                )
-            if registro.status != "Pendente":
-                desfechos[registro.status] += 1
-
-        total = len(registros)
+        dados = pd.DataFrame(
+            {
+                "data": [registro.inicio.date() for registro in registros],
+                "dia_semana": [registro.inicio.weekday() for registro in registros],
+                "hora": [registro.inicio.hour for registro in registros],
+                "profissional": [registro.id_profissional for registro in registros],
+                "suspeita": [registro.suspeita for registro in registros],
+                "paciente": [registro.id_paciente for registro in registros],
+                "status": [registro.status for registro in registros],
+            }
+        )
+        total = len(dados)
+        por_faixa = dados.groupby(["dia_semana", "hora"]).size()
         self.distribuicao_horarios: dict[FaixaHorario, float] = {
-            faixa: quantidade / total for faixa, quantidade in por_faixa.items()
+            (int(dia), int(hora)): float(quantidade / total)
+            for (dia, hora), quantidade in por_faixa.items()
         }
-        # Condicional às datas com pelo menos um registro daquele dia da semana.
-        self.taxa_agendamentos_por_hora: dict[FaixaHorario, float] = {
-            faixa: sum(
-                por_data_faixa[(data, faixa)]
-                for data in datas_observadas_por_dia[faixa[0]]
-            )
-            / len(datas_observadas_por_dia[faixa[0]])
-            for faixa in por_faixa
+
+        datas = pd.date_range(
+            start=dados["data"].min(), end=dados["data"].max(), freq="D"
+        )
+        por_hora = dados.groupby("hora").size()
+        self.taxa_agendamentos_por_hora: dict[int, float] = {
+            int(hora): float(quantidade / len(datas))
+            for hora, quantidade in por_hora.items()
         }
-        self.probabilidades_profissionais = {
-            profissional: quantidade / total
-            for profissional, quantidade in por_profissional.items()
+        self.probabilidades_profissionais: dict[str, float] = {
+            profissional: float(probabilidade)
+            for profissional, probabilidade in dados["profissional"]
+            .value_counts(normalize=True)
+            .items()
         }
-        self.probabilidades_suspeitas = {
-            suspeita: quantidade / total
-            for suspeita, quantidade in por_suspeita.items()
+        self.probabilidades_suspeitas: dict[Suspeita, float] = {
+            suspeita: float(probabilidade)
+            for suspeita, probabilidade in dados["suspeita"]
+            .value_counts(normalize=True)
+            .items()
         }
-        total_desfechos = sum(desfechos.values())
+        nomes = pd.Series(
+            [
+                registro.nome_profissional
+                for registro in registros
+                if registro.nome_profissional
+            ],
+            index=[
+                registro.id_profissional
+                for registro in registros
+                if registro.nome_profissional
+            ],
+        )
+        self.nomes_profissionais: dict[str, str] = nomes.to_dict()
+        desfechos = dados.loc[dados["status"] != "Pendente", "status"].value_counts()
+        total_desfechos = int(desfechos.sum())
         self.probabilidade_no_show = (
-            desfechos["Falta"] / total_desfechos if total_desfechos else None
+            float(desfechos.get("Falta", 0) / total_desfechos)
+            if total_desfechos
+            else None
         )
-        self.pacientes_com_multiplos_agendamentos = sum(
-            quantidade > 1 for quantidade in pacientes.values()
+        self.pacientes_com_multiplos_agendamentos = int(
+            (dados["paciente"].value_counts() > 1).sum()
         )
-        primeiro_dia = min(registro.inicio.date() for registro in registros)
+        primeiro_dia = dados["data"].min()
         self.dia_semana_inicial = primeiro_dia.weekday()
         self.minuto_inicio_simulacao = min(
             registro.inicio.hour * 60 + registro.inicio.minute for registro in registros
@@ -113,55 +119,47 @@ class Parametros:
         """Lê e valida arquivo CSV/XLSX com o esquema da agenda."""
         caminho = Path(arquivo)
         if caminho.suffix.casefold() == ".csv":
-            with caminho.open(encoding="utf-8-sig", newline="") as fonte:
-                amostra = fonte.read(4096)
-                fonte.seek(0)
-                try:
-                    dialeto = csv.Sniffer().sniff(amostra, delimiters=",;\t")
-                except csv.Error:
-                    dialeto = csv.excel
-                leitor = csv.DictReader(fonte, dialect=dialeto)
-                cabecalhos = leitor.fieldnames
-                if not cabecalhos:
-                    raise ValueError("O arquivo CSV não contém cabeçalho.")
-                nomes = [nome.strip() if nome else "" for nome in cabecalhos]
-                if len(nomes) != len(set(nomes)):
-                    raise ValueError("O arquivo contém nomes de coluna duplicados.")
-                linhas = [
-                    {
-                        (chave.strip() if chave else ""): valor
-                        for chave, valor in linha.items()
-                    }
-                    for linha in leitor
-                ]
+            tabela = pd.read_csv(
+                caminho,
+                sep=None,
+                engine="python",
+                header=None,
+                encoding="utf-8-sig",
+                dtype=object,
+                keep_default_na=False,
+            )
         elif caminho.suffix.casefold() == ".xlsx":
-            workbook = load_workbook(caminho, read_only=True, data_only=True)
-            try:
-                valores = workbook.active.iter_rows(values_only=True)
-                cabecalhos = next(valores, None)
-                if cabecalhos is None:
-                    raise ValueError("A planilha não contém cabeçalho.")
-                nomes = [
-                    str(valor).strip() if valor is not None else ""
-                    for valor in cabecalhos
-                ]
-                if len(nomes) != len(set(nomes)):
-                    raise ValueError("O arquivo contém nomes de coluna duplicados.")
-                linhas = [
-                    dict(zip(nomes, linha))
-                    for linha in valores
-                    if any(valor is not None for valor in linha)
-                ]
-            finally:
-                workbook.close()
+            tabela = pd.read_excel(
+                caminho, header=None, dtype=object, engine="calamine"
+            )
         else:
             raise ValueError("Formato não suportado. Use um arquivo .csv ou .xlsx.")
 
+        if tabela.empty:
+            raise ValueError(
+                "A planilha não contém cabeçalho."
+                if caminho.suffix.casefold() == ".xlsx"
+                else "O arquivo CSV não contém cabeçalho."
+            )
+        nomes = [
+            str(valor).strip() if pd.notna(valor) and str(valor).strip() else ""
+            for valor in tabela.iloc[0].tolist()
+        ]
+        if tabela.shape[1] > len(nomes):
+            nomes.extend([""] * (tabela.shape[1] - len(nomes)))
+        if len(nomes) != len(set(nomes)):
+            raise ValueError("O arquivo contém nomes de coluna duplicados.")
+        if "" in nomes:
+            raise ValueError("O arquivo contém coluna sem nome ou dados extras.")
+        dados = tabela.iloc[1:].copy()
+        dados.columns = nomes
+        dados = dados.replace(r"^\s*$", pd.NA, regex=True).dropna(how="all")
+        linhas = (
+            dados.astype(object).where(pd.notna(dados), None).to_dict(orient="records")
+        )
         if not linhas:
             raise ValueError("O arquivo não contém registros de agenda.")
-        colunas = set(linhas[0])
-        if "" in colunas or None in colunas:
-            raise ValueError("O arquivo contém coluna sem nome ou dados extras.")
+        colunas = set(nomes)
         faltantes = _OBRIGATORIAS - colunas
         if faltantes:
             raise ValueError(
@@ -180,6 +178,25 @@ class Parametros:
             except (TypeError, ValueError) as erro:
                 raise ValueError(f"Linha {numero}: {erro}") from erro
         return cls(registros)
+
+    def imprimir_parametros(self) -> None:
+        """Imprime os resultados estimados para a parametrização."""
+        dias = ("segunda", "terça", "quarta", "quinta", "sexta", "sábado", "domingo")
+        print("=== Resultados da parametrização ===")
+        print(f"Registros de agenda: {len(self.registros)}")
+        print("Distribuição de horários:")
+        for (dia, hora), probabilidade in sorted(self.distribuicao_horarios.items()):
+            print(f"  {dias[dia]} às {hora:02d}h: {probabilidade:.2%}")
+        print("Taxa média de agendamentos por hora:")
+        for hora, taxa in sorted(self.taxa_agendamentos_por_hora.items()):
+            print(f"  às {hora:02d}h: {taxa:.2f}")
+        print(f"Probabilidades por profissional: {self.probabilidades_profissionais}")
+        print(f"Probabilidades por suspeita: {self.probabilidades_suspeitas}")
+        print(f"Probabilidade de no-show: {self.probabilidade_no_show}")
+        print(
+            "Pacientes com múltiplos agendamentos: "
+            f"{self.pacientes_com_multiplos_agendamentos}"
+        )
 
     @staticmethod
     def _interpretar_linha(linha: dict[str, object]) -> RegistroAgenda:

@@ -101,12 +101,8 @@ class Simulador:
             minuto_agenda = parametros.minuto_inicio_simulacao + env.now
             hora_total = int(minuto_agenda // 60)
             proxima_hora = (hora_total + 1) * 60 - parametros.minuto_inicio_simulacao
-            dia = hora_total // 24
-            dia_semana = (parametros.dia_semana_inicial + dia) % 7
             hora = hora_total % 24
-            taxa_horaria = parametros.taxa_agendamentos_por_hora.get(
-                (dia_semana, hora), 0
-            )
+            taxa_horaria = parametros.taxa_agendamentos_por_hora.get(hora, 0)
             if taxa_horaria <= 0:
                 yield env.timeout(proxima_hora - env.now)
                 continue

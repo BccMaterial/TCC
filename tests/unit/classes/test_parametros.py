@@ -2,7 +2,7 @@ from datetime import datetime
 
 import pytest
 import simpy
-from openpyxl import Workbook
+import pandas as pd
 
 from classes import Equipe, Parametros, RegistroAgenda, Simulador
 from enums import Suspeita
@@ -61,13 +61,13 @@ def test_carregar_csv_estima_distribuicoes_e_exclui_pendentes_no_no_show(tmp_pat
     assert sum(parametros.distribuicao_horarios.values()) == pytest.approx(1)
     assert sum(parametros.probabilidades_profissionais.values()) == pytest.approx(1)
     assert sum(parametros.probabilidades_suspeitas.values()) == pytest.approx(1)
-    assert parametros.taxa_agendamentos_por_hora == {(0, 9): 2}
+    assert parametros.taxa_agendamentos_por_hora == {9: 2.0}
     assert parametros.registros[0].inicio.utcoffset().total_seconds() == -10800
 
 
-def test_taxa_horaria_considera_outras_datas_observadas_do_mesmo_dia():
+def test_taxa_horaria_considera_todas_as_datas_do_periodo():
     primeira = datetime.fromisoformat("2026-10-19T09:00:00-03:00")
-    segunda = datetime.fromisoformat("2026-10-26T10:00:00-03:00")
+    segunda = datetime.fromisoformat("2026-11-02T10:00:00-03:00")
     parametros = Parametros(
         [
             RegistroAgenda(
@@ -90,37 +90,61 @@ def test_taxa_horaria_considera_outras_datas_observadas_do_mesmo_dia():
     )
 
     assert sum(parametros.distribuicao_horarios.values()) == pytest.approx(1)
-    assert parametros.taxa_agendamentos_por_hora[(0, 9)] == 0.5
-    assert parametros.taxa_agendamentos_por_hora[(0, 10)] == 0.5
+    assert parametros.taxa_agendamentos_por_hora[9] == pytest.approx(1 / 15)
+    assert parametros.taxa_agendamentos_por_hora[10] == pytest.approx(1 / 15)
 
 
 def test_carregar_xlsx_sem_colunas_opcionais(tmp_path):
     arquivo = tmp_path / "agenda.xlsx"
-    workbook = Workbook()
-    planilha = workbook.active
     colunas = [
         nome
         for nome in CABECALHO
         if nome not in {"ID de Agendamento", "Nome do Paciente", "Nome do Profissional"}
     ]
-    planilha.append(colunas)
-    planilha.append(
+    pd.DataFrame(
         [
-            "p1",
-            "prof1",
-            "2026-10-19T09:00:00Z",
-            "2026-10-19T10:00:00Z",
-            "TDAH",
-            "Falta",
+            colunas,
+            [
+                "p1",
+                "prof1",
+                "2026-10-19T09:00:00Z",
+                "2026-10-19T10:00:00Z",
+                "TDAH",
+                "Falta",
+            ],
         ]
-    )
-    workbook.save(arquivo)
+    ).to_excel(arquivo, header=False, index=False, engine="xlsxwriter")
 
     parametros = Parametros.carregar(arquivo)
 
     assert parametros.registros[0].id_agendamento is None
     assert parametros.registros[0].suspeita is Suspeita.TDAH
     assert parametros.probabilidade_no_show == 1
+
+
+def test_imprimir_parametros_exibe_resultados(capsys):
+    data = datetime.fromisoformat("2026-10-19T09:00:00-03:00")
+    parametros = Parametros(
+        [
+            RegistroAgenda(
+                "p1",
+                "prof1",
+                data,
+                data.replace(hour=10),
+                Suspeita.AUTISMO,
+                "Concluída",
+            )
+        ]
+    )
+
+    parametros.imprimir_parametros()
+
+    saida = capsys.readouterr().out
+    assert "=== Resultados da parametrização ===" in saida
+    assert "às 09h: 1.00" in saida
+    assert parametros.probabilidades_profissionais == {"prof1": 1.0}
+    assert isinstance(parametros.probabilidades_profissionais, dict)
+    assert isinstance(parametros.taxa_agendamentos_por_hora[9], float)
 
 
 @pytest.mark.parametrize(

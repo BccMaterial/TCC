@@ -7,6 +7,7 @@ from classes import Equipe, Parametros, Simulador
 if __name__ == "__main__":
     arquivo_agenda = Path(__file__).parent.parent / "data" / "teste.csv"
     parametros = Parametros.carregar(arquivo_agenda)
+    parametros.imprimir_parametros()
     ids_profissionais = list(parametros.probabilidades_profissionais)
     nomes_profissionais = [
         parametros.nomes_profissionais.get(id_profissional, id_profissional)
