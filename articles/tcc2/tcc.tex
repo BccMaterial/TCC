@@ -356,7 +356,48 @@ Os critérios de avaliação estão ligados com a capacidade do modelo de repres
 Detalhe etapas da metodologia em ordem cronológica. Use listas numeradas, diagramas de fluxo ou pseudocódigo para tornar o processo claro.
 
 \section{Ferramentas, tecnologias e ambientes}
-Liste softwares, linguagens, bibliotecas, frameworks e ambientes (laboratórios, nuvem, simulação) que serão usados. Justifique a escolha com base no problema e nas métricas.
+
+% Liste softwares, linguagens, bibliotecas, frameworks e ambientes (laboratórios, nuvem, simulação) que serão usados. Justifique a escolha com base no problema e nas métricas.
+
+Para o desenvolvimento do trabalho, utilizamos as seguintes ferramentas separadas por categoria:
+\begin{itemize}
+		\item \textbf{Linguagem de programação:} Python 3.13 ou superior, devido à sua ampla gama de bibliotecas voltadas para análise estatística, manipulação de dados e simulação de processos.
+		\item \textbf{Bibliotecas:} Foram utilizadas tanto bibliotecas para a implementação da simulação e transformação de dados, quanto para validações de formatação de código, testes automatizados e padronização de mensagens de \textit{commit} no controle de versão, como:
+		\begin{itemize}
+			\item \textbf{Pandas:} utilizado para manipulação, análise e importação de dados, permitindo a organização e tratamento eficiente das informações coletadas. Com o Pandas, foi possível extrair diversos parâmetros para a simulação com base em uma planilha fornecida;
+			\item \textbf{SimPy:} para simulação de eventos discretos, possibilitando a representação de filas, recursos e eventos ao longo do tempo. Com isso, é possível extrair métricas relevantes para a alteração de cenários;
+			\item \textbf{Taskipy:} utilizado para definir comandos frequentemente usados, como a execução do simulador, dos testes automatizados, e da verificação da formatação do código;
+			\item \textbf{Pytest:} Ferramenta de desenvolvimento de testes automatizados. Foram desenvolvidos tanto testes unitários, que validam as funções do código, quanto testes de confiabilidade, que validam os resultados da simulação em relação ao cenário real. Foi utilizado para garantir que as simulações tragam resultados corretos, e que as funções em todo o código estejam retornando resultados esperados e previsíveis;
+			\item \textbf{Black:} Formatador e validador de formatação do código, que auxilia na leitura do código-fonte do projeto, mantendo uma padronização;
+			\item \textbf{Commitizen}: Formatador e validador das mensagens de \textit{commit}, utilizado para manter um padrão das mensagens.
+		\end{itemize}
+		\item \textbf{Controle de versão:} Para o controle de versão, foi utilizado o git, que permite manter um histórico baseado em \textit{commits} (Registro de uma alteração realizada no projeto), além de possuir recursos que permitem a sincronização entre ambientes locais e remotos;
+		\item \textbf{Automações de validação:} Foi utilizado o \textit{Github Actions} para validar os registros de alteração realizados no projeto, com o objetivo de validar toda alteração proposta através de \textit{Pull Requests}. A automação valida: Resultado dos testes automatizados, checagem de formatação de código com o \textit{black}, e checagem das mensagens de \textit{commit} com o \textit{commitizen};
+		\item \textbf{Gerenciador de dependências:} Para gerenciar a declaração e as versões das dependências, foi utilizado o Poetry, permitindo que as dependências do projeto seja instalado a partir do comando \texttt{poetry install}.
+\end{itemize}
+
+Não foi utilizado nenhuma biblioteca que dependa de rede ou computação em nuvem, com isso, o trabalho pode ser executado em qualquer computador com Python instalado na versão 3.13 ou superior, juntamente com as dependências do projeto. Assim, a execução do simulador não tem a necessidade de conexão com a internet.
+
+Com isso, o principal insumo externo do trabalho trata-se dos parâmetros fornecidos, que consiste em:
+\begin{itemize}
+	\item \textbf{Planilha de dados:} Lista de agendamentos dos exames de pacientes, contendo as seguintes colunas:
+	\begin{itemize}
+		\item \textbf{ID do Paciente:} identificador único do paciente;
+		\item \textbf{ID do Profissional:} identificador único do profissional;
+		\item \textbf{Início da agenda:} data e horário de início do exame, em formato \textit{ISO 8601} com fuso horário;
+		\item \textbf{Fim da agenda:} data e horário do fim do exame, em formato \textit{ISO 8601} com fuso horário;
+		\item \textbf{Suspeita do paciente:} qual diagnóstico o paciente busca, como autismo, TDAH, entre outros;
+		\item \textbf{Status da agenda:} como está a situação da agenda. Os possíveis valores são: Pendente (Ainda não aconteceu a agenda), Falta (O paciente não compareceu), Concluída (O paciente compareceu na agenda);
+		\item \textbf{ID de Agendamento (Opcional):} identificador da agenda apresentada
+		\item \textbf{Nome do paciente (Opcional):} nome do paciente que participará da agenda. É utilizado apenas como nome de exibição, mas não é relevante para a simulação
+		\item \textbf{Nome do profissional (Opcional):} nome do profissional que atenderá o paciente. É utilizado apenas como nome de exibição, mas não é relevante para a simulação;
+	\end{itemize}	
+	\item \textbf{Recursos e restrições:} parâmetros que podem ser inseridos para o simulador considerar, no lugar do que foi inserido na planilha, como:
+	\begin{itemize}
+		\item \textbf{Quantidade de profissionais:} o usuário pode simular com N profissionais, ao invés da quantidade apresentada na planilha.
+		\item \textbf{Mínimo de exames por suspeita:} pode ser inserido nas parametrizações a quantidade mínima de exames para se obter um diagnóstico para determinada suspeita, e uma quantidade mínima padrão, que independe da suspeita.
+	\end{itemize}
+\end{itemize}
 
 \section{Procedimentos experimentais e métricas}
 Explique como os experimentos serão configurados, quais variáveis serão controladas e quais métricas demonstram que a proposta cumpre os objetivos (ex.: acurácia, latência, custo). Inclua tabelas que antecipem o plano de coleta, por exemplo:
