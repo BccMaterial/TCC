@@ -50,6 +50,38 @@ Atualmente, temos os seguintes scripts no `taskipy`:
 - `./articles`: Contém os artigos em LaTeX, incluindo o TCC
 - `./docs`: Rascunhos, documentações, orientações e anotações do projeto
 
+## Parametrização por agenda histórica
+
+`Parametros.carregar(caminho)` importa CSV (UTF-8) ou XLSX com uma linha por agendamento.
+Os campos obrigatórios são `ID do Paciente`, `ID do Profissional`, `Início da agenda`,
+`Fim da agenda`, `Suspeita do paciente` e `Status da agenda`. `ID de Agendamento`,
+`Nome do Paciente` e `Nome do Profissional` são opcionais. Os timestamps precisam ser
+texto ISO 8601 com fuso horário. A suspeita deve corresponder a um valor de `Suspeita`
+(atualmente `Autismo` ou `TDAH`); status aceitos: `Pendente`, `Falta` e `Concluída`.
+
+```python
+import simpy
+from classes import Equipe, Parametros, Simulador
+
+parametros = Parametros.carregar("agenda.xlsx")
+ids = list(parametros.probabilidades_profissionais)
+nomes = [parametros.nomes_profissionais.get(id_profissional) for id_profissional in ids]
+equipe = Equipe(simpy.Environment(), ids=ids, nomes=nomes)
+simulador = Simulador(equipe, parametros=parametros)
+simulador.iniciar(duracao=480)
+```
+
+A taxa por faixa de dia da semana/horário é calculada sobre datas observadas com pelo
+menos um agendamento naquele dia da semana. Se o arquivo omitir dias sem agenda, essa
+taxa é condicional e pode superestimar a demanda; a cobertura temporal do arquivo deve
+ser conhecida para interpretar o resultado. O no-show é estimado como `Falta / (Falta +
+Concluída)`, excluindo `Pendente`. A duração do atendimento continua sendo hipótese
+configurável (`tempo_avaliacao`), pois os horários de agenda não provam o tempo efetivo
+de consulta. Os registros calibram a geração estocástica; não são reproduzidos como
+eventos exatos. A simulação começa na primeira faixa de horário encontrada no arquivo,
+em vez da meia-noite, de modo que durações como 480 minutos representem um dia útil
+iniciado no horário de atendimento observado.
+
 # TODOs
 
 1. Implementação da Lógica de Triagem:

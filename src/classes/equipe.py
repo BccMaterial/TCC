@@ -17,9 +17,10 @@ class Equipe:
         env: simpy.Environment,
         quantidade: int | None = None,
         nomes: list[str] | None = None,
+        ids: list[str] | None = None,
     ) -> None:
         if quantidade is None:
-            quantidade = len(nomes) if nomes else 0
+            quantidade = len(nomes) if nomes else len(ids) if ids else 0
 
         if quantidade < 1:
             raise ValueError(
@@ -29,12 +30,19 @@ class Equipe:
             raise ValueError(
                 "A quantidade de nomes deve ser igual à quantidade de profissionais."
             )
+        if ids and len(ids) != quantidade:
+            raise ValueError(
+                "A quantidade de IDs deve ser igual à quantidade de profissionais."
+            )
+        if ids and len(set(ids)) != len(ids):
+            raise ValueError("Os IDs dos profissionais devem ser únicos.")
 
         self.env = env
         self.profissionais = [
             Profissional(
                 env,
                 nome=nomes[indice] if nomes else None,
+                id_profissional=ids[indice] if ids else None,
             )
             for indice in range(quantidade)
         ]
