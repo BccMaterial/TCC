@@ -98,7 +98,7 @@ This document follows the TCC structure proposed by Wazlawick for Computer Scien
 % ---------------------------------------------------------------
 \chapter{Introdução}
 
-Este trabalho tem como tema a otimização do tempo no processo de diagnóstico neuropsicológico, considerando que o mesmo parte de uma suspeita inicial, passa pela procura de um profissional especializado e termina com a devolução de um diagnóstico completo. Esse processo, devido a sua natureza extensa e composição de múltiplas etapas, pode conter longos períodos de espera, ainda mais em um cenário de alta demanda e com um número limitado de profissionais na área. Ademais, um reconhecimento crescente na importância da avaliação neuropsicológica contribui para o aumento da procura por essa categoria de atendimento.
+Este trabalho tem como tema a otimização do tempo total da entrega do diagnóstico psicológico, considerando que o mesmo parte de uma suspeita inicial, passa pela busca de um profissional especializado, e finaliza com a devolução do diagnóstico. Esse processo é denominado de avaliação neuropsicológica, e consiste em uma investigação estruturada a partir de uma bateria de testes e entrevistas em múltiplas etapas extensas para confirmar ou refutar a suspeita inicial, no qual é feito em uma clinica especializada que possui um fluxo de pacientes.
 
 \section{Contextualização do problema}
 
@@ -112,9 +112,9 @@ No presente momento de desenvolvimento deste trabalho, observa-se uma grande pro
 	\legend{Fonte: \citeonline{Mab2026}}
 \end{figure}
 
-Contudo, quando uma pessoa busca por esse tipo de avaliação, ela constantemente se depara com longas filas de espera, um processo que excede o tempo esperado e até um intervalo maior que um ano desde a suspeita inicial até a devolução do diagnóstico. O período de espera até a conclusão do processo é um problema sério e relevante, já que ele atrasa intervenções, tratamentos, adaptações escolares, acadêmicas, profissionais e sociais.
+Contudo, quando uma pessoa busca por esse tipo de avaliação, ela constantemente se depara com longas filas de espera, um processo que excede o tempo esperado e até um intervalo maior que um ano desde a suspeita inicial até a devolução do diagnóstico. O período de espera até a conclusão do processo é um problema sério e relevante, já que pode atrasar intervenções, tratamentos, adaptações escolares, acadêmicas, profissionais e sociais.
 
-Ademais, a falta de uma organização clara e processos bem definidos pode tornar o diagnóstico mais vulnerável a atrasos em múltiplas etapas. Considerando esse cenário, a computação tem uma contribuição significativa na análise, modelagem e melhoria do processo, tornando possível a identificação de gargalos, a simulação de cenários e a proposição de estratégias adequadas para tornar o fluxo de atendimento mais eficiente.
+Ademais, a falta de uma organização clara e processos bem definidos pode tornar o diagnóstico mais vulnerável a atrasos em múltiplas etapas. Considerando esse cenário, a computação pode ter uma contribuição significativa na análise, na modelagem e na melhoria do processo, tornando possível a identificação de gargalos a partir de insumos e métricas gerados pela simulação de cenários, que podem auxiliar na proposição de estratégias adequadas para tornar o fluxo de atendimento mais eficiente.
 
 \section{Formulação do problema}
 Coloque o problema em forma de pergunta clara, delimitando o que será investigado e qual resultado se espera atingir dentro da Computação.
@@ -126,7 +126,7 @@ Separamos os objetivos entre objetivo geral, no qual é a meta a ser atingida po
 \subsection{Objetivo geral}
 % Declare o propósito principal do TCC2 em uma frase direta, conectando-o ao problema e deixando claro se o foco é compreender, comparar, validar ou propor algo novo.
 
-O objetivo deste trabalho é demonstrar que um modelo estatístico desenvolvido com conceitos de pesquisa operacional, simulação de eventos discretos e teoria das filas pode reduzir o tempo necessário para a devolução de um diagnóstico no processo de avaliação neuropsicológica, considerando que o processo incorpora desde a primeira consulta até o retorno com o resultado dos exames.
+O objetivo deste trabalho é demonstrar que, através do uso de simulação de eventos discretos com base nos conceitos de pesquisa operacional e teoria das filas, pode-se reduzir o tempo total de espera do diagnóstico do paciente dentro do processo de avaliação neuropsicológica, considerando que o mesmo incorpora desde a primeira consulta, até o retorno com o resultado do diagnóstico.
 
 \subsection{Objetivos específicos}
 % Liste objetivos mensuráveis que estruturam o plano de trabalho. Tente utilizar verbos como revisar, comparar, modelar, quantificar ou validar. Exemplos:
@@ -137,16 +137,24 @@ O objetivo deste trabalho é demonstrar que um modelo estatístico desenvolvido 
 %     \item Avaliar o desempenho por métricas (ex.: acurácia, latência).
 % \end{itemize}
 
-Para o desenvolvimento do projeto, é necessário completar os seguintes objetivos específicos: mapeamento da linha de processos no diagnóstico, construção de um modelo de processos, realização de simulações com o modelo criado e o desenvolvimento de um algoritmo de otimização que proponha melhorias redutoras de gargalo. 
 
-O mapeamento torna possível a compreensão do funcionamento do processo, tornando viável o reconhecimento de pontos críticos, atrasos e falhas capazes de comprometer o tempo de diagnóstico. Essa análise torna plausível a identificação do momento onde ocorre o principal gargalo do sistema, ou seja, a sessão do processo onde existe o maior tempo de espera. Este gargalo pode estar presente em diversos momentos do processo, como na fila de espera para o atendimento inicial, no intervalo entre a realização dos exames e a devolução do diagnóstico ou em outras fases intermediárias. 
+Para o desenvolvimento do projeto, é necessário completar os seguintes objetivos específicos:
+\begin{itemize}
+		\item Mapeamento da linha de processos realizados na avaliação;
+		\item Construção de um modelo de processos;
+		\item Desenvolvimento de um simulador capaz de reproduzir os processos;
+		\item Realização de simulações com o modelo criado, com o intuito de reproduzir diversos cenários e obter suas métricas;
+		\item Análise dos resultados obtidos através das simulações, observando quais parâmetros possui maior impacto positivo com base nas métricas retiradas.
+\end{itemize}
 
-Com isso, será construído um modelo de processos capaz de representar o funcionamento dos mesmos. Esse modelos será capaz de testar múltiplos cenários, tornando possível a avaliação de como mudanças na organização do atendimento, na distribuição de recursos ou no fluxo de pacientes podem impactar o tempo de espera de devoluções. Depois da criação do modelo, simulações serão realizadas com o intuito de observar como o processo se comporta em diferentes condições para comparar cenários e identificar alternativas mais eficientes. Por último, em função dos resultados obtidos nas simulações, será desenvolvido um algoritmo de otimização com a finalidade de propor melhorias capazes de reduzir gargalos e tornar o processo de diagnóstico mais rápido.
+O mapeamento torna possível a compreensão do funcionamento do processo, tornando viável o reconhecimento de pontos críticos, atrasos e falhas capazes de comprometer o tempo de diagnóstico. Essa análise torna plausível a identificação do principal fator que impacta os cenários, ou seja, o parâmetro do processo no qual resulta maior diferença no tempo de espera. Este tempo de espera pode estar presente em diversos momentos do processo, como na fila para o atendimento inicial, no intervalo entre a realização dos exames e na devolução do diagnóstico ou em outras fases intermediárias. 
+
+Com isso, será construído um modelo de processos capaz de representar o funcionamento do mesmo. Esse modelo será capaz de testar múltiplos cenários, tornando possível a avaliação de como mudanças na distribuição de recursos ou no fluxo de pacientes podem impactar o tempo de espera dos diagnósticos. Após a criação do modelo e do desenvolvimento do simulador, serão realizadas simulações com o intuito de observar como o modelo se comporta em diferentes condições. Por último, em função dos resultados obtidos nas simulações, será analisado quais parâmetros mais impactaram de forma positiva o cenário simulado.
 
 \subsection{Hipótese ou critério de validação}
 % Descreva a hipótese que será testada ou o critério usado para afirmar que o objetivo geral foi atingido. Caso não haja hipótese formal, explique como as métricas escolhidas demonstrarão o sucesso esperado.
 
-Existe um gargalo no fluxo da análise neuropsicológica responsável por afetar a eficiência temporal e o tempo final do diagnóstico. Ao identificar e otimizar esse gargalo, espera-se reduzir o tempo mínimo de diagnóstico, melhorando a experiência do paciente e facilitando o processo.
+Através das simulações e das métricas retornadas, será identificado qual ou quais são os principais ofensores na eficiência do processo de avaliação neuropsicológica em uma clínica especializada. Espera-se que ao ajustar um ou mais parâmetros, seja possível reduzir o tempo de espera total dos pacientes, além de trazer insumos tanto sobre o cenário real quanto sobre o cenário simulado, de forma que seja possível trazer benefícios à clínica que deseja simular o seu próprio funcionamento.
 
 \section{Justificativa}
 % Ressalte a importância do problema para a Computação, destacando contribuições acadêmicas, sociais ou industriais. Explique como a proposta evita se tornar um “manual de ferramenta”.
