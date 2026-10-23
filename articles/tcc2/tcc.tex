@@ -138,18 +138,18 @@ Analisar quais fatores podem impactar negativamente ou positivamente na reduçã
 % \end{itemize}
 
 
-Para o desenvolvimento do projeto, é necessário completar os seguintes objetivos específicos:
+Para o atingir o objetivo geral, serão realizadas as seguintes etapas:
 \begin{itemize}
 		\item Mapeamento da linha de processos realizados na avaliação;
 		\item Construção de um modelo de processos;
 		\item Desenvolvimento de um simulador capaz de reproduzir os processos;
 		\item Realização de simulações com o modelo criado, com o intuito de reproduzir diversos cenários e obter suas métricas;
-		\item Análise dos resultados obtidos através das simulações, observando quais parâmetros possui maior impacto positivo com base nas métricas retiradas.
+		\item Análise dos resultados obtidos através das simulações, observando quais parâmetros possui maior impacto positivo ou negativo com base nas métricas retiradas.
 \end{itemize}
 
-O mapeamento torna possível a compreensão do funcionamento do processo, tornando viável o reconhecimento de pontos críticos, atrasos e falhas capazes de comprometer o tempo de diagnóstico. Essa análise torna plausível a identificação do principal fator que impacta os cenários, ou seja, o parâmetro do processo no qual resulta maior diferença no tempo de espera. Este tempo de espera pode estar presente em diversos momentos do processo, como na fila para o atendimento inicial, no intervalo entre a realização dos exames e na devolução do diagnóstico ou em outras fases intermediárias. 
+O mapeamento auxilia a compreensão do funcionamento do processo, tornando viável o reconhecimento de pontos críticos, que podem causar atrasos e falhas capazes de comprometer o tempo de diagnóstico. Essa análise torna plausível a identificação de possíveis fatores que impactam os cenários, ou seja, quais parâmetros podem ser prováveis ofensores para o processo. Além disso, este tempo de espera pode estar presente em diversos momentos do processo, como na fila para o atendimento inicial, no intervalo entre a realização dos exames, na devolução do diagnóstico ou em outras fases intermediárias. Embora o mapeamento permita a identificação das etapas críticas, ele não é suficiente para estimar o impacto de alterações nos recursos, como o aumento de número de profissionais.
 
-Com isso, será construído um modelo de processos capaz de representar o funcionamento do mesmo. Esse modelo será capaz de testar múltiplos cenários, tornando possível a avaliação de como mudanças na distribuição de recursos ou no fluxo de pacientes podem impactar o tempo de espera dos diagnósticos. Após a criação do modelo e do desenvolvimento do simulador, serão realizadas simulações com o intuito de observar como o modelo se comporta em diferentes condições. Por último, em função dos resultados obtidos nas simulações, será analisado quais parâmetros mais impactaram de forma positiva o cenário simulado.
+Com isso, será construído um modelo de processos capaz de representar o funcionamento do mesmo. Esse modelo deve ser capaz de testar múltiplos cenários, tornando possível a avaliação de como mudanças na distribuição de recursos ou no fluxo de pacientes podem impactar o tempo de espera dos diagnósticos. Após a criação do modelo e do desenvolvimento do simulador, serão realizadas simulações com o intuito de observar como o modelo se comporta em diferentes condições. Por último, em função dos resultados obtidos nas simulações, será analisado quais parâmetros mais impactaram de forma positiva o cenário simulado.
 
 \subsection{Hipótese ou critério de validação}
 % Descreva a hipótese que será testada ou o critério usado para afirmar que o objetivo geral foi atingido. Caso não haja hipótese formal, explique como as métricas escolhidas demonstrarão o sucesso esperado.
