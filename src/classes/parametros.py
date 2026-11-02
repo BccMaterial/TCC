@@ -42,6 +42,17 @@ class RegistroAgenda:
 class Parametros:
     """Importa agenda CSV/XLSX e estima distribuições para a simulação."""
 
+    registros: tuple[RegistroAgenda, ...]
+    distribuicao_horarios: dict[FaixaHorario, float]
+    taxa_agendamentos_por_hora: dict[int, float]
+    probabilidades_profissionais: dict[str, float]
+    probabilidades_suspeitas: dict[Suspeita, float]
+    nomes_profissionais: dict[str, str]
+    probabilidade_no_show: float | None
+    pacientes_com_multiplos_agendamentos: int
+    dia_semana_inicial: int
+    minuto_inicio_simulacao: int
+
     def __init__(self, registros: list[RegistroAgenda]) -> None:
         if not registros:
             raise ValueError("O arquivo não contém registros de agenda.")

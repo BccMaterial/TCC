@@ -13,6 +13,13 @@ from .parametros import Parametros
 class Simulador:
     """Executa e apresenta os resultados de uma simulação de atendimentos."""
 
+    equipe: Equipe
+    pacientes: list[Paciente]
+    parametros: Parametros | None
+    tempo_avaliacao: tuple[float, float]
+    agendamentos_simulados: int
+    nao_compareceram: int
+
     def __init__(
         self,
         equipe: Equipe,
@@ -26,12 +33,14 @@ class Simulador:
             or tempo_avaliacao[1] < tempo_avaliacao[0]
         ):
             raise ValueError("Informe um intervalo válido para a duração da avaliação.")
+
         self.equipe = equipe
         self.pacientes = pacientes if pacientes is not None else []
         self.parametros = parametros
         self.tempo_avaliacao = tempo_avaliacao
         self.agendamentos_simulados = 0
         self.nao_compareceram = 0
+
         if parametros is not None:
             if parametros.probabilidade_no_show is None:
                 raise ValueError(
