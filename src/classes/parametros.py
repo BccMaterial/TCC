@@ -47,6 +47,7 @@ class Parametros:
     taxa_agendamentos_por_hora: dict[int, float]
     probabilidades_profissionais: dict[str, float]
     probabilidades_suspeitas: dict[Suspeita, float]
+    distribuicao_quantidade_avaliacoes: dict[int, float]
     nomes_profissionais: dict[str, str]
     probabilidade_no_show: float | None
     pacientes_com_multiplos_agendamentos: int
@@ -94,6 +95,17 @@ class Parametros:
             suspeita: float(probabilidade)
             for suspeita, probabilidade in dados["suspeita"]
             .value_counts(normalize=True)
+            .items()
+        }
+        avaliacoes_por_paciente = (
+            dados.loc[dados["status"] == "Concluída"].groupby("paciente").size()
+        )
+        self.distribuicao_quantidade_avaliacoes: dict[int, float] = {
+            int(quantidade): float(probabilidade)
+            for quantidade, probabilidade in avaliacoes_por_paciente.value_counts(
+                normalize=True
+            )
+            .sort_index()
             .items()
         }
         nomes = pd.Series(
@@ -203,6 +215,12 @@ class Parametros:
             print(f"  às {hora:02d}h: {taxa:.2f}")
         print(f"Probabilidades por profissional: {self.probabilidades_profissionais}")
         print(f"Probabilidades por suspeita: {self.probabilidades_suspeitas}")
+        print("Distribuição da quantidade de exames concluídos por paciente:")
+        for quantidade, probabilidade in sorted(
+            self.distribuicao_quantidade_avaliacoes.items()
+        ):
+            exame = "exame" if quantidade == 1 else "exames"
+            print(f"  {quantidade} {exame}: {probabilidade:.2%} dos pacientes")
         print(f"Probabilidade de no-show: {self.probabilidade_no_show}")
         print(
             "Pacientes com múltiplos agendamentos: "
