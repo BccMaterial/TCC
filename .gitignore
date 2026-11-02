@@ -36,7 +36,7 @@ __pycache__
 
 # Pasta de arquivos locais (PDFs, livros, materiais de apoio)
 arquivos/
+output/
 
 # Configurações do Claude Code
 .claude/
-

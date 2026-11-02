@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import pytest
 import simpy
@@ -92,6 +92,33 @@ def test_taxa_horaria_considera_todas_as_datas_do_periodo():
     assert sum(parametros.distribuicao_horarios.values()) == pytest.approx(1)
     assert parametros.taxa_agendamentos_por_hora[9] == pytest.approx(1 / 15)
     assert parametros.taxa_agendamentos_por_hora[10] == pytest.approx(1 / 15)
+
+
+def test_distribuicao_de_exames_concluidos_por_paciente():
+    data = datetime.fromisoformat("2026-10-19T09:00:00-03:00")
+    registros = []
+    for paciente, quantidade, status in [
+        ("p1", 4, "Concluída"),
+        ("p2", 5, "Concluída"),
+        ("p3", 3, "Pendente"),
+        ("p4", 2, "Falta"),
+    ]:
+        for _ in range(quantidade):
+            inicio = data + timedelta(minutes=len(registros))
+            registros.append(
+                RegistroAgenda(
+                    paciente,
+                    "prof1",
+                    inicio,
+                    inicio + timedelta(minutes=30),
+                    Suspeita.AUTISMO,
+                    status,
+                )
+            )
+
+    parametros = Parametros(registros)
+
+    assert parametros.distribuicao_quantidade_avaliacoes == {4: 0.5, 5: 0.5}
 
 
 def test_carregar_xlsx_sem_colunas_opcionais(tmp_path):

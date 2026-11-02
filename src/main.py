@@ -22,3 +22,5 @@ if __name__ == "__main__":
     simulador = Simulador(equipe, parametros=parametros)
     simulador.iniciar(duracao=480)
     simulador.resumo()
+    arquivo_exportado = simulador.exportar()
+    print(f"\nResultados exportados para: {arquivo_exportado}")

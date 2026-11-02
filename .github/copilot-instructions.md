@@ -40,6 +40,10 @@ poetry run pytest tests/unit/classes/test_equipe.py::test_when_requesting_and_re
 
 Use Conventional Commit-style prefixes followed by a concise description, for example `feat: add patient triage`, `test: cover team release`, `fix: correct class imports`, or `ci: configure package mode`. Keep the subject focused on the change.
 
+## Branch names
+
+Branch names do not need category prefixes such as `feat/`, `fix/`, or `refactor/`. Use a concise, descriptive name for the work.
+
 ## CI and Commitizen
 
 The pull-request workflow uses Python 3.14 and runs the test and Black checks; its Commitizen Conventional Commit check is advisory (`continue-on-error: true`). `poetry run task commit` starts the interactive Commitizen commit flow.
