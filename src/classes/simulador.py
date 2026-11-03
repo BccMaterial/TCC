@@ -57,6 +57,11 @@ class Simulador:
 
     def iniciar(self, duracao: float = 480) -> None:
         """Inicia a chegada de pacientes e executa a simulação."""
+        if self.parametros is not None:
+            duracao = self.parametros.duracao_simulacao
+        if duracao <= 0:
+            raise ValueError("A duração da simulação deve ser maior que zero.")
+
         self.equipe.monitorar(intervalo=1)
         processo = (
             self._chegada_parametrizada()

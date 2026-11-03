@@ -20,7 +20,7 @@ if __name__ == "__main__":
         ids=ids_profissionais,
     )
     simulador = Simulador(equipe, parametros=parametros)
-    simulador.iniciar(duracao=480)
+    simulador.iniciar()
     simulador.resumo()
     arquivo_exportado = simulador.exportar()
     print(f"\nResultados exportados para: {arquivo_exportado}")

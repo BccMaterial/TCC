@@ -90,6 +90,7 @@ def test_taxa_horaria_considera_todas_as_datas_do_periodo():
     )
 
     assert sum(parametros.distribuicao_horarios.values()) == pytest.approx(1)
+    assert parametros.duracao_simulacao == 14 * 24 * 60
     assert parametros.taxa_agendamentos_por_hora[9] == pytest.approx(1 / 15)
     assert parametros.taxa_agendamentos_por_hora[10] == pytest.approx(1 / 15)
 
@@ -224,10 +225,11 @@ def test_simulador_parametrizado_gera_agendamentos(monkeypatch):
     env = simpy.Environment()
     equipe = Equipe(env, ids=["prof1"])
     simulador = Simulador(equipe, parametros=parametros, tempo_avaliacao=(30, 30))
+    parametros.duracao_simulacao = 61
     monkeypatch.setattr("classes.simulador.random.expovariate", lambda _: 30)
     monkeypatch.setattr("classes.simulador.random.random", lambda: 0)
 
-    simulador.iniciar(duracao=61)
+    simulador.iniciar()
 
     assert simulador.agendamentos_simulados == 1
     assert simulador.nao_compareceram == 0
@@ -252,10 +254,11 @@ def test_simulador_parametrizado_aplica_no_show(monkeypatch):
     env = simpy.Environment()
     equipe = Equipe(env, ids=["prof1"])
     simulador = Simulador(equipe, parametros=parametros)
+    parametros.duracao_simulacao = 61
     monkeypatch.setattr("classes.simulador.random.expovariate", lambda _: 30)
     monkeypatch.setattr("classes.simulador.random.random", lambda: 0)
 
-    simulador.iniciar(duracao=61)
+    simulador.iniciar()
 
     assert simulador.agendamentos_simulados == 1
     assert simulador.nao_compareceram == 1
