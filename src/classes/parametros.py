@@ -7,6 +7,8 @@ import pandas as pd
 
 from enums import Suspeita
 
+from .horario_trabalho import HorarioTrabalho
+
 FaixaHorario = tuple[int, int]
 
 _OBRIGATORIAS = {
@@ -78,12 +80,17 @@ class Parametros:
             for (dia, hora), quantidade in por_faixa.items()
         }
 
-        datas = pd.date_range(
-            start=dados["data"].min(), end=dados["data"].max(), freq="D"
+        dias_uteis = pd.date_range(
+            start=dados["data"].min(), end=dados["data"].max(), freq="B"
         )
-        por_hora = dados.groupby("hora").size()
+        agendas_no_expediente = dados.loc[
+            (dados["dia_semana"] < 5)
+            & (dados["hora"] >= HorarioTrabalho.INICIO_EXPEDIENTE // 60)
+            & (dados["hora"] < HorarioTrabalho.FIM_EXPEDIENTE // 60)
+        ]
+        por_hora = agendas_no_expediente.groupby("hora").size()
         self.taxa_agendamentos_por_hora: dict[int, float] = {
-            int(hora): float(quantidade / len(datas))
+            int(hora): float(quantidade / len(dias_uteis))
             for hora, quantidade in por_hora.items()
         }
         self.probabilidades_profissionais: dict[str, float] = {
