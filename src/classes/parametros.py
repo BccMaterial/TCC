@@ -7,6 +7,8 @@ import pandas as pd
 
 from enums import Suspeita
 
+from .horario_trabalho import HorarioTrabalho
+
 FaixaHorario = tuple[int, int]
 
 _OBRIGATORIAS = {
@@ -53,6 +55,7 @@ class Parametros:
     pacientes_com_multiplos_agendamentos: int
     dia_semana_inicial: int
     minuto_inicio_simulacao: int
+    duracao_simulacao: int
 
     def __init__(self, registros: list[RegistroAgenda]) -> None:
         if not registros:
@@ -77,12 +80,17 @@ class Parametros:
             for (dia, hora), quantidade in por_faixa.items()
         }
 
-        datas = pd.date_range(
-            start=dados["data"].min(), end=dados["data"].max(), freq="D"
+        dias_uteis = pd.date_range(
+            start=dados["data"].min(), end=dados["data"].max(), freq="B"
         )
-        por_hora = dados.groupby("hora").size()
+        agendas_no_expediente = dados.loc[
+            (dados["dia_semana"] < 5)
+            & (dados["hora"] >= HorarioTrabalho.INICIO_EXPEDIENTE // 60)
+            & (dados["hora"] < HorarioTrabalho.FIM_EXPEDIENTE // 60)
+        ]
+        por_hora = agendas_no_expediente.groupby("hora").size()
         self.taxa_agendamentos_por_hora: dict[int, float] = {
-            int(hora): float(quantidade / len(datas))
+            int(hora): float(quantidade / len(dias_uteis))
             for hora, quantidade in por_hora.items()
         }
         self.probabilidades_profissionais: dict[str, float] = {
@@ -133,6 +141,8 @@ class Parametros:
         )
         primeiro_dia = dados["data"].min()
         self.dia_semana_inicial = primeiro_dia.weekday()
+        ultimo_dia = dados["data"].max()
+        self.duracao_simulacao = (ultimo_dia - primeiro_dia).days * 24 * 60
         self.minuto_inicio_simulacao = min(
             registro.inicio.hour * 60 + registro.inicio.minute for registro in registros
         )
@@ -207,6 +217,11 @@ class Parametros:
         dias = ("segunda", "terça", "quarta", "quinta", "sexta", "sábado", "domingo")
         print("=== Resultados da parametrização ===")
         print(f"Registros de agenda: {len(self.registros)}")
+        print(
+            "Duração da simulação: "
+            f"{self.duracao_simulacao // (24 * 60)} dias "
+            f"({self.duracao_simulacao} minutos)"
+        )
         print("Distribuição de horários:")
         for (dia, hora), probabilidade in sorted(self.distribuicao_horarios.items()):
             print(f"  {dias[dia]} às {hora:02d}h: {probabilidade:.2%}")

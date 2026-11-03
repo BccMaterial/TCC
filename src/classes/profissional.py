@@ -3,6 +3,8 @@ from collections.abc import Generator
 
 import simpy
 
+from .horario_trabalho import HorarioTrabalho
+
 
 class Profissional:
     """
@@ -41,19 +43,21 @@ class Profissional:
         self.nome: str = nome or f"Profissional {str(self.id)[:8]}"
         self.env: simpy.Environment = env
         self.resource: simpy.Resource = simpy.Resource(env, capacity=1)
+        self.horario_trabalho = HorarioTrabalho()
 
         self.num_pacientes_atendidos: int = 0
         self.tempo_total_atendimento: float = 0.0
+        self.em_atendimento = False
         self._amostras: list[tuple[float, int]] = []
 
     def request(self) -> simpy.Request:
         """Solicita o recurso do profissional (usado com `with`)."""
         return self.resource.request()
 
-    def registrar_atendimento(self, inicio: float, fim: float) -> None:
-        """Registra a duração de um atendimento concluído entre `inicio` e `fim`."""
+    def registrar_atendimento(self, duracao: float) -> None:
+        """Registra o tempo efetivamente trabalhado em um atendimento concluído."""
         self.num_pacientes_atendidos += 1
-        self.tempo_total_atendimento += fim - inicio
+        self.tempo_total_atendimento += duracao
 
     def monitorar(self, intervalo: float = 1.0) -> Generator[simpy.Event, None, None]:
         """
@@ -63,7 +67,7 @@ class Profissional:
         `intervalo` minutos, formando a série temporal da ocupação.
         """
         while True:
-            self._amostras.append((self.env.now, self.resource.count))
+            self._amostras.append((self.env.now, int(self.em_atendimento)))
             yield self.env.timeout(intervalo)
 
     @property
@@ -74,14 +78,19 @@ class Profissional:
     @property
     def taxa_ocupacao(self) -> float:
         """Fração do tempo em que o profissional esteve ocupado."""
-        if self.tempo_simulado == 0:
+        if self.tempo_jornada == 0:
             return 0.0
-        return self.tempo_total_atendimento / self.tempo_simulado
+        return self.tempo_total_atendimento / self.tempo_jornada
 
     @property
     def tempo_ocioso(self) -> float:
-        """Tempo em que o profissional ficou sem atender pacientes."""
-        return max(self.tempo_simulado - self.tempo_total_atendimento, 0.0)
+        """Tempo útil em que o profissional ficou sem atender pacientes."""
+        return max(self.tempo_jornada - self.tempo_total_atendimento, 0.0)
+
+    @property
+    def tempo_jornada(self) -> float:
+        """Tempo de expediente ocorrido até o momento atual da simulação."""
+        return self.horario_trabalho.minutos_uteis(0, self.tempo_simulado)
 
     @property
     def tempo_medio_atendimento(self) -> float:

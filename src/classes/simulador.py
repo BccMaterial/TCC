@@ -6,6 +6,7 @@ from pathlib import Path
 from enums import Suspeita
 
 from .equipe import Equipe
+from .horario_trabalho import HorarioTrabalho
 from .paciente import Paciente
 from .parametros import Parametros
 
@@ -40,6 +41,18 @@ class Simulador:
         self.tempo_avaliacao = tempo_avaliacao
         self.agendamentos_simulados = 0
         self.nao_compareceram = 0
+        self.horario_trabalho = HorarioTrabalho(
+            dia_semana_inicial=(
+                parametros.dia_semana_inicial if parametros is not None else 0
+            ),
+            minuto_inicio=(
+                parametros.minuto_inicio_simulacao
+                if parametros is not None
+                else HorarioTrabalho.INICIO_EXPEDIENTE
+            ),
+        )
+        for profissional in equipe.profissionais:
+            profissional.horario_trabalho = self.horario_trabalho
 
         if parametros is not None:
             if parametros.probabilidade_no_show is None:
@@ -57,6 +70,11 @@ class Simulador:
 
     def iniciar(self, duracao: float = 480) -> None:
         """Inicia a chegada de pacientes e executa a simulação."""
+        if self.parametros is not None:
+            duracao = self.parametros.duracao_simulacao
+        if duracao <= 0:
+            raise ValueError("A duração da simulação deve ser maior que zero.")
+
         self.equipe.monitorar(intervalo=1)
         processo = (
             self._chegada_parametrizada()
@@ -80,11 +98,30 @@ class Simulador:
             requisicao = profissional.resource.request()
             yield requisicao
         try:
-            tempo_avaliacao = random.uniform(*self.tempo_avaliacao)
-            inicio_atendimento = env.now
-            yield env.timeout(tempo_avaliacao)
-            profissional.registrar_atendimento(inicio_atendimento, env.now)
+            tempo_restante = random.uniform(*self.tempo_avaliacao)
+            tempo_trabalhado = 0.0
+            while tempo_restante > 0:
+                if not self.horario_trabalho.em_expediente(env.now):
+                    profissional.em_atendimento = False
+                    espera = self.horario_trabalho.minutos_ate_proximo_expediente(
+                        env.now
+                    )
+                    yield env.timeout(espera)
+                    continue
+
+                duracao_trecho = min(
+                    tempo_restante,
+                    self.horario_trabalho.minutos_ate_fechamento(env.now),
+                )
+                profissional.em_atendimento = True
+                yield env.timeout(duracao_trecho)
+                profissional.em_atendimento = False
+                tempo_trabalhado += duracao_trecho
+                tempo_restante -= duracao_trecho
+
+            profissional.registrar_atendimento(tempo_trabalhado)
         finally:
+            profissional.em_atendimento = False
             if requisicao is None:
                 self.equipe.release(profissional)
             else:
@@ -93,12 +130,20 @@ class Simulador:
     def _chegada_pacientes(self):
         env = self.equipe.env
         while True:
+            if not self.horario_trabalho.em_expediente(env.now):
+                espera = self.horario_trabalho.minutos_ate_proximo_expediente(env.now)
+                yield env.timeout(espera)
+                continue
+
+            intervalo = random.expovariate(1 / 20)
+            ate_fechamento = self.horario_trabalho.minutos_ate_fechamento(env.now)
+            if intervalo >= ate_fechamento:
+                yield env.timeout(ate_fechamento)
+                continue
+            yield env.timeout(intervalo)
             paciente = Paciente(random.choice(list(Suspeita)))
             self.pacientes.append(paciente)
             env.process(self._paciente(paciente))
-
-            intervalo = random.expovariate(1 / 20)
-            yield env.timeout(intervalo)
 
     def _chegada_parametrizada(self):
         env = self.equipe.env
@@ -107,18 +152,27 @@ class Simulador:
             return
 
         while True:
+            if not self.horario_trabalho.em_expediente(env.now):
+                espera = self.horario_trabalho.minutos_ate_proximo_expediente(env.now)
+                yield env.timeout(espera)
+                continue
+
             minuto_agenda = parametros.minuto_inicio_simulacao + env.now
             hora_total = int(minuto_agenda // 60)
             proxima_hora = (hora_total + 1) * 60 - parametros.minuto_inicio_simulacao
             hora = hora_total % 24
             taxa_horaria = parametros.taxa_agendamentos_por_hora.get(hora, 0)
+            limite_intervalo = min(
+                proxima_hora,
+                env.now + self.horario_trabalho.minutos_ate_fechamento(env.now),
+            )
             if taxa_horaria <= 0:
-                yield env.timeout(proxima_hora - env.now)
+                yield env.timeout(limite_intervalo - env.now)
                 continue
-            while env.now < proxima_hora:
+            while env.now < limite_intervalo:
                 intervalo = random.expovariate(taxa_horaria / 60)
-                if env.now + intervalo >= proxima_hora:
-                    yield env.timeout(proxima_hora - env.now)
+                if env.now + intervalo >= limite_intervalo:
+                    yield env.timeout(limite_intervalo - env.now)
                     break
                 yield env.timeout(intervalo)
                 self.agendamentos_simulados += 1
