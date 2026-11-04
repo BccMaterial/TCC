@@ -1,3 +1,5 @@
+import random
+import secrets
 from pathlib import Path
 
 import simpy
@@ -5,6 +7,10 @@ import simpy
 from classes import Equipe, Parametros, Simulador
 
 if __name__ == "__main__":
+    seed = secrets.randbits(64)
+    random.seed(seed)
+    print(f"Seed da simulação: {seed}")
+
     arquivo_agenda = Path(__file__).parent.parent / "data" / "teste.csv"
     parametros = Parametros.carregar(arquivo_agenda)
     parametros.imprimir_parametros()

@@ -83,12 +83,29 @@ class Parametros:
         dias_uteis = pd.date_range(
             start=dados["data"].min(), end=dados["data"].max(), freq="B"
         )
-        agendas_no_expediente = dados.loc[
-            (dados["dia_semana"] < 5)
-            & (dados["hora"] >= HorarioTrabalho.INICIO_EXPEDIENTE // 60)
-            & (dados["hora"] < HorarioTrabalho.FIM_EXPEDIENTE // 60)
+        primeiro_agendamento_por_paciente: dict[str, RegistroAgenda] = {}
+        for registro in registros:
+            atual = primeiro_agendamento_por_paciente.get(registro.id_paciente)
+            if atual is None or registro.inicio < atual.inicio:
+                primeiro_agendamento_por_paciente[registro.id_paciente] = registro
+        chegadas = pd.DataFrame(
+            {
+                "dia_semana": [
+                    registro.inicio.weekday()
+                    for registro in primeiro_agendamento_por_paciente.values()
+                ],
+                "hora": [
+                    registro.inicio.hour
+                    for registro in primeiro_agendamento_por_paciente.values()
+                ],
+            }
+        )
+        chegadas_no_expediente = chegadas.loc[
+            (chegadas["dia_semana"] < 5)
+            & (chegadas["hora"] >= HorarioTrabalho.INICIO_EXPEDIENTE // 60)
+            & (chegadas["hora"] < HorarioTrabalho.FIM_EXPEDIENTE // 60)
         ]
-        por_hora = agendas_no_expediente.groupby("hora").size()
+        por_hora = chegadas_no_expediente.groupby("hora").size()
         self.taxa_agendamentos_por_hora: dict[int, float] = {
             int(hora): float(quantidade / len(dias_uteis))
             for hora, quantidade in por_hora.items()
@@ -225,7 +242,7 @@ class Parametros:
         print("Distribuição de horários:")
         for (dia, hora), probabilidade in sorted(self.distribuicao_horarios.items()):
             print(f"  {dias[dia]} às {hora:02d}h: {probabilidade:.2%}")
-        print("Taxa média de agendamentos por hora:")
+        print("Taxa média de chegadas de pacientes por hora:")
         for hora, taxa in sorted(self.taxa_agendamentos_por_hora.items()):
             print(f"  às {hora:02d}h: {taxa:.2f}")
         print(f"Probabilidades por profissional: {self.probabilidades_profissionais}")
@@ -301,6 +318,16 @@ class Parametros:
     def amostrar_suspeita(self) -> Suspeita:
         itens = list(self.probabilidades_suspeitas)
         pesos = [self.probabilidades_suspeitas[item] for item in itens]
+        return random.choices(itens, weights=pesos, k=1)[0]
+
+    def amostrar_quantidade_avaliacoes(self) -> int:
+        if not self.distribuicao_quantidade_avaliacoes:
+            raise ValueError(
+                "Não há avaliações concluídas na planilha para estimar "
+                "a quantidade de avaliações por paciente."
+            )
+        itens = list(self.distribuicao_quantidade_avaliacoes)
+        pesos = [self.distribuicao_quantidade_avaliacoes[item] for item in itens]
         return random.choices(itens, weights=pesos, k=1)[0]
 
     def amostrar_profissional(self) -> str:

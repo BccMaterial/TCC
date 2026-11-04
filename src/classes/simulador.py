@@ -86,46 +86,52 @@ class Simulador:
 
     def _paciente(self, paciente: Paciente, id_profissional: str | None = None):
         env = self.equipe.env
-        if id_profissional is None:
-            profissional = yield self.equipe.request()
-            requisicao = None
-        else:
-            profissional = next(
-                item
-                for item in self.equipe.profissionais
-                if str(item.id) == str(id_profissional)
-            )
-            requisicao = profissional.resource.request()
-            yield requisicao
-        try:
-            tempo_restante = random.uniform(*self.tempo_avaliacao)
-            tempo_trabalhado = 0.0
-            while tempo_restante > 0:
-                if not self.horario_trabalho.em_expediente(env.now):
-                    profissional.em_atendimento = False
-                    espera = self.horario_trabalho.minutos_ate_proximo_expediente(
-                        env.now
-                    )
-                    yield env.timeout(espera)
-                    continue
+        while not paciente.diagnostico_concluido:
+            profissional_id = id_profissional
+            if profissional_id is None and self.parametros is not None:
+                profissional_id = self.parametros.amostrar_profissional()
 
-                duracao_trecho = min(
-                    tempo_restante,
-                    self.horario_trabalho.minutos_ate_fechamento(env.now),
-                )
-                profissional.em_atendimento = True
-                yield env.timeout(duracao_trecho)
-                profissional.em_atendimento = False
-                tempo_trabalhado += duracao_trecho
-                tempo_restante -= duracao_trecho
-
-            profissional.registrar_atendimento(tempo_trabalhado)
-        finally:
-            profissional.em_atendimento = False
-            if requisicao is None:
-                self.equipe.release(profissional)
+            if profissional_id is None:
+                profissional = yield self.equipe.request()
+                requisicao = None
             else:
-                profissional.resource.release(requisicao)
+                profissional = next(
+                    item
+                    for item in self.equipe.profissionais
+                    if str(item.id) == str(profissional_id)
+                )
+                requisicao = profissional.resource.request()
+                yield requisicao
+            try:
+                tempo_restante = random.uniform(*self.tempo_avaliacao)
+                tempo_trabalhado = 0.0
+                while tempo_restante > 0:
+                    if not self.horario_trabalho.em_expediente(env.now):
+                        profissional.em_atendimento = False
+                        espera = self.horario_trabalho.minutos_ate_proximo_expediente(
+                            env.now
+                        )
+                        yield env.timeout(espera)
+                        continue
+
+                    duracao_trecho = min(
+                        tempo_restante,
+                        self.horario_trabalho.minutos_ate_fechamento(env.now),
+                    )
+                    profissional.em_atendimento = True
+                    yield env.timeout(duracao_trecho)
+                    profissional.em_atendimento = False
+                    tempo_trabalhado += duracao_trecho
+                    tempo_restante -= duracao_trecho
+
+                profissional.registrar_atendimento(tempo_trabalhado)
+                paciente.registrar_avaliacao()
+            finally:
+                profissional.em_atendimento = False
+                if requisicao is None:
+                    self.equipe.release(profissional)
+                else:
+                    profissional.resource.release(requisicao)
 
     def _chegada_pacientes(self):
         env = self.equipe.env
@@ -141,7 +147,14 @@ class Simulador:
                 yield env.timeout(ate_fechamento)
                 continue
             yield env.timeout(intervalo)
-            paciente = Paciente(random.choice(list(Suspeita)))
+            paciente = Paciente(
+                random.choice(list(Suspeita)),
+                num_avaliacoes_necessarias=(
+                    self.parametros.amostrar_quantidade_avaliacoes()
+                    if self.parametros is not None
+                    else 1
+                ),
+            )
             self.pacientes.append(paciente)
             env.process(self._paciente(paciente))
 
@@ -179,30 +192,37 @@ class Simulador:
                 if random.random() < parametros.probabilidade_no_show:
                     self.nao_compareceram += 1
                     continue
-                paciente = Paciente(parametros.amostrar_suspeita())
-                self.pacientes.append(paciente)
-                env.process(
-                    self._paciente(paciente, parametros.amostrar_profissional())
+                paciente = Paciente(
+                    parametros.amostrar_suspeita(),
+                    num_avaliacoes_necessarias=(
+                        parametros.amostrar_quantidade_avaliacoes()
+                    ),
                 )
+                self.pacientes.append(paciente)
+                env.process(self._paciente(paciente))
 
     def resumo(self) -> list[dict[str, float | int | str]]:
         """Exibe o resumo da simulação e retorna as métricas dos profissionais."""
         resumos = self.equipe.resumos()
-        total_atendidos = sum(resumo["pacientes_atendidos"] for resumo in resumos)
         print("\n=== Resumo da simulação ===")
         print(f"Pacientes que chegaram: {len(self.pacientes)}")
         if self.parametros is not None:
             print(f"Agendamentos gerados: {self.agendamentos_simulados}")
             print(f"Não compareceram: {self.nao_compareceram}")
-        print(f"Pacientes atendidos: {total_atendidos}")
+        exames_concluidos = sum(paciente.num_avaliacoes for paciente in self.pacientes)
+        pacientes_diagnosticados = sum(
+            paciente.diagnostico_concluido for paciente in self.pacientes
+        )
+        print(f"Exames concluídos: {exames_concluidos}")
+        print(f"Pacientes com ciclo concluído: {pacientes_diagnosticados}")
         print(
-            f"Pacientes ainda não atendidos: "
-            f"{len(self.pacientes) - total_atendidos}"
+            "Pacientes com ciclo incompleto: "
+            f"{len(self.pacientes) - pacientes_diagnosticados}"
         )
 
         for resumo in resumos:
             print(f"\n=== Métricas de {resumo['nome']} ===")
-            print(f"Pacientes atendidos: {resumo['pacientes_atendidos']}")
+            print(f"Atendimentos concluídos: {resumo['pacientes_atendidos']}")
             print(
                 "Tempo médio de atendimento: "
                 f"{resumo['tempo_medio_atendimento']:.2f} min"
