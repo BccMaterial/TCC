@@ -60,13 +60,6 @@ class Simulador:
                     "É necessário ao menos um status 'Falta' ou 'Concluída' "
                     "para estimar a probabilidade de no-show."
                 )
-            ids_equipe = {str(profissional.id) for profissional in equipe.profissionais}
-            ids_ausentes = set(parametros.probabilidades_profissionais) - ids_equipe
-            if ids_ausentes:
-                raise ValueError(
-                    "A equipe deve incluir profissionais com os IDs dos dados: "
-                    + ", ".join(sorted(ids_ausentes))
-                )
 
     def iniciar(self, duracao: float = 480) -> None:
         """Inicia a chegada de pacientes e executa a simulação."""
@@ -84,24 +77,10 @@ class Simulador:
         self.equipe.env.process(processo)
         self.equipe.env.run(until=duracao)
 
-    def _paciente(self, paciente: Paciente, id_profissional: str | None = None):
+    def _paciente(self, paciente: Paciente):
         env = self.equipe.env
         while not paciente.diagnostico_concluido:
-            profissional_id = id_profissional
-            if profissional_id is None and self.parametros is not None:
-                profissional_id = self.parametros.amostrar_profissional()
-
-            if profissional_id is None:
-                profissional = yield self.equipe.request()
-                requisicao = None
-            else:
-                profissional = next(
-                    item
-                    for item in self.equipe.profissionais
-                    if str(item.id) == str(profissional_id)
-                )
-                requisicao = profissional.resource.request()
-                yield requisicao
+            profissional = yield self.equipe.request()
             try:
                 tempo_restante = random.uniform(*self.tempo_avaliacao)
                 tempo_trabalhado = 0.0
@@ -128,10 +107,7 @@ class Simulador:
                 paciente.registrar_avaliacao()
             finally:
                 profissional.em_atendimento = False
-                if requisicao is None:
-                    self.equipe.release(profissional)
-                else:
-                    profissional.resource.release(requisicao)
+                self.equipe.release(profissional)
 
     def _chegada_pacientes(self):
         env = self.equipe.env

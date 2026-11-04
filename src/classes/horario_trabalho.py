@@ -5,6 +5,8 @@ class HorarioTrabalho:
     """Calcula os períodos úteis a partir do calendário da simulação."""
 
     INICIO_EXPEDIENTE = 9 * 60
+    INICIO_ALMOCO = 12 * 60
+    FIM_ALMOCO = 13 * 60
     FIM_EXPEDIENTE = 18 * 60
     MINUTOS_DIA = 24 * 60
 
@@ -23,11 +25,17 @@ class HorarioTrabalho:
 
     def em_expediente(self, tempo: float) -> bool:
         dia_semana, minuto, _ = self._dia_e_minuto(tempo)
-        return dia_semana < 5 and self.INICIO_EXPEDIENTE <= minuto < self.FIM_EXPEDIENTE
+        return (
+            dia_semana < 5
+            and self.INICIO_EXPEDIENTE <= minuto < self.FIM_EXPEDIENTE
+            and not self.INICIO_ALMOCO <= minuto < self.FIM_ALMOCO
+        )
 
     def minutos_ate_proximo_expediente(self, tempo: float) -> float:
         dia_semana, minuto, deslocamento_dias = self._dia_e_minuto(tempo)
-        if dia_semana < 5 and self.INICIO_EXPEDIENTE <= minuto < self.FIM_EXPEDIENTE:
+        if dia_semana < 5 and self.INICIO_ALMOCO <= minuto < self.FIM_ALMOCO:
+            return self.FIM_ALMOCO - minuto
+        if self.em_expediente(tempo):
             return 0
 
         for deslocamento in range(8):
@@ -47,7 +55,10 @@ class HorarioTrabalho:
         if not self.em_expediente(tempo):
             return 0
         _, minuto, _ = self._dia_e_minuto(tempo)
-        return self.FIM_EXPEDIENTE - minuto
+        limite = (
+            self.INICIO_ALMOCO if minuto < self.INICIO_ALMOCO else self.FIM_EXPEDIENTE
+        )
+        return limite - minuto
 
     def minutos_uteis(self, inicio: float, fim: float) -> float:
         if fim <= inicio:
@@ -74,4 +85,13 @@ class HorarioTrabalho:
                 0,
                 min(fim, fim_expediente) - max(inicio, inicio_expediente),
             )
+            inicio_almoco = (
+                deslocamento * self.MINUTOS_DIA
+                + self.INICIO_ALMOCO
+                - self.minuto_inicio
+            )
+            fim_almoco = (
+                deslocamento * self.MINUTOS_DIA + self.FIM_ALMOCO - self.minuto_inicio
+            )
+            total -= max(0, min(fim, fim_almoco) - max(inicio, inicio_almoco))
         return total
