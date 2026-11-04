@@ -53,8 +53,27 @@ def test_atendimento_pausa_no_fechamento_e_continua_no_proximo_dia_util():
     profissional = equipe.profissionais[0]
     assert profissional.num_pacientes_atendidos == 1
     assert profissional.tempo_total_atendimento == 60
-    assert profissional.tempo_jornada == 9 * 60 + 31
-    assert profissional.taxa_ocupacao == 60 / (9 * 60 + 31)
+    assert profissional.tempo_jornada == 8 * 60 + 31
+    assert profissional.taxa_ocupacao == 60 / (8 * 60 + 31)
+
+
+def test_atendimento_pausa_no_almoco_e_continua_apos_intervalo():
+    env = simpy.Environment()
+    equipe = Equipe(env, quantidade=1)
+    simulador = Simulador(equipe, tempo_avaliacao=(60, 60))
+    paciente = Paciente(Suspeita.AUTISMO)
+
+    def iniciar_atendimento_antes_do_almoco():
+        yield env.timeout(2 * 60 + 30)
+        yield env.process(simulador._paciente(paciente))
+
+    env.process(iniciar_atendimento_antes_do_almoco())
+    env.run(until=4 * 60 + 31)
+
+    profissional = equipe.profissionais[0]
+    assert profissional.num_pacientes_atendidos == 1
+    assert profissional.tempo_total_atendimento == 60
+    assert profissional.tempo_jornada == 3 * 60 + 31
 
 
 def test_paciente_realiza_todos_os_exames_antes_da_conclusao():
