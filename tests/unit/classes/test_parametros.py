@@ -131,6 +131,40 @@ def test_taxa_horaria_considera_somente_agendas_no_expediente_em_dias_uteis():
     assert parametros.taxa_agendamentos_por_hora == {9: pytest.approx(1 / 5)}
 
 
+def test_taxa_horaria_conta_somente_a_primeira_agenda_de_cada_paciente():
+    data = datetime.fromisoformat("2026-10-19T09:00:00-03:00")
+    parametros = Parametros(
+        [
+            RegistroAgenda(
+                "p1",
+                "prof1",
+                data,
+                data.replace(hour=10),
+                Suspeita.AUTISMO,
+                "Concluída",
+            ),
+            RegistroAgenda(
+                "p1",
+                "prof1",
+                data.replace(hour=10),
+                data.replace(hour=11),
+                Suspeita.AUTISMO,
+                "Concluída",
+            ),
+            RegistroAgenda(
+                "p2",
+                "prof1",
+                data.replace(hour=9, minute=30),
+                data.replace(hour=10, minute=30),
+                Suspeita.AUTISMO,
+                "Concluída",
+            ),
+        ]
+    )
+
+    assert parametros.taxa_agendamentos_por_hora == {9: pytest.approx(2)}
+
+
 def test_distribuicao_de_exames_concluidos_por_paciente():
     data = datetime.fromisoformat("2026-10-19T09:00:00-03:00")
     registros = []
@@ -271,6 +305,47 @@ def test_simulador_parametrizado_gera_agendamentos(monkeypatch):
     assert simulador.nao_compareceram == 0
     assert len(simulador.pacientes) == 1
     assert equipe.profissionais[0].num_pacientes_atendidos == 1
+
+
+def test_simulador_parametrizado_amostra_exames_e_conclui_ciclo(monkeypatch):
+    data = datetime.fromisoformat("2026-10-19T09:00:00-03:00")
+    parametros = Parametros(
+        [
+            RegistroAgenda(
+                "p1",
+                "prof1",
+                data,
+                data.replace(hour=10),
+                Suspeita.AUTISMO,
+                "Concluída",
+            ),
+            RegistroAgenda(
+                "p1",
+                "prof1",
+                data.replace(hour=10),
+                data.replace(hour=11),
+                Suspeita.AUTISMO,
+                "Concluída",
+            ),
+        ]
+    )
+    env = simpy.Environment()
+    equipe = Equipe(env, ids=["prof1"])
+    simulador = Simulador(equipe, parametros=parametros, tempo_avaliacao=(30, 30))
+    parametros.duracao_simulacao = 121
+    intervalos = iter((30, 1000))
+    monkeypatch.setattr(
+        "classes.simulador.random.expovariate", lambda _: next(intervalos)
+    )
+    monkeypatch.setattr("classes.simulador.random.random", lambda: 0)
+
+    simulador.iniciar()
+
+    assert len(simulador.pacientes) == 1
+    assert simulador.pacientes[0].num_avaliacoes_necessarias == 2
+    assert simulador.pacientes[0].num_avaliacoes == 2
+    assert simulador.pacientes[0].diagnostico_concluido is True
+    assert equipe.profissionais[0].num_pacientes_atendidos == 2
 
 
 def test_simulador_parametrizado_aplica_no_show(monkeypatch):
